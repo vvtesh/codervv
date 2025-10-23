@@ -73,15 +73,15 @@
 
         /* Sidebar Item Colors (Theme-Aware) */
         .sidebar-item-active {
-            color: var(--primary-color);
-            background-color: #e0f2f1; /* Teal 50 */
+            color: #ffffff; /* White text for high contrast */
+            background-color: var(--primary-color); /* Use the main accent color for the background */
             font-weight: 600;
             border-left: 4px solid var(--primary-color);
         }
         .dark .sidebar-item-active {
-            /* FIX: Light gray background and dark text for max contrast in Dark Mode */
-            background-color: #e5e7eb; /* Gray 200 */
-            color: #111827; /* Gray 900 (Very dark gray/near black) */
+            /* changes the background of the active menu item from ugly white in dark mode to black. */
+            background-color: #000000; /* Black background */
+            color: #ffffff; /* White text for contrast */
             border-left: 4px solid var(--primary-color); /* Retain Teal accent border */
         }
 

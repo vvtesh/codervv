@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevDocs Static Site</title>
+    
+    <!-- Script to apply theme early to prevent FOUC (MOVED UP FOR SPEED) -->
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || 'light';
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <!-- === SYNTAX HIGHLIGHTING: PRISM.JS === -->
+    <!-- Prism.js Light Theme (Default) - Initially active -->
+    <link id="prism-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <!-- Prism.js Dark Theme (Okaidia) - Initially inactive -->
+    <link id="prism-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" disabled />
+    
+    <!-- Prism.js Core Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Include languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup-templating.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Added Java support explicitly -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <!-- End Prism.js -->
+
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Custom styles for the scrollbar and transitions */
+        :root {
+            --primary-color: #0d9488; /* Teal 600 */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Slate 50 - Light Mode Default */
+        }
+        /* Dark mode background for the main body */
+        .dark body {
+            background-color: #111827; /* Gray 900 */
+        }
+        
+        /* FIX: Explicit CSS rules to prevent white flash on fixed elements in dark theme */
+        /* Ensuring immediate dark mode backgrounds for header and sidebar, overriding 'bg-white' */
+        .dark header {
+            background-color: #000000 !important; /* Matches dark:bg-black */
+        }
+        .dark #sidebar {
+            background-color: #1f2937 !important; /* Matches dark:bg-gray-800 */
+            border-right-color: #374151 !important; /* Matches dark:border-gray-700 */
+        }
+        /* END FIX */
+
+        /* Sidebar Item Colors (Theme-Aware) */
+        .sidebar-item-active {
+            color: var(--primary-color);
+            background-color: #e0f2f1; /* Teal 50 */
+            font-weight: 600;
+            border-left: 4px solid var(--primary-color);
+        }
+        .dark .sidebar-item-active {
+            /* FIX: Light gray background and dark text for max contrast in Dark Mode */
+            background-color: #e5e7eb; /* Gray 200 */
+            color: #111827; /* Gray 900 (Very dark gray/near black) */
+            border-left: 4px solid var(--primary-color); /* Retain Teal accent border */
+        }
+
+        /* General Layout */
+        #sidebar {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(0);
+        }
+        .content-scrollable {
+             /* Adjust height calculation for top/bottom fixed bars */
+            height: calc(100vh - 6rem);
+            overflow-y: auto;
+        }
+        /* Mobile specific adjustments (hidden by default, shown by JS) */
+        @media (max-width: 1024px) {
+            #sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar-open #sidebar {
+                transform: translateX(0);
+                z-index: 40;
+            }
+            .sidebar-open #main-content-wrapper {
+                opacity: 0.5;
+                pointer-events: none;
+            }
+        }
+        /* Override Tailwind prose styles for code blocks to ensure Prism.js works */
+        .prose pre {
+            padding: 0; 
+            background-color: transparent; 
+            margin: 1.5em 0;
+            border-radius: 0.5rem;
+            overflow: auto; 
+        }
+        /* Ensure code block elements match prose styling in both themes */
+        .prose h1, .prose h2, .prose h3 { color: #1f2937; } /* Light mode headings */
+        .dark .prose h1, .dark .prose h2, .dark .prose h3 { color: #f3f4f6; } /* Dark mode headings */
+        .dark .prose p, .dark .prose code, .dark .prose li { color: #d1d5db; } /* Dark mode text */
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 dark:bg-gray-900">
+
+    <!-- 1. TOP BAR (Fixed Header) -->
+    <header class="fixed top-0 left-0 right-0 h-16 bg-white dark:bg-black shadow-md dark:shadow-xl z-30 flex items-center justify-between px-4 lg:px-6">
+        <div class="flex items-center space-x-3">
+            <!-- Logo (Inline SVG for simplicity) -->
+            <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+            <span class="text-xl font-bold text-gray-800 dark:text-gray-100">DevDocs</span>
+        </div>
+        
+        <div class="flex items-center space-x-4">
+            <!-- Theme Toggle Button -->
+            <button id="theme-toggle" class="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition" 
+                aria-label="Toggle theme">
+                <!-- Icon will be set by JS -->
+            </button>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-button" class="lg:hidden p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+            
+            <!-- About Me Menu -->
+            <div class="hidden lg:flex relative group">
+                <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 px-3 py-2 rounded-lg transition duration-150 flex items-center">
+                    About Me
+                    <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition group-hover:rotate-180"></i>
+                </a>
+                <div class="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-teal-50 dark:hover:bg-teal-600 hover:text-teal-700 dark:hover:text-white rounded-t-lg">My Portfolio</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-teal-50 dark:hover:bg-teal-600 hover:text-teal-700 dark:hover:text-white">Contact</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-teal-50 dark:hover:bg-teal-600 hover:text-teal-700 dark:hover:text-white rounded-b-lg">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. MAIN LAYOUT (Sidebar and Content) -->
+    <main class="flex pt-16 pb-20"> <!-- Padding for fixed header/footer -->
+        
+        <!-- Mobile Overlay -->
+        <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden" onclick="toggleSidebar()"></div>
+
+        <!-- 2a. LEFT SIDEBAR (Navigation Menu) -->
+        <aside id="sidebar" class="fixed top-16 bottom-20 w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 lg:block z-30 p-4 content-scrollable">
+            
+            <!-- NEW SEARCH BAR -->
+            <div class="mb-4">
+                <input type="text" id="menu-search" oninput="filterMenu()" 
+                       placeholder="Search titles..." 
+                       class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-gray-200 transition">
+            </div>
+            <!-- END NEW SEARCH BAR -->
+
+            <nav id="nav-menu" class="space-y-2">
+                <!-- Navigation links will be injected here by JavaScript -->
+            </nav>
+        </aside>
+
+        <!-- 2b. MAIN CONTENT AREA -->
+        <div id="main-content-wrapper" class="w-full lg:ml-64 p-6 transition-all duration-300">
+            <section id="content-container" class="max-w-4xl mx-auto py-4">
+                <!-- Content will be injected here by JavaScript -->
+                <h1 id="content-title" class="text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-6">Welcome to DevDocs!</h1>
+                <div id="content-body" class="prose prose-teal max-w-none text-gray-700 dark:text-gray-300 space-y-4">
+                    <p>This is your starting page. Use the expandable and collapsible menu on the left to navigate between documentation sections.</p>
+                    <p>The content and the navigation structure are defined in the JavaScript data object, making it easy to manage all your documentation pages in one place without needing external file imports.</p>
+                    <p>To get started, please click on any section in the sidebar, like "Introduction" under the "Getting Started" category.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 3. BOTTOM BAR (Fixed Footer) -->
+    <footer class="fixed bottom-0 left-0 right-0 h-16 bg-gray-800 dark:bg-black text-white flex items-center justify-center z-20 shadow-lg">
+        <p class="text-sm italic text-gray-300 dark:text-gray-400 px-4 text-center">
+            "The computer was born to solve problems that did not exist before."
+        </p>
+    </footer>
+
+    <script>
+        // ====================================================================
+        // --- START OF CONTENT DATA (MOCKS SEPARATE CONTENT FILES) ---
+        // ====================================================================
+
+        // A) NAVIGATION MAP (Defines the menu hierarchy: Category Title -> Page IDs)
+        const menuStructure = [
+            {
+                categoryTitle: "Getting Started",
+                categoryId: "getting-started",
+                pageIds: ["intro", "setup"] 
+            },
+            {
+                categoryTitle: "Core Concepts",
+                categoryId: "core-concepts",
+                pageIds: ["data-layer", "tailwind-style", "code-examples"]
+            },
+            {
+                categoryTitle: "Advanced Topics",
+                categoryId: "advanced",
+                pageIds: ["perf-opt"]
+            }
+        ];
+
+        // B) PAGE CONTENT (Holds the actual page title and rich content body)
+        const pageContent = {
+            "intro": {
+                title: "Introduction",
+                markdownContent: `
+                    <p>Welcome to the project documentation. This introductory section provides a high-level overview of the system's goals and architecture.</p>
+                    <p>We focus on creating robust, scalable, and maintainable software using modern web technologies. This site itself is a demonstration of clean, single-file deployment.</p>
+                `
+            },
+            "setup": {
+                title: "Setup and Installation",
+                markdownContent: `
+                    <p>To begin, cloning the repository and running a build process would be the standard steps. For this static site, simply open <code>index.html</code> in your browser.</p>
+                    <p>All dependencies are loaded via CDN, ensuring a quick and simple startup process. No local build steps are required.</p>
+                `
+            },
+            "data-layer": {
+                title: "The Data Layer",
+                markdownContent: `
+                    <p>The data layer is managed entirely through local JavaScript objects for this demonstration. In a production environment, this would interface with a database like Firestore or MongoDB.</p>
+                    <p>We prioritize asynchronous data fetching and state immutability to ensure predictable application flow and simple debugging.</p>
+                `
+            },
+            "tailwind-style": {
+                title: "Styling with Tailwind",
+                markdownContent: `
+                    <p>This entire layout is styled using Tailwind CSS utility classes. This allows for rapid development and guaranteed responsiveness across all screen sizes.</p>
+                    <p>The design adheres to mobile-first principles, ensuring excellent readability and usability on smaller devices. We use utility classes like <code>flex</code>, <code>bg-white</code>, and responsive prefixes like <code>lg:ml-64</code>.</p>
+                `
+            },
+            "code-examples": {
+                title: "Code Highlighting Demo",
+                markdownContent: `
+                    <p>This page demonstrates how to include source code with syntax highlighting using the Prism.js library. Note the use of the <code>language-javascript</code>, <code>language-python</code>, and <code>language-java</code> classes.</p>
+                    
+                    <h3>Example: Java Hello World</h3>
+                    <p>The **Java Hello World** program is the traditional first step in learning Java. It defines a public class named <code>HelloWorld</code> and includes the necessary <code>public static void main(String[] args)</code> method, which serves as the entry point for execution by the Java Virtual Machine (JVM). The actual output is produced using <code>System.out.println("Hello, World!")</code>.</p>
+                    
+                    <pre><code class="language-java">
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+                    </code></pre>
+                    
+                    <h3>Example: JavaScript Function</h3>
+                    <p>Here is a small function to calculate the Fibonacci sequence:</p>
+                    
+                    <pre><code class="language-javascript">
+function fibonacci(n) {
+  if (n &lt;= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// Call the function
+console.log(fibonacci(10));
+                    </code></pre>
+
+                    <h3>Example: Python Script</h3>
+                    <p>Python code highlighting also works automatically:</p>
+                    
+                    <pre><code class="language-python">
+# A simple Python script
+def greet(name):
+    """Prints a greeting message."""
+    print(f"Hello, {name}!")
+
+if __name__ == "__main__":
+    greet("DevDocs User")
+                    </code></pre>
+                `
+            },
+            "perf-opt": {
+                title: "Performance Optimization",
+                markdownContent: `
+                    <p>Key optimization strategies include minimizing DOM manipulations (by batching updates) and using efficient CSS (like Tailwind's utility-first approach).</p>
+                    <p>Future plans involve lazy loading images and using web workers for heavy computational tasks.</p>
+                `
+            }
+        };
+
+        // ====================================================================
+        // --- END OF CONTENT DATA ---
+        // ====================================================================
+
+
+        // --- SVG Definitions for Robust Icon Toggling ---
+        const CHEVRON_DOWN_SVG = `<svg class="w-4 h-4 transition-transform" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`;
+        const CHEVRON_RIGHT_SVG = `<svg class="w-4 h-4 transition-transform" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>`;
+        
+        const SUN_SVG = `<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`;
+        const MOON_SVG = `<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
+
+
+        // --- 2. CORE FUNCTIONS ---
+
+        // Theme Management Functions
+        function applyTheme(theme) {
+            const htmlElement = document.documentElement;
+            const toggleButton = document.getElementById('theme-toggle');
+            
+            // Reference Prism theme links
+            const lightThemeLink = document.getElementById('prism-light-theme');
+            const darkThemeLink = document.getElementById('prism-dark-theme');
+
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                toggleButton.innerHTML = SUN_SVG; // Show sun icon in dark mode
+                toggleButton.setAttribute('aria-label', 'Switch to Light Mode');
+                
+                // Switch Prism themes: enable dark, disable light
+                if (darkThemeLink) darkThemeLink.disabled = false;
+                if (lightThemeLink) lightThemeLink.disabled = true;
+
+            } else {
+                htmlElement.classList.remove('dark');
+                toggleButton.innerHTML = MOON_SVG; // Show moon icon in light mode
+                toggleButton.setAttribute('aria-label', 'Switch to Dark Mode');
+
+                // Switch Prism themes: enable light, disable dark
+                if (darkThemeLink) darkThemeLink.disabled = true;
+                if (lightThemeLink) lightThemeLink.disabled = false;
+            }
+            localStorage.setItem('theme', theme);
+
+            // Re-run highlighting to ensure new CSS rules are applied immediately
+            if (window.Prism) {
+                Prism.highlightAll();
+            }
+        }
+
+        function toggleTheme() {
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            applyTheme(newTheme);
+        }
+
+        // Function to find the content body by pageId
+        function findContent(pageId) {
+            const content = pageContent[pageId];
+
+            if (!content) {
+                return null;
+            }
+
+            return {
+                title: content.title,
+                markdownContent: content.markdownContent
+            };
+        }
+        
+        // Utility function to process the content for highlighting (Prism.js requires <pre><code>)
+        function processContentForHighlighting(markdown) {
+            return markdown; 
+        }
+
+
+        // Function to render the main content area
+        function renderContent(pageId) {
+            const page = findContent(pageId);
+            const titleElement = document.getElementById('content-title');
+            const bodyElement = document.getElementById('content-body');
+            const navMenu = document.getElementById('nav-menu');
+            
+            if (!page) {
+                titleElement.textContent = "Content Not Found";
+                bodyElement.innerHTML = "<p>The requested page could not be located in the documentation structure.</p>";
+                return;
+            }
+
+            // Update Main Content
+            titleElement.textContent = page.title;
+            
+            // Inject the processed content
+            bodyElement.innerHTML = processContentForHighlighting(page.markdownContent);
+
+            // IMPORTANT: Call Prism.highlightAll() to apply syntax highlighting after
+            // the new content is injected into the DOM.
+            if (window.Prism) {
+                Prism.highlightAll();
+            } else {
+                console.warn("Prism.js not loaded. Syntax highlighting skipped.");
+            }
+
+
+            // Update Active State in Navigation
+            const activeLink = navMenu.querySelector('.sidebar-item-active');
+            if (activeLink) {
+                activeLink.classList.remove('sidebar-item-active');
+            }
+            const newActiveLink = navMenu.querySelector(`[data-page-id="${pageId}"]`);
+            if (newActiveLink) {
+                newActiveLink.classList.add('sidebar-item-active');
+            }
+
+            // Close sidebar on mobile after navigation
+            if (window.innerWidth < 1024) {
+                toggleSidebar(false);
+            }
+        }
+
+        // Function to handle category expansion/collapse
+        function toggleCategory(categoryId) {
+            const content = document.getElementById(`content-${categoryId}`);
+            const icon = document.getElementById(`icon-${categoryId}`);
+
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.innerHTML = CHEVRON_DOWN_SVG;
+            } else {
+                content.classList.add('hidden');
+                icon.innerHTML = CHEVRON_RIGHT_SVG;
+            }
+        }
+        
+        // Function to filter menu links based on search input
+        window.filterMenu = function() {
+            const searchInput = document.getElementById('menu-search');
+            // Get the search term, convert to lowercase, and trim whitespace
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            
+            // Select all category wrappers (Level 1 containers)
+            const categories = document.querySelectorAll('.category-wrapper');
+
+            categories.forEach(categoryWrapper => {
+                let categoryHasMatches = false;
+                
+                // Get the subpages container (Level 2 list)
+                const pageLinksContainer = categoryWrapper.querySelector('.subpages-container');
+                // Get all individual page link wrappers
+                const pageLinks = categoryWrapper.querySelectorAll('.page-link-wrapper');
+
+                // 1. Iterate through page links (Level 2)
+                pageLinks.forEach(linkWrapper => {
+                    const link = linkWrapper.querySelector('a.page-link');
+                    // Get the visible title text
+                    const linkTitle = link.textContent.toLowerCase().trim(); 
+
+                    if (searchTerm === '' || linkTitle.includes(searchTerm)) {
+                        // Show the link
+                        linkWrapper.classList.remove('hidden');
+                        categoryHasMatches = true;
+                    } else {
+                        // Hide the link
+                        linkWrapper.classList.add('hidden');
+                    }
+                });
+
+                // 2. Determine visibility and expansion of the Level 1 category
+                if (searchTerm === '') {
+                    // If search is cleared, ensure category is visible (it will respect its original toggle state)
+                    categoryWrapper.classList.remove('hidden');
+                    // Page links container will respect its toggle state (default: open)
+                } else if (categoryHasMatches) {
+                    // If searching AND the category has matches, show the whole category
+                    categoryWrapper.classList.remove('hidden');
+                    
+                    // Force the page links container open to show the results
+                    pageLinksContainer.classList.remove('hidden');
+                    
+                    // Change the icon to 'down' (open)
+                    const categoryId = categoryWrapper.id.replace('category-wrapper-', '');
+                    const icon = document.getElementById(`icon-${categoryId}`);
+                    // Check if icon exists and needs updating (less fragile than checking path)
+                    if (icon) {
+                        icon.innerHTML = CHEVRON_DOWN_SVG;
+                    }
+
+                } else {
+                    // If searching AND no matches in category, hide the entire category
+                    categoryWrapper.classList.add('hidden');
+                }
+            });
+        }
+
+
+        // Function to build and inject the entire menu structure
+        function buildMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            let html = '';
+
+            // Use the defined SVG string for initial state (down/expanded)
+            const categoryIconSvg = CHEVRON_DOWN_SVG;
+
+            // Iterate over the menu structure to build the navigation
+            menuStructure.forEach(category => {
+                // Category Header (Level 1)
+                // FIX: Forced dark background (bg-gray-700) and light text (text-gray-100)
+                html += `
+                    <div class="category-wrapper" id="category-wrapper-${category.categoryId}">
+                        <button class="flex items-center justify-between w-full p-2 text-sm font-semibold bg-gray-700 text-gray-100 hover:bg-gray-600 rounded-lg transition duration-150"
+                            onclick="toggleCategory('${category.categoryId}')">
+                            <span>${category.categoryTitle}</span>
+                            <span id="icon-${category.categoryId}">
+                                ${categoryIconSvg}
+                            </span>
+                        </button>
+                        
+                        <!-- Subpages Container (Level 2) -->
+                        <div id="content-${category.categoryId}" class="ml-3 mt-1 space-y-1 subpages-container">
+                `;
+
+                // Iterate over the page IDs within the category
+                category.pageIds.forEach(pageId => {
+                    // Get the page title from the pageContent object
+                    const page = pageContent[pageId];
+                    
+                    // IMPORTANT: We must check if content exists for the ID before rendering the link
+                    if (page) {
+                         // Subpage Link (Level 2) - Wrapped for easy filtering
+                        html += `
+                                <div class="page-link-wrapper">
+                                    <a href="#" data-page-id="${pageId}" class="block px-3 py-1.5 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-teal-50 dark:hover:bg-teal-900/40 hover:text-teal-700 dark:hover:text-teal-400 transition duration-150 page-link"
+                                        onclick="event.preventDefault(); renderContent('${pageId}');">
+                                        ${page.title}
+                                    </a>
+                                </div>
+                        `;
+                    } else {
+                        console.warn(`Content missing for pageId: ${pageId}`);
+                    }
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+
+            navMenu.innerHTML = html;
+
+            // Attach event listeners to all links for initial setup
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    renderContent(this.dataset.pageId);
+                });
+            });
+
+            // Render the very first page on load (uses the first ID from the menuStructure)
+            if (menuStructure.length > 0 && menuStructure[0].pageIds.length > 0) {
+                renderContent(menuStructure[0].pageIds[0]);
+            }
+        }
+
+        // Mobile Sidebar Toggle
+        function toggleSidebar(force) {
+            const body = document.body;
+            const overlay = document.getElementById('mobile-overlay');
+
+            if (force === true) {
+                 body.classList.add('sidebar-open');
+                 overlay.classList.remove('hidden');
+            } else if (force === false) {
+                 body.classList.remove('sidebar-open');
+                 overlay.classList.add('hidden');
+            } else {
+                // Toggle
+                body.classList.toggle('sidebar-open');
+                if (body.classList.contains('sidebar-open')) {
+                    overlay.classList.remove('hidden');
+                } else {
+                    overlay.classList.add('hidden');
+                }
+            }
+        }
+
+        // --- 3. INITIALIZATION ---
+
+        window.onload = function() {
+            try {
+                // 1. Apply theme immediately on load
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                applyTheme(savedTheme);
+
+                // 2. Replace lucide icons in static HTML elements
+                if (window.lucide) {
+                    lucide.createIcons();
+                }
+
+                // 3. Build the menu and render the first page
+                buildMenu();
+
+                // 4. Setup mobile button listener
+                document.getElementById('menu-button').addEventListener('click', () => toggleSidebar());
+                
+                // 5. Setup theme toggle listener
+                document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+            } catch (e) {
+                console.error("Initialization Error: Could not build the menu.", e);
+                // Fallback: If buildMenu fails, notify the user in the sidebar
+                document.getElementById('nav-menu').innerHTML = '<div class="p-4 text-red-500 text-sm font-semibold">Fatal Error: Could not build menu. Check console.</div>';
+            }
+        };
+    </script>
+</body>
+</html>

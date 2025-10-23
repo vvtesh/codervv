@@ -1,0 +1,38 @@
+<p>This page demonstrates how to include source code with syntax highlighting using the Prism.js library. Note the use of the <code>language-javascript</code>, <code>language-python</code>, and <code>language-java</code> classes.</p>
+            
+<h3>Example: Java Hello World</h3>
+<p>The **Java Hello World** program is the traditional first step in learning Java. It defines a public class named <code>HelloWorld</code> and includes the necessary <code>public static void main(String[] args)</code> method, which serves as the entry point for execution by the Java Virtual Machine (JVM). The actual output is produced using <code>System.out.println("Hello, World!")</code>.</p>
+
+<pre><code class="language-java">
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+</code></pre>
+
+<h3>Example: JavaScript Function</h3>
+<p>Here is a small function to calculate the Fibonacci sequence:</p>
+
+<pre><code class="language-javascript">
+function fibonacci(n) {
+  if (n &lt;= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// Call the function
+console.log(fibonacci(10));
+</code></pre>
+
+<h3>Example: Python Script</h3>
+<p>Python code highlighting also works automatically:</p>
+
+<pre><code class="language-python">
+# A simple Python script
+def greet(name):
+    """Prints a greeting message."""
+    print(f"Hello, {name}!")
+
+if __name__ == "__main__":
+    greet("DevDocs User")
+</code></pre>

@@ -146,17 +146,10 @@
             </button>
             
             <!-- About Me Menu -->
-            <div class="hidden lg:flex relative group">
-                <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 px-3 py-2 rounded-lg transition duration-150 flex items-center">
-                    About Me
-                    <i data-lucide="chevron-down" class="w-4 h-4 ml-1 transition group-hover:rotate-180"></i>
-                </a>
-                <div class="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-teal-50 dark:hover:bg-teal-600 hover:text-teal-700 dark:hover:text-white rounded-t-lg">My Portfolio</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-teal-50 dark:hover:bg-teal-600 hover:text-teal-700 dark:hover:text-white">Contact</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-teal-50 dark:hover:bg-teal-600 hover:text-teal-700 dark:hover:text-white rounded-b-lg">GitHub</a>
-                </div>
-            </div>
+            <a href="https://vvtesh.github.io" target="_blank" rel="noopener noreferrer"
+               class="hidden lg:inline-block text-gray-600 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 px-3 py-2 rounded-lg transition duration-150">
+                About Me
+            </a>
         </div>
     </header>
 
@@ -203,117 +196,10 @@
         </p>
     </footer>
 
+    <!-- Load content data from external file -->
+    <script src="content.js"></script>
+
     <script>
-        // ====================================================================
-        // --- START OF CONTENT DATA (MOCKS SEPARATE CONTENT FILES) ---
-        // ====================================================================
-
-        // A) NAVIGATION MAP (Defines the menu hierarchy: Category Title -> Page IDs)
-        const menuStructure = [
-            {
-                categoryTitle: "Getting Started",
-                categoryId: "getting-started",
-                pageIds: ["intro", "setup"] 
-            },
-            {
-                categoryTitle: "Core Concepts",
-                categoryId: "core-concepts",
-                pageIds: ["data-layer", "tailwind-style", "code-examples"]
-            },
-            {
-                categoryTitle: "Advanced Topics",
-                categoryId: "advanced",
-                pageIds: ["perf-opt"]
-            }
-        ];
-
-        // B) PAGE CONTENT (Holds the actual page title and rich content body)
-        const pageContent = {
-            "intro": {
-                title: "Introduction",
-                markdownContent: `
-                    <p>Welcome to the project documentation. This introductory section provides a high-level overview of the system's goals and architecture.</p>
-                    <p>We focus on creating robust, scalable, and maintainable software using modern web technologies. This site itself is a demonstration of clean, single-file deployment.</p>
-                `
-            },
-            "setup": {
-                title: "Setup and Installation",
-                markdownContent: `
-                    <p>To begin, cloning the repository and running a build process would be the standard steps. For this static site, simply open <code>index.html</code> in your browser.</p>
-                    <p>All dependencies are loaded via CDN, ensuring a quick and simple startup process. No local build steps are required.</p>
-                `
-            },
-            "data-layer": {
-                title: "The Data Layer",
-                markdownContent: `
-                    <p>The data layer is managed entirely through local JavaScript objects for this demonstration. In a production environment, this would interface with a database like Firestore or MongoDB.</p>
-                    <p>We prioritize asynchronous data fetching and state immutability to ensure predictable application flow and simple debugging.</p>
-                `
-            },
-            "tailwind-style": {
-                title: "Styling with Tailwind",
-                markdownContent: `
-                    <p>This entire layout is styled using Tailwind CSS utility classes. This allows for rapid development and guaranteed responsiveness across all screen sizes.</p>
-                    <p>The design adheres to mobile-first principles, ensuring excellent readability and usability on smaller devices. We use utility classes like <code>flex</code>, <code>bg-white</code>, and responsive prefixes like <code>lg:ml-64</code>.</p>
-                `
-            },
-            "code-examples": {
-                title: "Code Highlighting Demo",
-                markdownContent: `
-                    <p>This page demonstrates how to include source code with syntax highlighting using the Prism.js library. Note the use of the <code>language-javascript</code>, <code>language-python</code>, and <code>language-java</code> classes.</p>
-                    
-                    <h3>Example: Java Hello World</h3>
-                    <p>The **Java Hello World** program is the traditional first step in learning Java. It defines a public class named <code>HelloWorld</code> and includes the necessary <code>public static void main(String[] args)</code> method, which serves as the entry point for execution by the Java Virtual Machine (JVM). The actual output is produced using <code>System.out.println("Hello, World!")</code>.</p>
-                    
-                    <pre><code class="language-java">
-public class HelloWorld {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
-}
-                    </code></pre>
-                    
-                    <h3>Example: JavaScript Function</h3>
-                    <p>Here is a small function to calculate the Fibonacci sequence:</p>
-                    
-                    <pre><code class="language-javascript">
-function fibonacci(n) {
-  if (n &lt;= 1) return n;
-  return fibonacci(n - 1) + fibonacci(n - 2);
-}
-
-// Call the function
-console.log(fibonacci(10));
-                    </code></pre>
-
-                    <h3>Example: Python Script</h3>
-                    <p>Python code highlighting also works automatically:</p>
-                    
-                    <pre><code class="language-python">
-# A simple Python script
-def greet(name):
-    """Prints a greeting message."""
-    print(f"Hello, {name}!")
-
-if __name__ == "__main__":
-    greet("DevDocs User")
-                    </code></pre>
-                `
-            },
-            "perf-opt": {
-                title: "Performance Optimization",
-                markdownContent: `
-                    <p>Key optimization strategies include minimizing DOM manipulations (by batching updates) and using efficient CSS (like Tailwind's utility-first approach).</p>
-                    <p>Future plans involve lazy loading images and using web workers for heavy computational tasks.</p>
-                `
-            }
-        };
-
-        // ====================================================================
-        // --- END OF CONTENT DATA ---
-        // ====================================================================
-
-
         // --- SVG Definitions for Robust Icon Toggling ---
         const CHEVRON_DOWN_SVG = `<svg class="w-4 h-4 transition-transform" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`;
         const CHEVRON_RIGHT_SVG = `<svg class="w-4 h-4 transition-transform" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>`;
@@ -365,51 +251,49 @@ if __name__ == "__main__":
             applyTheme(newTheme);
         }
 
-        // Function to find the content body by pageId
-        function findContent(pageId) {
-            const content = pageContent[pageId];
-
-            if (!content) {
-                return null;
-            }
-
-            return {
-                title: content.title,
-                markdownContent: content.markdownContent
-            };
-        }
-        
-        // Utility function to process the content for highlighting (Prism.js requires <pre><code>)
-        function processContentForHighlighting(markdown) {
-            return markdown; 
-        }
-
-
-        // Function to render the main content area
-        function renderContent(pageId) {
-            const page = findContent(pageId);
+        // Function to render the main content area by fetching content from a file
+        async function renderContent(pageId) {
+            const pageMeta = pageContent[pageId];
             const titleElement = document.getElementById('content-title');
             const bodyElement = document.getElementById('content-body');
             const navMenu = document.getElementById('nav-menu');
             
-            if (!page) {
+            if (!pageMeta) {
                 titleElement.textContent = "Content Not Found";
                 bodyElement.innerHTML = "<p>The requested page could not be located in the documentation structure.</p>";
                 return;
             }
 
             // Update Main Content
-            titleElement.textContent = page.title;
+            titleElement.textContent = pageMeta.title;
             
-            // Inject the processed content
-            bodyElement.innerHTML = processContentForHighlighting(page.markdownContent);
+            // Show a loading state
+            bodyElement.innerHTML = '<p class="text-gray-500 dark:text-gray-400">Loading content...</p>';
 
-            // IMPORTANT: Call Prism.highlightAll() to apply syntax highlighting after
-            // the new content is injected into the DOM.
-            if (window.Prism) {
-                Prism.highlightAll();
-            } else {
-                console.warn("Prism.js not loaded. Syntax highlighting skipped.");
+            try {
+                // Fetch the content from the corresponding HTML file
+                const response = await fetch(`content/${pageId}.html`);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const contentHtml = await response.text();
+
+                // Inject the fetched content
+                bodyElement.innerHTML = contentHtml;
+
+                // IMPORTANT: Call Prism.highlightAll() to apply syntax highlighting after
+                // the new content is injected into the DOM.
+                if (window.Prism) {
+                    Prism.highlightAll();
+                } else {
+                    console.warn("Prism.js not loaded. Syntax highlighting skipped.");
+                }
+
+            } catch (error) {
+                console.error("Error fetching page content:", error);
+                bodyElement.innerHTML = `<p class="text-red-500">Error: Could not load content for this page. Please check the file path and network connection.</p>`;
             }
 
 
@@ -540,8 +424,7 @@ if __name__ == "__main__":
                          // Subpage Link (Level 2) - Wrapped for easy filtering
                         html += `
                                 <div class="page-link-wrapper">
-                                    <a href="#" data-page-id="${pageId}" class="block px-3 py-1.5 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-teal-50 dark:hover:bg-teal-900/40 hover:text-teal-700 dark:hover:text-teal-400 transition duration-150 page-link"
-                                        onclick="event.preventDefault(); renderContent('${pageId}');">
+                                    <a href="#" data-page-id="${pageId}" class="block px-3 py-1.5 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-teal-50 dark:hover:bg-teal-900/40 hover:text-teal-700 dark:hover:text-teal-400 transition duration-150 page-link">
                                         ${page.title}
                                     </a>
                                 </div>
@@ -559,12 +442,18 @@ if __name__ == "__main__":
 
             navMenu.innerHTML = html;
 
-            // Attach event listeners to all links for initial setup
-            navMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    renderContent(this.dataset.pageId);
-                });
+            // Use a single, delegated event listener on the parent menu for efficiency.
+            // This is better than attaching a listener to every single link.
+            navMenu.addEventListener('click', function(e) {
+                // Find the actual link that was clicked, even if the click was on an inner element.
+                const link = e.target.closest('a.page-link');
+
+                // If the click wasn't on a page link, do nothing.
+                if (!link) return;
+
+                e.preventDefault(); // Prevent the link from navigating.
+                const pageId = link.dataset.pageId;
+                renderContent(pageId);
             });
 
             // Render the very first page on load (uses the first ID from the menuStructure)

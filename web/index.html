@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DevDocs Static Site</title>
-    
+
     <!-- Script to apply theme early to prevent FOUC (MOVED UP FOR SPEED) -->
     <script>
         (function() {
@@ -24,13 +24,13 @@
         }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    
+
     <!-- === SYNTAX HIGHLIGHTING: PRISM.JS === -->
     <!-- Prism.js Light Theme (Default) - Initially active -->
     <link id="prism-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
     <!-- Prism.js Dark Theme (Okaidia) - Initially inactive -->
     <link id="prism-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" disabled />
-    
+
     <!-- Prism.js Core Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <!-- Include languages -->
@@ -45,7 +45,7 @@
 
     <!-- Load Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
+
     <style>
         /* Custom styles for the scrollbar and transitions */
         :root {
@@ -59,7 +59,7 @@
         .dark body {
             background-color: #111827; /* Gray 900 */
         }
-        
+
         /* FIX: Explicit CSS rules to prevent white flash on fixed elements in dark theme */
         /* By targeting the default light-mode classes, we create a more specific selector that wins over Tailwind's base styles without needing !important. */
         .dark header.bg-white {
@@ -111,11 +111,11 @@
         }
         /* Override Tailwind prose styles for code blocks to ensure Prism.js works */
         .prose pre {
-            padding: 0; 
-            background-color: transparent; 
+            padding: 0;
+            background-color: transparent;
             margin: 1.5em 0;
             border-radius: 0.5rem;
-            overflow: auto; 
+            overflow: auto;
         }
         /* Ensure code block elements match prose styling in both themes */
         .prose h1, .prose h2, .prose h3 { color: #1f2937; } /* Light mode headings */
@@ -132,10 +132,10 @@
             <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
             <span class="text-xl font-bold text-gray-800 dark:text-gray-100">DevDocs</span>
         </div>
-        
+
         <div class="flex items-center space-x-4">
             <!-- Theme Toggle Button -->
-            <button id="theme-toggle" class="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition" 
+            <button id="theme-toggle" class="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
                 aria-label="Toggle theme">
                 <!-- Icon will be set by JS -->
             </button>
@@ -144,7 +144,7 @@
             <button id="menu-button" class="lg:hidden p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
                 <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
-            
+
             <!-- About Me Menu -->
             <a href="https://vvtesh.github.io" target="_blank" rel="noopener noreferrer"
                class="hidden lg:inline-block text-gray-600 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 px-3 py-2 rounded-lg transition duration-150">
@@ -155,17 +155,17 @@
 
     <!-- 2. MAIN LAYOUT (Sidebar and Content) -->
     <main class="flex pt-16 pb-20"> <!-- Padding for fixed header/footer -->
-        
+
         <!-- Mobile Overlay -->
         <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden" onclick="toggleSidebar()"></div>
 
         <!-- 2a. LEFT SIDEBAR (Navigation Menu) -->
         <aside id="sidebar" class="fixed top-16 bottom-20 w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 lg:block z-30 p-4 content-scrollable">
-            
+
             <!-- NEW SEARCH BAR -->
             <div class="mb-4">
-                <input type="text" id="menu-search" oninput="filterMenu()" 
-                       placeholder="Search titles..." 
+                <input type="text" id="menu-search" oninput="filterMenu()"
+                       placeholder="Search titles..."
                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-gray-200 transition">
             </div>
             <!-- END NEW SEARCH BAR -->
@@ -203,7 +203,7 @@
         // --- SVG Definitions for Robust Icon Toggling ---
         const CHEVRON_DOWN_SVG = `<svg class="w-4 h-4 transition-transform" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`;
         const CHEVRON_RIGHT_SVG = `<svg class="w-4 h-4 transition-transform" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>`;
-        
+
         const SUN_SVG = `<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`;
         const MOON_SVG = `<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
 
@@ -214,7 +214,7 @@
         function applyTheme(theme) {
             const htmlElement = document.documentElement;
             const toggleButton = document.getElementById('theme-toggle');
-            
+
             // Reference Prism theme links
             const lightThemeLink = document.getElementById('prism-light-theme');
             const darkThemeLink = document.getElementById('prism-dark-theme');
@@ -223,7 +223,7 @@
                 htmlElement.classList.add('dark');
                 toggleButton.innerHTML = SUN_SVG; // Show sun icon in dark mode
                 toggleButton.setAttribute('aria-label', 'Switch to Light Mode');
-                
+
                 // Switch Prism themes: enable dark, disable light
                 if (darkThemeLink) darkThemeLink.disabled = false;
                 if (lightThemeLink) lightThemeLink.disabled = true;
@@ -257,7 +257,7 @@
             const titleElement = document.getElementById('content-title');
             const bodyElement = document.getElementById('content-body');
             const navMenu = document.getElementById('nav-menu');
-            
+
             if (!pageMeta) {
                 titleElement.textContent = "Content Not Found";
                 bodyElement.innerHTML = "<p>The requested page could not be located in the documentation structure.</p>";
@@ -266,7 +266,7 @@
 
             // Update Main Content
             titleElement.textContent = pageMeta.title;
-            
+
             // Show a loading state
             bodyElement.innerHTML = '<p class="text-gray-500 dark:text-gray-400">Loading content...</p>';
 
@@ -326,19 +326,19 @@
                 icon.innerHTML = CHEVRON_RIGHT_SVG;
             }
         }
-        
+
         // Function to filter menu links based on search input
         window.filterMenu = function() {
             const searchInput = document.getElementById('menu-search');
             // Get the search term, convert to lowercase, and trim whitespace
             const searchTerm = searchInput.value.toLowerCase().trim();
-            
+
             // Select all category wrappers (Level 1 containers)
             const categories = document.querySelectorAll('.category-wrapper');
 
             categories.forEach(categoryWrapper => {
                 let categoryHasMatches = false;
-                
+
                 // Get the subpages container (Level 2 list)
                 const pageLinksContainer = categoryWrapper.querySelector('.subpages-container');
                 // Get all individual page link wrappers
@@ -348,7 +348,7 @@
                 pageLinks.forEach(linkWrapper => {
                     const link = linkWrapper.querySelector('a.page-link');
                     // Get the visible title text
-                    const linkTitle = link.textContent.toLowerCase().trim(); 
+                    const linkTitle = link.textContent.toLowerCase().trim();
 
                     if (searchTerm === '' || linkTitle.includes(searchTerm)) {
                         // Show the link
@@ -368,10 +368,10 @@
                 } else if (categoryHasMatches) {
                     // If searching AND the category has matches, show the whole category
                     categoryWrapper.classList.remove('hidden');
-                    
+
                     // Force the page links container open to show the results
                     pageLinksContainer.classList.remove('hidden');
-                    
+
                     // Change the icon to 'down' (open)
                     const categoryId = categoryWrapper.id.replace('category-wrapper-', '');
                     const icon = document.getElementById(`icon-${categoryId}`);
@@ -409,7 +409,7 @@
                                 ${categoryIconSvg}
                             </span>
                         </button>
-                        
+
                         <!-- Subpages Container (Level 2) -->
                         <div id="content-${category.categoryId}" class="ml-3 mt-1 space-y-1 subpages-container">
                 `;
@@ -418,7 +418,7 @@
                 category.pageIds.forEach(pageId => {
                     // Get the page title from the pageContent object
                     const page = pageContent[pageId];
-                    
+
                     // IMPORTANT: We must check if content exists for the ID before rendering the link
                     if (page) {
                          // Subpage Link (Level 2) - Wrapped for easy filtering

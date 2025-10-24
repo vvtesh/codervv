@@ -7,12 +7,12 @@ const menuStructure = [
     {
         categoryTitle: "Getting Started",
         categoryId: "getting-started",
-        pageIds: ["intro", "setup"] 
+        pageIds: ["intro", "two-sum", "two-sum-ii"]
     },
     {
-        categoryTitle: "Core Concepts",
+        categoryTitle: "Recursion and DP",
         categoryId: "core-concepts",
-        pageIds: ["data-layer", "tailwind-style", "code-examples"]
+        pageIds: ["house-robber", "tailwind-style", "code-examples"]
     },
     {
         categoryTitle: "Advanced Topics",
@@ -26,11 +26,14 @@ const pageContent = {
     "intro": {
         title: "Introduction"
     },
-    "setup": {
-        title: "Setup and Installation"
+    "two-sum": {
+        title: "Two Sum"
     },
-    "data-layer": {
-        title: "The Data Layer"
+    "two-sum-ii": {
+        title: "Two Sum II"
+    },
+    "house-robber": {
+        title: "House Robber"
     },
     "tailwind-style": {
         title: "Styling with Tailwind"

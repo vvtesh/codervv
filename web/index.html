@@ -46,6 +46,20 @@
     <!-- Load Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- === MATHJAX CONFIGURATION === -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']] // Recognize $...$ for inline math
+            }
+        };
+    </script>
+    <!-- === END MATHJAX CONFIGURATION === -->
+
+    <!-- MathJax for LaTeX rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/polyfill-io-feature-packs@1.0.1/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
         /* Custom styles for the scrollbar and transitions */
         :root {
@@ -289,6 +303,15 @@
                     Prism.highlightAll();
                 } else {
                     console.warn("Prism.js not loaded. Syntax highlighting skipped.");
+                }
+
+                // IMPORTANT: Tell MathJax to re-render the new content.
+                if (window.MathJax) {
+                    // Use the promise-based approach for reliability.
+                    // This ensures MathJax processes the content after it's ready.
+                    window.MathJax.startup.promise.then(() => {
+                        window.MathJax.typesetPromise([bodyElement]);
+                    });
                 }
 
             } catch (error) {

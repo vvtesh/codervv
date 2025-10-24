@@ -7,17 +7,17 @@ const menuStructure = [
     {
         categoryTitle: "Getting Started",
         categoryId: "getting-started",
-        pageIds: ["intro", "two-sum", "two-sum-ii"]
+        pageIds: ["intro", "two-sum"]
     },
     {
         categoryTitle: "Recursion and DP",
         categoryId: "core-concepts",
-        pageIds: ["house-robber", "no-of-islands", "code-examples"]
+        pageIds: ["house-robber", "no-of-islands"]
     },
     {
         categoryTitle: "Advanced Topics",
-        categoryId: "advanced",
-        pageIds: ["perf-opt"]
+        categoryId: "meeting-rooms-ii",
+        pageIds: ["meeting-rooms-ii"]
     }
 ];
 
@@ -29,19 +29,13 @@ const pageContent = {
     "two-sum": {
         title: "Two Sum"
     },
-    "two-sum-ii": {
-        title: "Two Sum II"
-    },
     "house-robber": {
         title: "House Robber"
     },
     "no-of-islands": {
         title: "Number of Islands"
     },
-    "code-examples": {
-        title: "Code Highlighting Demo"
-    },
-    "perf-opt": {
-        title: "Performance Optimization"
+    "meeting-rooms-ii": {
+        title: "Meeting Rooms II"
     }
 };

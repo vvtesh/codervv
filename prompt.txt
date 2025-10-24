@@ -6,37 +6,20 @@ Using house-robber.html as example, create a new html for the following code sni
 
     ```java
     class Solution {
-        int count = 0;
-        static final char LAND = '1';
-        static final char WATER = '0';
-        public int numIslands(char[][] grid) {
-            int m = grid.length;
-            int n = grid[0].length;
+        public int minMeetingRooms(int[][] intervals) {
 
-            for(int i=0; i<m; i++) {
-                for(int j=0; j<n; j++) {
-                    if(grid[i][j]==LAND) {
-                        removeIsland(grid,i,j);
-                        count++;
-                    }
+            int n = intervals.length;
+            if (n == 0) return 0;
+            PriorityQueue<Integer> allocator = new PriorityQueue<Integer>();
+            Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+            allocator.add(intervals[0][1]);
+            for (int i = 1; i < intervals.length; i++) {
+                if (intervals[i][0] >= allocator.peek()) {
+                    allocator.poll();
                 }
+                allocator.add(intervals[i][1]);
             }
-            return count;
-        }
-
-        public void removeIsland(char[][] grid, int i, int j) {
-
-            if (i>=grid.length || j>=grid[0].length || i<0 || j<0 || grid[i][j]==WATER) {
-                return;
-            }
-
-            if (grid[i][j] == LAND) {
-                grid[i][j] = WATER;
-                removeIsland(grid, i+1, j);
-                removeIsland(grid, i, j+1);
-                removeIsland(grid, i-1, j);
-                removeIsland(grid, i, j-1);
-            }
+            return allocator.size();
         }
     }
     ```

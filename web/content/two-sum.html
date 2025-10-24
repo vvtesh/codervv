@@ -1,11 +1,8 @@
-<section id="two-sum">
-    <h2>Two Sum</h2>
-    <p><strong>Category:</strong> Interesting Problems</p>
-    <p>Input: <code>[2,7,11,15]</code>, target = <code>9</code><br>
-        Output: <code>[0,1]</code><br>
-        Exactly one solution guaranteed.</p>
-    <h3>Solution – Brute Force (O(n<sup>2</sup>))</h3>
-    <pre><code class="language-java">
+<h3>Example: Two Sum Solution (Brute Force)</h3>
+<p>This code solves the classic <b>Two Sum</b> problem, which requires finding the indices of two numbers in an array that add up to a specific <code>target</code>. This solution uses the **Brute Force** approach, employing a nested loop structure. The outer loop iterates through each element, and the inner loop checks every subsequent element to see if the required complement (<code>target - nums[i]</code>) exists. While simple to implement, this method has a time complexity of $O(n^2)$.</p>
+
+<pre><code class="language-java">
+<textarea hidden>
 class Solution {
   public int[] twoSum(int[] nums, int target) {
     for (int i = 0; i < nums.length; i++) {
@@ -18,9 +15,16 @@ class Solution {
     return new int[] {};
   }
 }
-  </code></pre>
-    <h3>Solution – HashMap (O(n))</h3>
-    <pre><code class="language-java">
+</textarea>
+</code></pre>
+
+<hr>
+
+<h3>Example: Two Sum Solution (Optimized HashMap)</h3>
+<p>This solution also addresses the <b>Two Sum</b> problem but significantly improves performance by utilizing a <b>HashMap</b>. The approach iterates through the array only once. For each element $x$ at index $i$, it calculates the required <b>complement</b> (<code>target - x</code>). It checks if this complement already exists as a key in the map. If it does, the indices are immediately returned. If not, the current number $x$ and its index $i$ are stored in the map. This optimization reduces the time complexity to $O(n)$.</p>
+
+<pre><code class="language-java">
+<textarea hidden>
 class Solution {
   public int[] twoSum(int[] nums, int target) {
     Map<Integer, Integer> map = new HashMap<>();
@@ -34,5 +38,33 @@ class Solution {
     return new int[] {};
   }
 }
-  </code></pre>
-</section>
+</textarea>
+</code></pre>
+
+
+<hr>
+
+<h3>Example: Two Sum Solution (Two Pointers - Sorted Array)</h3>
+<p>This code solves the <b>Two Sum</b> problem under the assumption that the input array is already sorted in ascending order. It employs the **Two Pointers** technique, initializing pointers at the start (<code>low</code>) and end (<code>high</code>) of the array. The algorithm calculates the sum of the elements at the pointers. If the sum is less than the target, the **left pointer is incremented**; if the sum is greater, the **right pointer is decremented**. This efficient approach continues until the target is found, achieving an optimal time complexity of $O(n)$.</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+  public int[] twoSum(int[] numbers, int target) {
+    int low = 0;
+    int high = numbers.length - 1;
+    while (low < high) {
+      int sum = numbers[low] + numbers[high];
+      if (sum == target) {
+        return new int[] { low + 1, high + 1 };
+      } else if (sum < target) {
+        ++low;
+      } else {
+        --high;
+      }
+    }
+    return new int[] { -1, -1 };
+  }
+}
+</textarea>
+</code></pre>

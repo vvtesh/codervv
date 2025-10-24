@@ -81,6 +81,16 @@ async function renderContent(pageId) {
         // Inject the fetched content
         bodyElement.innerHTML = contentHtml;
 
+        // --- Process <textarea> blocks to prevent HTML parsing issues ---
+        // Find all <code> elements that contain a <textarea>
+        bodyElement.querySelectorAll('code > textarea').forEach(textArea => {
+            const codeBlock = textArea.parentElement;
+            // Set the code block's text content to the raw value of the textarea
+            codeBlock.textContent = textArea.value;
+            // The textarea is no longer needed and can be removed
+            textArea.remove();
+        });
+
         // IMPORTANT: Call Prism.highlightAll() to apply syntax highlighting after
         // the new content is injected into the DOM.
         if (window.Prism) {

@@ -1,0 +1,42 @@
+<hr>
+<h3>Example: Number of Islands Solution (DFS)</h3>
+<p>This Java code solves the "Number of Islands" problem, which asks to find the total number of islands in a 2D binary grid. The approach uses <b>Depth-First Search (DFS)</b> to identify and mark entire islands. When the main loop encounters '1' (land), it increments the island count and calls <code>removeIsland</code>, which recursively explores all adjacent land cells (up, down, left, right) and changes them to '0' (water). This process effectively "sinks" the entire island, preventing it from being counted again, until the entire grid is traversed.</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+    int count = 0;
+    static final char LAND = '1';
+    static final char WATER = '0';
+    public int numIslands(char[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+        for(int i=0; i<m; i++) {
+            for(int j=0; j<n; j++) {
+                if(grid[i][j]==LAND) {
+                    removeIsland(grid,i,j);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    public void removeIsland(char[][] grid, int i, int j) {
+
+        if (i>=grid.length || j>=grid[0].length || i<0 || j<0 || grid[i][j]==WATER) {
+            return;
+        }
+
+        if (grid[i][j] == LAND) {
+            grid[i][j] = WATER;
+            removeIsland(grid, i+1, j);
+            removeIsland(grid, i, j+1);
+            removeIsland(grid, i-1, j);
+            removeIsland(grid, i, j-1);
+        }
+    }
+}
+</textarea>
+</code></pre>

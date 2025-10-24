@@ -12,7 +12,7 @@ const menuStructure = [
     {
         categoryTitle: "Recursion and DP",
         categoryId: "core-concepts",
-        pageIds: ["house-robber", "tailwind-style", "code-examples"]
+        pageIds: ["house-robber", "no-of-islands", "code-examples"]
     },
     {
         categoryTitle: "Advanced Topics",
@@ -35,8 +35,8 @@ const pageContent = {
     "house-robber": {
         title: "House Robber"
     },
-    "tailwind-style": {
-        title: "Styling with Tailwind"
+    "no-of-islands": {
+        title: "Number of Islands"
     },
     "code-examples": {
         title: "Code Highlighting Demo"

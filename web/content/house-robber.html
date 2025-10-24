@@ -2,6 +2,7 @@
 <p>This Java code implements a solution to the classic "House Robber" problem using <b>Dynamic Programming</b> with <b>Memoization</b> (top-down approach). The <code>rob(int[] nums)</code> method initializes a memoization array and calls the recursive helper method <code>robFrom</code>. The <code>robFrom</code> method calculates the maximum money that can be robbed from house index $i$ onwards by choosing the maximum of two options: skipping the current house or robbing the current house and moving two houses down. Memoization ensures that subproblems are solved only once, significantly improving performance.</p>
 
 <pre><code class="language-java">
+<textarea hidden>
 class Solution {
     private int[] memo;
 
@@ -30,6 +31,7 @@ class Solution {
         return ans;
     }
 }
+</textarea>
 </code></pre>
 
 <hr>
@@ -38,6 +40,7 @@ class Solution {
 <p>This second Java solution for the "House Robber" problem uses an <b>Iterative Dynamic Programming</b> (bottom-up) approach. Instead of recursion, it uses an array, <code>maxRobbedAmount</code>, to store the optimal solution for subproblems starting from the end of the street. The array is filled backwards from $N-2$ to $0$. The value at index $i$ is calculated using the recurrence relation: $DP[i] = \max(DP[i+1], DP[i+2] + nums[i])$. The final answer is stored in <code>maxRobbedAmount[0]</code>.</p>
 
 <pre><code class="language-java">
+<textarea hidden>
 class Solution {
     public int rob(int[] nums) {
         int N = nums.length;
@@ -61,6 +64,7 @@ class Solution {
         return maxRobbedAmount[0];
     }
 }
+</textarea>
 </code></pre>
 
 <hr>
@@ -69,6 +73,7 @@ class Solution {
 <p>This third Java solution is an optimization of the previous <b>Iterative Dynamic Programming</b> approach. It achieves $O(1)$ space complexity by observing that the current solution only depends on the results of the two immediately following houses ($i+1$ and $i+2$). This eliminates the need for the full $DP$ array. Two variables, <code>robNext</code> and <code>robNextPlusOne</code>, track the maximum amounts for $i+1$ and $i+2$, respectively. In each loop, a new optimal <code>current</code> value is computed, and the two variables are shifted to prepare for the next iteration.</p>
 
 <pre><code class="language-java">
+<textarea hidden>
 class Solution {
     public int rob(int[] nums) {
         int N = nums.length;
@@ -92,4 +97,41 @@ class Solution {
         return robNext;
     }
 }
+</textarea>
+</code></pre>
+
+<hr>
+
+<h3>Example: House Robber II (Circular Street) Solution</h3>
+<p>This code solves the "House Robber II" problem, where the houses are arranged in a circle, meaning the first house and the last house are neighbors. The solution handles this by breaking the circle into two non-circular, linear subproblems: robbing houses from index $0$ to $N-2$ (excluding the last house) and robbing houses from index $1$ to $N-1$ (excluding the first house). The maximum of the results from these two linear runs, calculated by the <code>rob_simple</code> function, is the final answer. The <code>rob_simple</code> function itself uses the optimized <b>Iterative Dynamic Programming</b> approach.</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+    public int rob(int[] nums) {
+        if (nums.length == 0) return 0;
+
+        if (nums.length == 1) return nums[0];
+
+        int max1 = rob_simple(nums, 0, nums.length - 2);
+        int max2 = rob_simple(nums, 1, nums.length - 1);
+
+        return Math.max(max1, max2);
+    }
+
+    public int rob_simple(int[] nums, int start, int end) {
+        int t1 = 0;
+        int t2 = 0;
+
+        for (int i = start; i <= end; i++) {
+            int temp = t1;
+            int current = nums[i];
+            t1 = Math.max(current + t2, t1);
+            t2 = temp;
+        }
+
+        return t1;
+    }
+}
+</textarea>
 </code></pre>

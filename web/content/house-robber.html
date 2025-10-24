@@ -1,0 +1,95 @@
+<h3>Example: House Robber Problem Solution</h3>
+<p>This Java code implements a solution to the classic "House Robber" problem using <b>Dynamic Programming</b> with <b>Memoization</b> (top-down approach). The <code>rob(int[] nums)</code> method initializes a memoization array and calls the recursive helper method <code>robFrom</code>. The <code>robFrom</code> method calculates the maximum money that can be robbed from house index $i$ onwards by choosing the maximum of two options: skipping the current house or robbing the current house and moving two houses down. Memoization ensures that subproblems are solved only once, significantly improving performance.</p>
+
+<pre><code class="language-java">
+class Solution {
+    private int[] memo;
+
+    public int rob(int[] nums) {
+        this.memo = new int[100];
+        Arrays.fill(this.memo, -1);
+
+        return this.robFrom(0, nums);
+    }
+
+    private int robFrom(int i, int[] nums) {
+        if (i >= nums.length) {
+            return 0;
+        }
+
+        if (this.memo[i] > -1) {
+            return this.memo[i];
+        }
+
+        int ans = Math.max(
+            this.robFrom(i + 1, nums),
+            this.robFrom(i + 2, nums) + nums[i]
+        );
+
+        this.memo[i] = ans;
+        return ans;
+    }
+}
+</code></pre>
+
+<hr>
+
+<h3>Example: House Robber Problem Solution (Iterative DP)</h3>
+<p>This second Java solution for the "House Robber" problem uses an <b>Iterative Dynamic Programming</b> (bottom-up) approach. Instead of recursion, it uses an array, <code>maxRobbedAmount</code>, to store the optimal solution for subproblems starting from the end of the street. The array is filled backwards from $N-2$ to $0$. The value at index $i$ is calculated using the recurrence relation: $DP[i] = \max(DP[i+1], DP[i+2] + nums[i])$. The final answer is stored in <code>maxRobbedAmount[0]</code>.</p>
+
+<pre><code class="language-java">
+class Solution {
+    public int rob(int[] nums) {
+        int N = nums.length;
+
+        if (N == 0) {
+            return 0;
+        }
+
+        int[] maxRobbedAmount = new int[nums.length + 1];
+
+        maxRobbedAmount[N] = 0;
+        maxRobbedAmount[N - 1] = nums[N - 1];
+
+        for (int i = N - 2; i >= 0; --i) {
+            maxRobbedAmount[i] = Math.max(
+                maxRobbedAmount[i + 1],
+                maxRobbedAmount[i + 2] + nums[i]
+            );
+        }
+
+        return maxRobbedAmount[0];
+    }
+}
+</code></pre>
+
+<hr>
+
+<h3>Example: House Robber Problem Solution (Optimized Iterative DP)</h3>
+<p>This third Java solution is an optimization of the previous <b>Iterative Dynamic Programming</b> approach. It achieves $O(1)$ space complexity by observing that the current solution only depends on the results of the two immediately following houses ($i+1$ and $i+2$). This eliminates the need for the full $DP$ array. Two variables, <code>robNext</code> and <code>robNextPlusOne</code>, track the maximum amounts for $i+1$ and $i+2$, respectively. In each loop, a new optimal <code>current</code> value is computed, and the two variables are shifted to prepare for the next iteration.</p>
+
+<pre><code class="language-java">
+class Solution {
+    public int rob(int[] nums) {
+        int N = nums.length;
+
+        if (N == 0) {
+            return 0;
+        }
+
+        int robNext, robNextPlusOne;
+
+        robNextPlusOne = 0;
+        robNext = nums[N - 1];
+
+        for (int i = N - 2; i >= 0; --i) {
+            int current = Math.max(robNext, robNextPlusOne + nums[i]);
+
+            robNextPlusOne = robNext;
+            robNext = current;
+        }
+
+        return robNext;
+    }
+}
+</code></pre>

@@ -1,0 +1,38 @@
+<section id="two-sum">
+    <h2>Two Sum</h2>
+    <p><strong>Category:</strong> Interesting Problems</p>
+    <p>Input: <code>[2,7,11,15]</code>, target = <code>9</code><br>
+        Output: <code>[0,1]</code><br>
+        Exactly one solution guaranteed.</p>
+    <h3>Solution – Brute Force (O(n<sup>2</sup>))</h3>
+    <pre><code class="language-java">
+class Solution {
+  public int[] twoSum(int[] nums, int target) {
+    for (int i = 0; i < nums.length; i++) {
+      for (int j = i + 1; j < nums.length; j++) {
+        if (nums[j] == target - nums[i]) {
+          return new int[] { i, j };
+        }
+      }
+    }
+    return new int[] {};
+  }
+}
+  </code></pre>
+    <h3>Solution – HashMap (O(n))</h3>
+    <pre><code class="language-java">
+class Solution {
+  public int[] twoSum(int[] nums, int target) {
+    Map<Integer, Integer> map = new HashMap<>();
+    for (int i = 0; i < nums.length; i++) {
+      int complement = target - nums[i];
+      if (map.containsKey(complement)) {
+        return new int[] { map.get(complement), i };
+      }
+      map.put(nums[i], i);
+    }
+    return new int[] {};
+  }
+}
+  </code></pre>
+</section>

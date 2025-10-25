@@ -27,7 +27,7 @@ const menuStructure = [
     {
         categoryTitle: "Union Find",
         categoryId: "core-concepts",
-        pageIds: ["water-distribution"]
+        pageIds: ["union-find-basics", "water-distribution"]
     },
     {
         categoryTitle: "Advanced Topics",
@@ -70,5 +70,8 @@ const pageContent = {
     },
     "rotten-oranges": {
         title: "Rotting Oranges"
+    },
+    "union-find-basics": {
+        title: "Basics"
     }
 };

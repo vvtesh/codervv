@@ -1,0 +1,37 @@
+<hr>
+
+<h3>Example: Disjoint Set Union (DSU) Data Structure Implementation</h3>
+<p>This Java code implements the Disjoint Set Union (DSU) or Union-Find data structure, which efficiently manages a collection of disjoint sets. The approach uses a HashMap to store parent pointers (id) and the size of each set's tree, enabling path compression in the find operation for optimization. The union by size heuristic is applied in the union operation to maintain a flat tree structure, ensuring near-constant time complexity for both operations.</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+    class DisjointSet { HashMap<Integer, Integer> id, size;
+
+        public DisjointSet() {
+            this.id = new HashMap&lt;&gt;();
+            this.size = new HashMap&lt;&gt;();
+        }
+
+        public int find(int n) {
+            if (id.get(n) == n)
+                return n;
+            id.put(n, find(id.get(n)));
+            return id.get(n);
+        }
+
+        public void union(int u, int v) {
+            int idU = find(u);
+            int idV = find(v);
+            if (idU == idV)
+                return;
+            if (size.get(idU) &lt; size.get(idV)) {
+                id.put(idU, idV);
+                size.put(idV, size.get(idU) + size.get(idV));
+            } else {
+                id.put(idV, idU);
+                size.put(idU, size.get(idU) + size.get(idV));
+            }
+        }
+    }
+</textarea>
+</code></pre>

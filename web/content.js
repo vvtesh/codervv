@@ -10,14 +10,29 @@ const menuStructure = [
         pageIds: ["intro", "two-sum"]
     },
     {
-        categoryTitle: "Recursion and DP",
+        categoryTitle: "Recursion, BFS, DFS, DP",
         categoryId: "core-concepts",
-        pageIds: ["house-robber", "no-of-islands"]
+        pageIds: ["house-robber", "no-of-islands", "rotten-oranges"]
+    },
+    {
+        categoryTitle: "Monotonic Stacks",
+        categoryId: "monotonic-stacks",
+        pageIds: ["next-greater-element-i"]
+    },
+    {
+        categoryTitle: "TreeMap (SortedMap)",
+        categoryId: "core-concepts",
+        pageIds: ["my-calendar-iii", "count-int-in-intervals"]
+    },
+    {
+        categoryTitle: "Union Find",
+        categoryId: "core-concepts",
+        pageIds: ["water-distribution"]
     },
     {
         categoryTitle: "Advanced Topics",
         categoryId: "meeting-rooms-ii",
-        pageIds: ["meeting-rooms-ii"]
+        pageIds: ["meeting-rooms-ii", "longest-increasing-subsequence"]
     }
 ];
 
@@ -37,5 +52,23 @@ const pageContent = {
     },
     "meeting-rooms-ii": {
         title: "Meeting Rooms II"
+    },
+    "my-calendar-iii": {
+        title: "My Calendar III (Sweeping Line)"
+    },
+    "count-int-in-intervals": {
+        title: "Count Integers in Intervals"
+    },
+    "longest-increasing-subsequence": {
+        title: "Longest Increasing Subsequence"
+    },
+    "next-greater-element-i": {
+        title: "Next Greater Element I"
+    },
+    "water-distribution": {
+        title: "Water Distribution in a Village"
+    },
+    "rotten-oranges": {
+        title: "Rotting Oranges"
     }
 };

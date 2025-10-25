@@ -1,0 +1,26 @@
+<h3>Example: Longest Increasing Subsequence (LIS) Solution (Optimized with Binary Search)</h3>
+<p>This Java code solves the **Longest Increasing Subsequence** (LIS) problem using an **optimized dynamic programming** approach combined with **binary search**. It maintains an `ArrayList`, `sub`, where `sub[i]` stores the smallest tail of all increasing subsequences of length $i+1$. For each number, if it's greater than the current LIS tail, it extends the LIS; otherwise, it uses **binary search** to find the smallest tail in `sub` that is greater than or equal to the current number and replaces it, ensuring the subsequence tails remain as small as possible. The final answer is the size of the `sub` list.</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        ArrayList<Integer> sub = new ArrayList<>();
+        sub.add(nums[0]);
+
+        for (int i = 1; i < nums.length; i++) {
+            int num = nums[i];
+            if (num > sub.get(sub.size() - 1)) {
+                sub.add(num);
+            } else {
+                int idx = Collections.binarySearch(sub, num);
+                int j = (idx >= 0 ? idx : ~idx);
+                sub.set(j, num);
+            }
+        }
+
+        return sub.size();
+    }
+}
+</textarea>
+</code></pre>

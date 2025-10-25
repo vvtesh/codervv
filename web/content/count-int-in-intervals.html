@@ -1,0 +1,45 @@
+<h3>Example: Counting Total Covered Length of Intervals</h3>
+<p>This Java class addresses the problem of efficiently calculating the total length covered by a stream of added intervals, ensuring that overlaps are only counted once. The approach uses a <b>TreeMap</b> to store non-overlapping intervals, mapping the start (left) of an interval to its end (right). When a new interval `[l, r]` is added, the code iteratively checks for and merges all existing intervals that overlap with it using a <b>greedy merge strategy</b>. The total count is updated by subtracting the length of the removed intervals and adding the length of the newly merged, extended interval.</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+class CountIntervals {
+
+    private TreeMap<Integer, Integer> treeMap;
+    private int count;
+
+    public CountIntervals() {
+       treeMap = new TreeMap<>();
+       count = 0;
+    }
+
+    public void add(int left, int right) {
+
+       int l = left;
+       int r = right;
+
+       while(!(treeMap.floorKey(r) == null || treeMap.get(treeMap.floorKey(r)) < l)){
+
+          int smallerLeft = treeMap.floorKey(r);
+          int smallerRight = treeMap.get(smallerLeft);
+
+          // reduce the count
+          count -= (smallerRight - smallerLeft + 1);
+          treeMap.remove(smallerLeft);
+
+          // merge
+          l = Math.min(l, smallerLeft);
+          r = Math.max(r, smallerRight);
+       }
+
+       treeMap.put(l, r);
+       count += (r - l + 1);
+
+    }
+
+    public int count() {
+       return count;
+    }
+}
+</textarea>
+</code></pre>

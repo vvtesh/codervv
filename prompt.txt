@@ -1,27 +1,137 @@
 ````
-Using house-robber.html as example, create a new html for the following code snippet.
+Using the following html content as example.
+
+---example html
+<h3>Example: House Robber Problem Solution (Optimized Iterative DP)</h3>
+<p>This third Java solution is an optimization of the previous <b>Iterative Dynamic Programming</b> approach. It achieves $O(1)$ space complexity by observing that the current solution only depends on the results of the two immediately following houses ($i+1$ and $i+2$). This eliminates the need for the full $DP$ array. Two variables, <code>robNext</code> and <code>robNextPlusOne</code>, track the maximum amounts for $i+1$ and $i+2$, respectively. In each loop, a new optimal <code>current</code> value is computed, and the two variables are shifted to prepare for the next iteration.</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+    public int rob(int[] nums) {
+        int N = nums.length;
+
+        if (N == 0) {
+            return 0;
+        }
+
+        int robNext, robNextPlusOne;
+
+        robNextPlusOne = 0;
+        robNext = nums[N - 1];
+
+        for (int i = N - 2; i >= 0; --i) {
+            int current = Math.max(robNext, robNextPlusOne + nums[i]);
+
+            robNextPlusOne = robNext;
+            robNext = current;
+        }
+
+        return robNext;
+    }
+}
+</textarea>
+</code></pre>
+
+<hr>
+
+<h3>Example: House Robber II (Circular Street) Solution</h3>
+<p>This code solves the "House Robber II" problem, where the houses are arranged in a circle, meaning the first house and the last house are neighbors. The solution handles this by breaking the circle into two non-circular, linear subproblems: robbing houses from index $0$ to $N-2$ (excluding the last house) and robbing houses from index $1$ to $N-1$ (excluding the first house). The maximum of the results from these two linear runs, calculated by the <code>rob_simple</code> function, is the final answer. The <code>rob_simple</code> function itself uses the optimized <b>Iterative Dynamic Programming</b> approach.</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+    public int rob(int[] nums) {
+        if (nums.length == 0) return 0;
+
+        if (nums.length == 1) return nums[0];
+
+        int max1 = rob_simple(nums, 0, nums.length - 2);
+        int max2 = rob_simple(nums, 1, nums.length - 1);
+
+        return Math.max(max1, max2);
+    }
+
+    public int rob_simple(int[] nums, int start, int end) {
+        int t1 = 0;
+        int t2 = 0;
+
+        for (int i = start; i <= end; i++) {
+            int temp = t1;
+            int current = nums[i];
+            t1 = Math.max(current + t2, t1);
+            t2 = temp;
+        }
+
+        return t1;
+    }
+}
+</textarea>
+</code></pre>
+---example html ends
 
 1.  **Heading:** Create a new `<h3>` heading with appropriate title.
 2.  **Code Snippet:** Integrate the following Java code into a `<pre><code class="language-java">` block, ensuring all comments are removed, just as in the previous examples:
 
     ```java
     class Solution {
-        public int minMeetingRooms(int[][] intervals) {
+        public int orangesRotting(int[][] grid) {
+            Queue<Pair<Integer, Integer>> queue = new ArrayDeque();
 
-            int n = intervals.length;
-            if (n == 0) return 0;
-            PriorityQueue<Integer> allocator = new PriorityQueue<Integer>();
-            Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
-            allocator.add(intervals[0][1]);
-            for (int i = 1; i < intervals.length; i++) {
-                if (intervals[i][0] >= allocator.peek()) {
-                    allocator.poll();
+            // Step 1). build the initial set of rotten oranges
+            int freshOranges = 0;
+            int ROWS = grid.length, COLS = grid[0].length;
+
+            for (int r = 0; r < ROWS; ++r)
+                for (int c = 0; c < COLS; ++c)
+                    if (grid[r][c] == 2)
+                        queue.offer(new Pair(r, c));
+                    else if (grid[r][c] == 1)
+                        freshOranges++;
+
+            // Mark the round / level, _i.e_ the ticker of timestamp
+            queue.offer(new Pair(-1, -1));
+
+            // Step 2). start the rotting process via BFS
+            int minutesElapsed = -1;
+            int[][] directions = { {-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+
+            while (!queue.isEmpty()) {
+                Pair<Integer, Integer> p = queue.poll();
+                int row = p.getKey();
+                int col = p.getValue();
+                if (row == -1) {
+                    // We finish one round of processing
+                    minutesElapsed++;
+                    // to avoid the endless loop
+                    if (!queue.isEmpty())
+                        queue.offer(new Pair(-1, -1));
+                } else {
+                    // this is a rotten orange
+                    // then it would contaminate its neighbors
+                    for (int[] d : directions) {
+                        int neighborRow = row + d[0];
+                        int neighborCol = col + d[1];
+                        if (neighborRow >= 0 && neighborRow < ROWS &&
+                            neighborCol >= 0 && neighborCol < COLS) {
+                            if (grid[neighborRow][neighborCol] == 1) {
+                                // this orange would be contaminated
+                                grid[neighborRow][neighborCol] = 2;
+                                freshOranges--;
+                                // this orange would then contaminate other oranges
+                                queue.offer(new Pair(neighborRow, neighborCol));
+                            }
+                        }
+                    }
                 }
-                allocator.add(intervals[i][1]);
             }
-            return allocator.size();
+
+            // return elapsed minutes if no fresh orange left
+            return freshOranges == 0 ? minutesElapsed : -1;
         }
     }
+
+
     ```
 
 3.  **Explanation Paragraph:** Write a concise paragraph (no more than 5 lines) that explains the code. It should:

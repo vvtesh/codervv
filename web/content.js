@@ -12,7 +12,9 @@ const menuStructure = [
     {
         categoryTitle: "Recursion, BFS, DFS, DP",
         categoryId: "core-concepts",
-        pageIds: ["max-area-of-islands", "house-robber", "no-of-islands", "rotten-oranges", "generate-parenthesis",
+        pageIds: ["max-area-of-islands", "house-robber", "no-of-islands", "rotten-oranges",
+            "combination-sum",
+            "generate-parenthesis",
             "regex-matching"]
     },
     {
@@ -98,6 +100,9 @@ const pageContent = {
     },
     "rotten-oranges": {
         title: "Rotting Oranges"
+    },
+    "combination-sum": {
+        title: "Combination Sum"
     },
     "regex-matching": {
     title: "Regex Matching"

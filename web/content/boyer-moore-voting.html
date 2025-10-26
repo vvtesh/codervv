@@ -1,0 +1,28 @@
+<hr>
+
+<h3>Find Majority Item (Boyer-Moore Voting Algorithm)</h3>
+<p>When there are only two elements, easy counting!</p>
+
+<pre>
+    Input: nums = [2,2,1,1,1,2,2]
+    Output: 2
+</pre>
+
+<pre><code class="language-java">
+<textarea hidden>
+public int majorityElement(int[] nums) {
+        int count = 0;
+        Integer candidate = null;
+
+        for (int num : nums) {
+            if (count == 0) {
+                candidate = num;
+            }
+            count += (num == candidate) ? 1 : -1;
+        }
+
+        return candidate;
+    }
+
+</textarea>
+</code></pre>

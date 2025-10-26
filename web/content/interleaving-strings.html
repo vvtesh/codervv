@@ -1,0 +1,30 @@
+<hr>
+
+<h3>Example: My Calendar Three Solution (Difference Array/TreeMap)</h3>
+<p>Approach: Recursive</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+    if (res.equals(s3) && i == s1.length() && j == s2.length()) return true;
+    boolean ans = false;
+    if (i < sllen) ans |= f(s1, i + 1, s2, j,     res + s1.charAt(i), s3);
+    if (j < s2len) ans |= f(s1, i,     s2, j + 1, res + s2.charAt(j), s3);
+    return ans;
+</textarea>
+</code></pre>
+
+<hr>
+
+<p>Approach: Iterative</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+    for (int i = 0; i < nums.length; i++) {
+        int accu = 1;
+        for (int j = i; j < nums.length; j++) {
+            accu *= nums[j];
+            result = Math.max(result, accu);
+        }
+    }
+</textarea>
+</code></pre>

@@ -7,17 +7,22 @@ const menuStructure = [
     {
         categoryTitle: "Getting Started",
         categoryId: "getting-started",
-        pageIds: ["intro", "essential-java", "two-sum"]
+        pageIds: ["intro", "essential-java", "interleaving-strings", "two-sum"]
     },
     {
         categoryTitle: "Recursion, BFS, DFS, DP",
         categoryId: "core-concepts",
-        pageIds: ["house-robber", "no-of-islands", "rotten-oranges"]
+        pageIds: ["house-robber", "no-of-islands", "rotten-oranges", "generate-parenthesis"]
+    },
+    {
+        categoryTitle: "Stacks",
+        categoryId: "stacks",
+        pageIds: ["longest-valid-parenthesis"]
     },
     {
         categoryTitle: "Monotonic Stacks",
         categoryId: "monotonic-stacks",
-        pageIds: ["next-greater-element-i"]
+        pageIds: ["next-greater-element-i", "trapping-rain-water"]
     },
     {
         categoryTitle: "TreeMap (SortedMap)",
@@ -32,7 +37,7 @@ const menuStructure = [
     {
         categoryTitle: "Advanced Topics",
         categoryId: "meeting-rooms-ii",
-        pageIds: ["meeting-rooms-ii", "longest-increasing-subsequence","max-subarray-sum"]
+        pageIds: ["meeting-rooms-ii", "longest-increasing-subsequence","max-subarray-sum","boyer-moore-voting"]
     }
 ];
 
@@ -43,6 +48,9 @@ const pageContent = {
     },
     "essential-java": {
         title: "Essential Java"
+    },
+    "interleaving-strings": {
+        title: "Interleaving Strings"
     },
     "two-sum": {
         title: "Two Sum"
@@ -79,5 +87,17 @@ const pageContent = {
     },
     "max-subarray-sum": {
         title: "Maximum Subarray Sum (Kadane's algorithm)"
+    },
+    "longest-valid-parenthesis": {
+        title: "Longest Valid Parentheses"
+    },
+    "generate-parenthesis": {
+        title: "Generate Parentheses"
+    },
+    "boyer-moore-voting": {
+    title: "Find Majority Item (Voting Algorithm)"
+    },
+    "trapping-rain-water": {
+        title: "Trapping Rain Water"
     }
 };

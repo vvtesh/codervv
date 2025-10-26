@@ -1,0 +1,45 @@
+<hr>
+
+<h3>Example: Maximum Subarray Sum (Kadane's algorithm)</h3>
+
+<p>
+    Brute force
+</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+    for (int i = 0; i < nums.length; i++) {
+        int accu = 1;
+        for (int j = i; j < nums.length; j++) {
+            accu *= nums[j];
+            result = Math.max(result, accu);
+        }
+    }
+</textarea>
+</code></pre>
+
+<p>
+    Kadane’s Algorithm provides the most optimized approach for finding the Maximum Subarray Sum, solving the problem in linear time, O(n), and is recognized as a type of Dynamic Programming algorithm. The core logic is built on the intuition that adding a large negative number will decrease a positive value, thus preventing the attainment of the maximum sum; therefore, if the current subarray sum ever becomes negative, the algorithm dictates that it must be reset to zero, effectively forgetting the previous negative-contributing numbers and beginning a fresh subarray. To implement this, the algorithm uses two main variables: Current Sum (for the sum of the subarray currently being examined) and Max Sum (which stores the largest sum found across all subarrays), iteratively adding elements to Current Sum within a single loop, and continuously updating Max Sum to store the maximum value between Current Sum and Max Sum. It is crucial that the reset condition (Current Sum less than zero) occurs after the Max Sum calculation, as this order ensures that edge cases—such as arrays containing only negative values—correctly capture the least negative element as the maximum sum, rather than incorrectly returning zero.
+</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+public class Solution {
+    public int maxSubArray(int[] nums) {
+        int maxSum = Integer.MIN_VALUE;
+        int currSum = 0;
+
+        for (int num : nums) {
+            currSum += num;
+            maxSum = Math.max(maxSum, currSum);
+
+            if (currSum < 0) {
+                currSum = 0;
+            }
+        }
+
+        return maxSum;
+    }
+}
+</textarea>
+</code></pre>

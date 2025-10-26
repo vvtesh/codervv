@@ -7,7 +7,7 @@ const menuStructure = [
     {
         categoryTitle: "Getting Started",
         categoryId: "getting-started",
-        pageIds: ["intro", "two-sum"]
+        pageIds: ["intro", "essential-java", "two-sum"]
     },
     {
         categoryTitle: "Recursion, BFS, DFS, DP",
@@ -32,7 +32,7 @@ const menuStructure = [
     {
         categoryTitle: "Advanced Topics",
         categoryId: "meeting-rooms-ii",
-        pageIds: ["meeting-rooms-ii", "longest-increasing-subsequence"]
+        pageIds: ["meeting-rooms-ii", "longest-increasing-subsequence","max-subarray-sum"]
     }
 ];
 
@@ -40,6 +40,9 @@ const menuStructure = [
 const pageContent = {
     "intro": {
         title: "Introduction"
+    },
+    "essential-java": {
+        title: "Essential Java"
     },
     "two-sum": {
         title: "Two Sum"
@@ -73,5 +76,8 @@ const pageContent = {
     },
     "union-find-basics": {
         title: "Basics"
+    },
+    "max-subarray-sum": {
+        title: "Maximum Subarray Sum (Kadane's algorithm)"
     }
 };

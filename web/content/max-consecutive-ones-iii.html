@@ -1,0 +1,56 @@
+
+
+<h3>Maximum Consecutive Ones III</h3>
+<p>BruteForce: The answer has to start somewhere and end somewhere. If we assume, each position could be the answer’s starting point, we could go as long as possible covering only k zeros. Do this for every position. Return max valid length.
+    SlidingWindow: Expand and Shrink based on zeroCount.
+</p>
+<p>Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.</p>
+<pre>
+Input: nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2
+Output: 6
+</pre>
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+
+        int n = nums.length;
+        if (n <= k) {
+            return n;
+        }
+
+        int ans = 0, l=0, r=0, zeroCount=0;
+
+        while(r<n) {
+
+            if (nums[r] == 1) r++;
+
+            if (nums[l] == 0) {
+                if (zeroCount<k) {
+                    r++;
+                    zeroCount++;
+                } else {
+                    ans = Math.max(ans, r-l);
+                    l = shrinkWindow(nums, l, r);
+                    zeroCount--;
+                }
+            }
+        }
+        ans = Math.max(ans, r-l);
+        return ans;
+    }
+
+    /**
+    * Moving the left pointer till we find the first zero, shrinks the window.
+    */
+    public int shrinkWindow(int[] nums, int , int r) {
+        while(l<=r && nums[l]==1) {
+            l++;
+        }
+        l++;
+        return l;
+    }
+}
+
+</textarea>
+</code></pre>

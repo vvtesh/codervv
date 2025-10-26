@@ -7,12 +7,18 @@ const menuStructure = [
     {
         categoryTitle: "Getting Started",
         categoryId: "getting-started",
-        pageIds: ["intro", "essential-java", "interleaving-strings", "two-sum"]
+        pageIds: ["intro", "essential-java", "interleaving-strings", "two-sum", "longest-consecutive-subsequence"]
     },
     {
         categoryTitle: "Recursion, BFS, DFS, DP",
         categoryId: "core-concepts",
-        pageIds: ["house-robber", "no-of-islands", "rotten-oranges", "generate-parenthesis"]
+        pageIds: ["max-area-of-islands", "house-robber", "no-of-islands", "rotten-oranges", "generate-parenthesis",
+            "regex-matching"]
+    },
+    {
+        categoryTitle: "Sliding Window",
+        categoryId: "core-concepts",
+        pageIds: ["max-consecutive-ones-iii"]
     },
     {
         categoryTitle: "Stacks",
@@ -23,6 +29,11 @@ const menuStructure = [
         categoryTitle: "Monotonic Stacks",
         categoryId: "monotonic-stacks",
         pageIds: ["next-greater-element-i", "trapping-rain-water"]
+    },
+    {
+        categoryTitle: "Graphs",
+        categoryId: "core-concepts",
+        pageIds: ["the-maze-ii", "course-schedule"]
     },
     {
         categoryTitle: "TreeMap (SortedMap)",
@@ -37,7 +48,7 @@ const menuStructure = [
     {
         categoryTitle: "Advanced Topics",
         categoryId: "meeting-rooms-ii",
-        pageIds: ["meeting-rooms-ii", "longest-increasing-subsequence","max-subarray-sum","boyer-moore-voting"]
+        pageIds: ["meeting-rooms-ii", "longest-increasing-subsequence","max-subarray-sum","boyer-moore-voting","best-sightseeing-pair"]
     }
 ];
 
@@ -61,6 +72,12 @@ const pageContent = {
     "no-of-islands": {
         title: "Number of Islands"
     },
+    "max-area-of-islands": {
+        title: "Max Area of Islands"
+    },
+    "max-consecutive-ones-iii": {
+        title: "Maximum Consecutive Ones III"
+    },
     "meeting-rooms-ii": {
         title: "Meeting Rooms II"
     },
@@ -82,6 +99,12 @@ const pageContent = {
     "rotten-oranges": {
         title: "Rotting Oranges"
     },
+    "regex-matching": {
+    title: "Regex Matching"
+    },
+    "longest-consecutive-subsequence": {
+        title: "Longest Consecutive Subsequence"
+    },
     "union-find-basics": {
         title: "Basics"
     },
@@ -99,5 +122,14 @@ const pageContent = {
     },
     "trapping-rain-water": {
         title: "Trapping Rain Water"
+    },
+    "best-sightseeing-pair": {
+        title: "Best Sightseeing Pair"
+    },
+    "the-maze-ii": {
+        title: "The Maze II"
+    },
+    "course-schedule": {
+        title: "Course Schedule"
     }
 };

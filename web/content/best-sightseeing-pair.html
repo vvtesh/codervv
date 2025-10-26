@@ -1,0 +1,65 @@
+
+
+<h3>Best SightSeeing Pair</h3>
+
+<p>Approach – Dynamic Programming (Prefix Sum)</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+
+    public int maxScoreSightseeingPair(int[] values) {
+        int n = values.length;
+        // Initialize an array to store the maximum left scores up to each index.
+        int[] maxLeftScore = new int[n];
+        // The left score at the first index is just the value of the first element.
+        maxLeftScore[0] = values[0];
+
+        int maxScore = 0;
+
+        for (int i = 1; i < n; i++) {
+            int currentRightScore = values[i] - i;
+            // Update the maximum score by combining the best left score so far with the current right score.
+            maxScore = Math.max(
+                maxScore,
+                maxLeftScore[i - 1] + currentRightScore
+            );
+
+            int currentLeftScore = values[i] + i;
+            // Update the maximum left score up to the current index.
+            maxLeftScore[i] = Math.max(maxLeftScore[i - 1], currentLeftScore);
+        }
+
+        return maxScore;
+    }
+}
+</textarea>
+</code></pre>
+
+<p>Approach - Optimized Dynamic Programming</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+
+    public int maxScoreSightseeingPair(int[] values) {
+        int n = values.length;
+        int maxLeftScore = values[0];
+        int maxScore = 0;
+
+        for (int i = 1; i < n; i++) {
+            int currentRightScore = values[i] - i;
+            maxScore = Math.max(maxScore, maxLeftScore + currentRightScore);
+            int currentLeftScore = values[i] + i;
+            maxLeftScore = Math.max(maxLeftScore, currentLeftScore);
+        }
+
+        return maxScore;
+    }
+}
+
+</textarea>
+</code></pre>
+
+<hr>
+

@@ -5,41 +5,62 @@
 <textarea hidden>
 class CountIntervals {
 
-    private TreeMap<Integer, Integer> treeMap;
-    private int count;
+    TreeMap<Integer,Integer> map;
+    int count;
 
     public CountIntervals() {
-       treeMap = new TreeMap<>();
-       count = 0;
+        map = new TreeMap<>();
+        count = 0;
     }
 
     public void add(int left, int right) {
 
-       int l = left;
-       int r = right;
+        int l = left;
+        int r = right;
 
-       while(!(treeMap.floorKey(r) == null || treeMap.get(treeMap.floorKey(r)) < l)){
+        int overlappingKey = findOverlappingKey(l, r);
 
-          int smallerLeft = treeMap.floorKey(r);
-          int smallerRight = treeMap.get(smallerLeft);
+        while(overlappingKey >= 0) {
 
-          // reduce the count
-          count -= (smallerRight - smallerLeft + 1);
-          treeMap.remove(smallerLeft);
+            int overlappingValue = map.get(overlappingKey);
 
-          // merge
-          l = Math.min(l, smallerLeft);
-          r = Math.max(r, smallerRight);
-       }
+            count -= overlappingValue - overlappingKey + 1;
+            map.remove(overlappingKey);
 
-       treeMap.put(l, r);
-       count += (r - l + 1);
+            l = Math.min(l, overlappingKey);
+            r = Math.max(r, overlappingValue);
 
+            overlappingKey = findOverlappingKey(l, r);
+        }
+
+        map.put(l, r);
+        count += r - l + 1;
     }
 
     public int count() {
-       return count;
+        return count;
+    }
+
+    public int findOverlappingKey(int l, int r) {
+        Integer nearestKey = map.floorKey(r);
+        if (nearestKey != null) {
+            if (map.get(nearestKey) >= l)
+                return nearestKey;
+        }
+        return -1;
     }
 }
 </textarea>
 </code></pre>
+
+<p>Items to note:</p>
+
+<ol style="list-style-type: lower-alpha;">
+<li>Why do we need a treemap? Ans: To keep sorted intervals. floorKey takes O(logn).</li>
+<li>How to detect overlap between intervals? Ans: map.get(map.floorKey(r)) >= l</li>
+<li>Avoid multiple calls to floorKey by using findOverlappingKey instead of hasOverlap and getOverlappingKey.</li>
+    <li>Treemap uses Red Black tree. it is a self-balancing Binary Search Tree (BST), which is crucial for guaranteeing
+        efficient performance regardless of the order in which data is inserted. A Red-Black Tree automatically adjusts
+        its structure (through recoloring and rotations) after every insertion and deletion to ensure the tree remains
+        approximately balanced. For all major operations like get(), put(), remove(), and navigation methods (floorKey(), ceilingKey(), etc.), the worst-case time complexity is guaranteed to be $O(\log n)$. This consistent, logarithmic performance is what makes TreeMap reliable, even with millions of entries.</li>
+</ol>

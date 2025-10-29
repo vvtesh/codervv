@@ -48,9 +48,14 @@ const menuStructure = [
         pageIds: ["union-find-basics", "water-distribution"]
     },
     {
-        categoryTitle: "Advanced Topics",
+        categoryTitle: "Priority Queue",
         categoryId: "meeting-rooms-ii",
-        pageIds: ["meeting-rooms-ii", "longest-increasing-subsequence","max-subarray-sum","boyer-moore-voting","best-sightseeing-pair"]
+        pageIds: ["meeting-rooms-ii"]
+    },
+    {
+        categoryTitle: "Algorithmic Problems",
+        categoryId: "meeting-rooms-ii",
+        pageIds: ["longest-increasing-subsequence","max-subarray-sum","boyer-moore-voting","best-sightseeing-pair"]
     }
 ];
 

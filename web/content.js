@@ -12,7 +12,7 @@ const menuStructure = [
     {
         categoryTitle: "Recursion, BFS, DFS, DP",
         categoryId: "core-concepts",
-        pageIds: ["max-area-of-islands", "house-robber", "no-of-islands", "rotten-oranges",
+        pageIds: ["simple-recursion", "max-area-of-islands", "house-robber", "no-of-islands", "rotten-oranges",
             "combination-sum",
             "generate-parenthesis",
             "regex-matching"]
@@ -72,6 +72,9 @@ const pageContent = {
     },
     "two-sum": {
         title: "Two Sum"
+    },
+    "simple-recursion": {
+        title: "Simple Recursion"
     },
     "house-robber": {
         title: "House Robber"

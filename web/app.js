@@ -50,7 +50,7 @@ function toggleTheme() {
 }
 
 // Function to render the main content area by fetching content from a file
-async function renderContent(pageId) {
+async function renderContent(pageId, updateHistory = true) {
     const pageMeta = pageContent[pageId];
     const titleElement = document.getElementById('content-title');
     const bodyElement = document.getElementById('content-body');
@@ -127,6 +127,13 @@ async function renderContent(pageId) {
     // Close sidebar on mobile after navigation
     if (window.innerWidth < 1024) {
         toggleSidebar(false);
+    }
+
+    // --- NEW: Update URL with query parameter ---
+    // Update the browser's history to reflect the current page.
+    if (updateHistory) {
+        const newUrl = `${window.location.pathname}?page=${pageId}`;
+        window.history.pushState({ pageId: pageId }, '', newUrl);
     }
 }
 
@@ -238,7 +245,7 @@ function buildMenu() {
 
             // IMPORTANT: We must check if content exists for the ID before rendering the link
             if (page) {
-                 // Subpage Link (Level 2) - Wrapped for easy filtering
+                // Subpage Link (Level 2) - Wrapped for easy filtering
                 html += `
                         <div class="page-link-wrapper">
                             <a href="#" data-page-id="${pageId}" class="block px-3 py-1.5 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-teal-50 dark:hover:bg-teal-900/40 hover:text-teal-700 dark:hover:text-teal-400 transition duration-150 page-link">
@@ -272,11 +279,6 @@ function buildMenu() {
         const pageId = link.dataset.pageId;
         renderContent(pageId);
     });
-
-    // Render the very first page on load (uses the first ID from the menuStructure)
-    if (menuStructure.length > 0 && menuStructure[0].pageIds.length > 0) {
-        renderContent(menuStructure[0].pageIds[0]);
-    }
 }
 
 // Mobile Sidebar Toggle
@@ -285,11 +287,11 @@ function toggleSidebar(force) {
     const overlay = document.getElementById('mobile-overlay');
 
     if (force === true) {
-         body.classList.add('sidebar-open');
-         overlay.classList.remove('hidden');
+        body.classList.add('sidebar-open');
+        overlay.classList.remove('hidden');
     } else if (force === false) {
-         body.classList.remove('sidebar-open');
-         overlay.classList.add('hidden');
+        body.classList.remove('sidebar-open');
+        overlay.classList.add('hidden');
     } else {
         // Toggle
         body.classList.toggle('sidebar-open');
@@ -312,9 +314,34 @@ function initializeApp() {
         // 2. Build the dynamic navigation menu
         buildMenu();
 
+        // --- NEW: Determine initial page from URL or default ---
+        const urlParams = new URLSearchParams(window.location.search);
+        let initialPageId = urlParams.get('page');
+
+        // Validate the pageId from the URL. If it's not valid, fall back to default.
+        if (!initialPageId || !pageContent[initialPageId]) {
+            // Set a default page if the one from the URL is invalid or missing
+            if (menuStructure.length > 0 && menuStructure[0].pageIds.length > 0) {
+                initialPageId = menuStructure[0].pageIds[0]; // e.g., 'intro'
+            }
+        }
+
+        // Render the initial content without pushing to history (as it's the initial state)
+        if (initialPageId) {
+            renderContent(initialPageId, false);
+        }
+
         // 3. Set up event listeners
         document.getElementById('menu-button').addEventListener('click', () => toggleSidebar());
         document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+        // --- NEW: Handle browser back/forward navigation ---
+        window.addEventListener('popstate', (event) => {
+            if (event.state && event.state.pageId) {
+                // Render content for the state's pageId without adding a new history entry
+                renderContent(event.state.pageId, false);
+            }
+        });
 
         // 4. Render Lucide icons now that the DOM is fully ready
         if (window.lucide) {

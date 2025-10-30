@@ -9,6 +9,8 @@
     Explanation: The longest consecutive elements sequence is [1, 2, 3, 4].
     Therefore its length is 4.
 </pre>
+
+<p>The LCS must start with some number. So, for every number, we check if the previous is not present, it could be a candidate for LCS start. Just check how long the sequence it forms. Output the longest.</p>
 <pre><code class="language-java">
 <textarea hidden>
     public int longestConsecutive(int[] nums) {

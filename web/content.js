@@ -10,12 +10,17 @@ const menuStructure = [
         pageIds: ["intro", "essential-java", "substrings", "two-sum", "longest-consecutive-subsequence"]
     },
     {
-        categoryTitle: "Recursion, BFS, DFS, DP",
+        categoryTitle: "Recursion, DFS, DP",
         categoryId: "core-concepts",
-        pageIds: ["simple-recursion", "interleaving-strings", "max-area-of-islands", "house-robber", "no-of-islands", "rotten-oranges",
+        pageIds: ["simple-recursion", "interleaving-strings", "max-area-of-islands", "house-robber", "no-of-islands",
             "combination-sum",
             "generate-parenthesis",
             "regex-matching"]
+    },
+    {
+        categoryTitle: "BFS",
+        categoryId: "core-concepts",
+        pageIds: ["rotten-oranges"]
     },
     {
         categoryTitle: "Sliding Window",

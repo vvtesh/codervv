@@ -1,6 +1,6 @@
 <hr>
 
-<h3>Example: My Calendar Three Solution (Difference Array/TreeMap)</h3>
+<h3>Stack, Two Pointers</h3>
 <p>The provided Java code, longestValidParentheses, uses a stack-based approach to find the length of the longest valid (well-formed) substring of parentheses in a given string $s$. It initializes a variable maxans to store the maximum length found so far and pushes -1 onto the stack; this initial index acts as a base for calculating the length of the first valid substring. The code iterates through the string: if it encounters an opening parenthesis ('('), it pushes the current index onto the stack. If it encounters a closing parenthesis (')'), it pops the top element from the stack. After popping, if the stack becomes empty, it pushes the current index $i$ onto the stack, making this new index the base for a potential new valid substring starting after this mismatched closing parenthesis. If the stack is not empty, the code calculates the length of the current valid substring as $i - \text{stack.peek()}$ (current index minus the index of the last unmatched opening parenthesis or the base index) and updates maxans with the maximum length found. Finally, it returns maxans. This method efficiently determines the longest valid substring length in $O(n)$ time complexity.</p>
 <pre>
 Input: s = ")()())"

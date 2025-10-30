@@ -1,16 +1,11 @@
-<hr>
-
-<h3>Example</h3>
-<a href="https://leetcode.com/problems/interleaving-string/description/">Interleaving Strings</a>
-<p>Approach: Recursive</p>
-
-<pre><code class="language-java">
-<textarea hidden>
 
 public class InterleavingStrings {
+
     public boolean solve(String s1, int i, String s2, int j, String res, String s3) {
 
-        if (res.equals(s3) && i == s1.length() && j == s2.length()) return true;
+        if (res.equals(s3) && i == s1.length() && j == s2.length()) {
+            return true;
+        }
 
         boolean ans = false;
         if (i < s1.length())
@@ -33,21 +28,3 @@ public class InterleavingStrings {
         System.out.println(obj.isInterleaving("abc", "def", "adefcb")); //false
     }
 }
-</textarea>
-</code></pre>
-
-<hr>
-
-<p>Approach: Iterative</p>
-
-<pre><code class="language-java">
-<textarea hidden>
-    for (int i = 0; i < nums.length; i++) {
-        int accu = 1;
-        for (int j = i; j < nums.length; j++) {
-            accu *= nums[j];
-            result = Math.max(result, accu);
-        }
-    }
-</textarea>
-</code></pre>

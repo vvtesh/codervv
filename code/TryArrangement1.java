@@ -13,11 +13,19 @@ public class TryArrangement1 {
             System.out.println(Arrays.toString(result.toArray()));
             return;
         }
-        for(int j=0; j<words.length; j++) {
-            result.add(words[j]);
-            backtrack();
-            result.removeLast();
-        }
+
+        result.add("a");
+        backtrack();
+        result.removeLast();
+
+        result.add("b");
+        backtrack();
+        result.removeLast();
+
+        result.add("c");
+        backtrack();
+        result.removeLast();
+
     }
 
     public static void main(String[] args) {

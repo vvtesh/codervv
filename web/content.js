@@ -7,12 +7,12 @@ const menuStructure = [
     {
         categoryTitle: "Getting Started",
         categoryId: "getting-started",
-        pageIds: ["intro", "essential-java", "interleaving-strings", "two-sum", "longest-consecutive-subsequence"]
+        pageIds: ["intro", "essential-java", "substrings", "two-sum", "longest-consecutive-subsequence"]
     },
     {
         categoryTitle: "Recursion, BFS, DFS, DP",
         categoryId: "core-concepts",
-        pageIds: ["simple-recursion", "max-area-of-islands", "house-robber", "no-of-islands", "rotten-oranges",
+        pageIds: ["simple-recursion", "interleaving-strings", "max-area-of-islands", "house-robber", "no-of-islands", "rotten-oranges",
             "combination-sum",
             "generate-parenthesis",
             "regex-matching"]
@@ -66,6 +66,9 @@ const pageContent = {
     },
     "essential-java": {
         title: "Essential Java"
+    },
+    "substrings": {
+        title: "Substrings"
     },
     "interleaving-strings": {
         title: "Interleaving Strings"

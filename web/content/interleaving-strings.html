@@ -35,19 +35,3 @@ public class InterleavingStrings {
 }
 </textarea>
 </code></pre>
-
-<hr>
-
-<p>Approach: Iterative</p>
-
-<pre><code class="language-java">
-<textarea hidden>
-    for (int i = 0; i < nums.length; i++) {
-        int accu = 1;
-        for (int j = i; j < nums.length; j++) {
-            accu *= nums[j];
-            result = Math.max(result, accu);
-        }
-    }
-</textarea>
-</code></pre>

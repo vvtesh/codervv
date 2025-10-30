@@ -49,9 +49,21 @@
     Collections.reverse(someArray);
     Arrays.fill(row, Integer.MAX_VALUE);
 
+    int idx = Arrays.binarySearch(nums, fromIndex, toIndex, key);
+
     //Insert position after binary search
-    int idx = Collections.binarySearch(sub, num);
+    int idx = Collections.binarySearch(nums, num);
     int j = (idx >= 0 ? idx : ~idx);
+</textarea>
+</code></pre>
+
+<hr>
+<p>Essential String operations</p>
+<pre><code class="language-java">
+<textarea hidden>
+    String s = "hello";
+    int n = s.length(); //with brackets.
+    String commaSeparated = String.join(", ", find(s));
 </textarea>
 </code></pre>
 

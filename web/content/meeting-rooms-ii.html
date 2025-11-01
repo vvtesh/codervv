@@ -21,3 +21,14 @@ class Solution {
 }
 </textarea>
 </code></pre>
+
+<p>Notes</p>
+<pre>
+    1. Sort the intervals by start time.
+    2. Process intervals one by one.
+        2.a) When processing each, for all the intervals so far added, get the earliest end time.
+            (priority queue helps here.)
+        2.b) If the interval to be added starts after the prev smallest end time,
+            remove the prev smallest end time from queue.
+    3. Return the priority queue size.
+</pre>

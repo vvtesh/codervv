@@ -55,12 +55,12 @@ const menuStructure = [
     {
         categoryTitle: "Priority Queue",
         categoryId: "meeting-rooms-ii",
-        pageIds: ["meeting-rooms-ii"]
+        pageIds: ["priority-queue-basics", "max-events-attendable", "meeting-rooms-ii"]
     },
     {
         categoryTitle: "Algorithmic Problems",
         categoryId: "meeting-rooms-ii",
-        pageIds: ["longest-increasing-subsequence","max-subarray-sum","boyer-moore-voting","best-sightseeing-pair"]
+        pageIds: ["longest-increasing-subsequence","max-subarray-sum","boyer-moore-voting","best-sightseeing-pair", "merge-intervals", "non-overlapping-intervals"]
     }
 ];
 
@@ -95,6 +95,18 @@ const pageContent = {
     },
     "max-consecutive-ones-iii": {
         title: "Maximum Consecutive Ones III"
+    },
+    "priority-queue-basics": {
+        title: "Basics"
+    },
+    "merge-intervals": {
+        title: "Merge Intervals"
+    },
+    "max-events-attendable": {
+        title: "Max Events Attendable"
+    },
+    "non-overlapping-intervals": {
+        title: "Non-Overlapping Intervals"
     },
     "meeting-rooms-ii": {
         title: "Meeting Rooms II"

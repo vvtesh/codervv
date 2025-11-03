@@ -10,6 +10,44 @@ Output: 9
 
 <p>Approach – Monotonic Stack</p>
 
+<pre>
+    Keep putting smaller ones in stack. Stack looks as follows for
+    height = [0,1,0,2,1,0,1,3,2,1,2,1]:
+
+        [0]
+        []
+        [1]
+        [1,0]
+        []
+        [2]
+        [2,1]
+        [2,1,0]
+        [2,1,1]
+        []
+        [3]
+        [3,2]
+        [3,2,1]
+        [3,2,2]
+        [3,2,2,1]
+        Done.
+
+    When a bigger one is found, pop the smaller one, calc area.
+
+    Water trapped is calculated so many times:
+        Calculating trapped for 1 2 3 height=1 width=1
+        Calculating trapped for 4 5 6 height=1 width=1
+        Calculating trapped for 4 6 7 height=0 width=2
+        Calculating trapped for 3 4 7 height=1 width=3
+        Calculating trapped for 8 9 10 height=1 width=1
+    Numbers above are indexes, not heights.
+
+    When a bigger one is found, but we don't have two smaller ones in stack,
+        just clear the stack and continue.
+
+    In the code, the monotonously decreasing Stack holds index (not height as shown above).
+
+</pre>
+
 <pre><code class="language-java">
 <textarea hidden>
 class Solution {

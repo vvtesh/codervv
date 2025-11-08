@@ -1,28 +1,41 @@
 <hr>
 
 <h3>Find Majority Item (Boyer-Moore Voting Algorithm)</h3>
-<p>When there are only two elements, easy counting!</p>
-
+<p>Input/Output Example</p>
 <pre>
     Input: nums = [2,2,1,1,1,2,2]
     Output: 2
 </pre>
 
+<p>We can do it in nlogn complexity.</p>
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
+    }
+}
+</textarea>
+</code></pre>
+<hr>
+<p>We can do it in O(n). If we had some way of counting instances of the majority element as +1
+    and instances of any other element as −1, summing them would make it
+    obvious that the majority element is indeed the majority element.</p>
 <pre><code class="language-java">
 <textarea hidden>
 public int majorityElement(int[] nums) {
-        int count = 0;
-        Integer candidate = null;
+    int count = 0;
+    Integer candidate = null;
 
-        for (int num : nums) {
-            if (count == 0) {
-                candidate = num;
-            }
-            count += (num == candidate) ? 1 : -1;
+    for (int num : nums) {
+        if (count == 0) {
+            candidate = num;
         }
-
-        return candidate;
+        count += (num == candidate) ? 1 : -1;
     }
 
+    return candidate;
+}
 </textarea>
 </code></pre>

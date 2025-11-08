@@ -14,6 +14,8 @@ public class PriorityQueueExample {
     public static void main(String[] args) {
 
         PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        //same as
+        //PriorityQueue<Integer> minHeap = new PriorityQueue<>((a,b)->a-b);
 
         // Adding elements
         minHeap.offer(30);
@@ -36,6 +38,8 @@ public class PriorityQueueExample {
 
         // Option A: Using Collections.reverseOrder()
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+        //same as
+        //PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a,b)->b-a);
 
         // Adding elements
         maxHeap.offer(15);

@@ -1,32 +1,31 @@
 
 
-<h3>Best SightSeeing Pair</h3>
+<h3></h3>
 
-<p>Approach – Dynamic Programming (Prefix Sum)</p>
+<a href="https://leetcode.com/problems/best-sightseeing-pair/description/">Leetcode: Best SightSeeing Pair</a>
+<p>Problem: Maximize values[i] + values[j] + i - j.</p>
 
+<p>Approach - Brute Force</p>
+<p>Let us group factors related to i together and similarly factors related to j together. This is like <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/">"Best Time to Buy and Sell Stock"</a> where instead of finding the max(price[j] - price[i]), we're looking for max((values[i] + i) + (values[j] - j))</p>
 <pre><code class="language-java">
 <textarea hidden>
 class Solution {
-
     public int maxScoreSightseeingPair(int[] values) {
+
         int n = values.length;
-        // Initialize an array to store the maximum left scores up to each index.
         int[] maxLeftScore = new int[n];
-        // The left score at the first index is just the value of the first element.
         maxLeftScore[0] = values[0];
 
         int maxScore = 0;
 
         for (int i = 1; i < n; i++) {
             int currentRightScore = values[i] - i;
-            // Update the maximum score by combining the best left score so far with the current right score.
             maxScore = Math.max(
                 maxScore,
                 maxLeftScore[i - 1] + currentRightScore
             );
 
             int currentLeftScore = values[i] + i;
-            // Update the maximum left score up to the current index.
             maxLeftScore[i] = Math.max(maxLeftScore[i - 1], currentLeftScore);
         }
 
@@ -36,7 +35,9 @@ class Solution {
 </textarea>
 </code></pre>
 
-<p>Approach - Optimized Dynamic Programming</p>
+<hr>
+
+<p>Approach - Optimized</p>
 
 <pre><code class="language-java">
 <textarea hidden>

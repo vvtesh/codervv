@@ -13,7 +13,7 @@ const menuStructure = [
         categoryTitle: "Recursion, DFS, DP",
         categoryId: "core-concepts",
         pageIds: ["simple-recursion", "interleaving-strings", "max-area-of-islands", "house-robber", "no-of-islands",
-            "combination-sum",
+            "combination-sum", "subsets",
             "generate-parenthesis",
             "regex-matching"]
     },
@@ -83,6 +83,9 @@ const pageContent = {
     },
     "simple-recursion": {
         title: "Simple Recursion"
+    },
+    "subsets": {
+        title: "Subsets"
     },
     "house-robber": {
         title: "House Robber"

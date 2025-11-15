@@ -335,6 +335,39 @@ function initializeApp() {
         document.getElementById('menu-button').addEventListener('click', () => toggleSidebar());
         document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
 
+        // --- CORRECTED: MENU EXPAND/COLLAPSE TOGGLE LOGIC ---
+        const menuToggleBtn = document.getElementById('menu-toggle-all');
+        const menuToggleText = document.getElementById('menu-toggle-all-text');
+        const navMenu = document.getElementById('nav-menu');
+
+        if (menuToggleBtn && menuToggleText && navMenu) {
+            // Set initial state. We assume the menu is expanded by default.
+            let isExpanded = true;
+            menuToggleText.textContent = 'Collapse All';
+
+            menuToggleBtn.addEventListener('click', () => {
+                // Toggle the state
+                isExpanded = !isExpanded;
+
+                // Find all subpage containers and their corresponding icons
+                const allSubpageContainers = navMenu.querySelectorAll('.subpages-container');
+
+                allSubpageContainers.forEach(container => {
+                    const iconId = container.id.replace('content-', 'icon-');
+                    const icon = document.getElementById(iconId);
+
+                    container.classList.toggle('hidden', !isExpanded);
+                    if (icon) {
+                        icon.innerHTML = isExpanded ? CHEVRON_DOWN_SVG : CHEVRON_RIGHT_SVG;
+                    }
+                });
+
+                // Update the button text to reflect the next action
+                menuToggleText.textContent = isExpanded ? 'Collapse All' : 'Expand All';
+            });
+        }
+        // --- END: CORRECTED LOGIC ---
+
         // --- NEW: Handle browser back/forward navigation ---
         window.addEventListener('popstate', (event) => {
             if (event.state && event.state.pageId) {

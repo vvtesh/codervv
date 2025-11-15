@@ -61,6 +61,11 @@ const menuStructure = [
         categoryTitle: "Algorithmic Problems",
         categoryId: "meeting-rooms-ii",
         pageIds: ["longest-increasing-subsequence","max-subarray-sum","boyer-moore-voting","best-sightseeing-pair", "merge-intervals", "non-overlapping-intervals"]
+    },
+    {
+        categoryTitle: "Miscellaneous",
+        categoryId: "misc",
+        pageIds: ["interesting-problems"]
     }
 ];
 
@@ -167,5 +172,8 @@ const pageContent = {
     },
     "course-schedule": {
         title: "Course Schedule"
+    },
+    "interesting-problems": {
+        title: "Interesting Problems"
     }
 };

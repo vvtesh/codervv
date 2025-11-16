@@ -36,47 +36,39 @@ class Solution {
 }
 </textarea>
 </code></pre>
-
+<img width=400px src="content/images/subsets.png" />
 <pre>
+Think about it. We add to results a copy as we process.
+
+Process(0):
+    Add [].
+    Add 1 to list.
+        Process(1)
+    Remove 1.
+    Add 2 to list.
+        Process(2)
+    Remove 2.
+    Add 3 to list.
+        Process(3)
+    Remove 3.
+
 Output:
+    Iter1
+      Iter2
+        Iter3
     []
     [1]
-    [1, 2]
-    [1, 2, 3]
-    [1, 3]
+      [1, 2]
+        [1, 2, 3]
+      [1, 3]
     [2]
-    [2, 3]
+      [2, 3]
     [3]
 </pre>
 
 <hr>
 
-Bit mask trick.
-
-<pre><code class="language-java">
-<textarea hidden>
-    class Solution {
-
-        public List<List<Integer>> subsets(int[] nums) {
-            List<List<Integer>> output = new ArrayList();
-            int n = nums.length;
-
-            for (int i = (int) Math.pow(2, n); i < (int) Math.pow(2, n + 1); ++i) {
-
-                String bitmask = Integer.toBinaryString(i).substring(1);
-
-                List<Integer> curr = new ArrayList();
-                for (int j = 0; j < n; ++j) {
-                    if (bitmask.charAt(j) == '1') curr.add(nums[j]);
-                }
-                output.add(curr);
-            }
-            return output;
-        }
-}
-</textarea>
-</code></pre>
-
+<p>Bit mask trick.</p>
 
 <pre><code class="language-java">
 <textarea hidden>
@@ -107,7 +99,7 @@ Bit mask trick.
 </textarea>
 </code></pre>
 
-<p>This complication can be reduced by going from 2^n to 2^(n+1) so that binary number has fixed width with a 1 as MSB.</p>
+<p>This complication can be reduced by going from 2^n to 2^(n+1) so that binary number has fixed width with a 1 as MSB. So, we will get a fixed length binary string.</p>
 
 <pre><code class="language-java">
 <textarea hidden>

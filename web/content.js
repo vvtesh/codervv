@@ -3,6 +3,7 @@
 // ====================================================================
 
 // A) NAVIGATION MAP (Defines the menu hierarchy: Category Title -> Page IDs)
+//CategoryIds must be unique. Else, a popup will appear to fix it.
 const menuStructure = [
     {
         categoryTitle: "Getting Started",
@@ -11,7 +12,7 @@ const menuStructure = [
     },
     {
         categoryTitle: "Recursion, DFS, DP",
-        categoryId: "core-concepts",
+        categoryId: "recursion-dfs-dp",
         pageIds: ["simple-recursion", "unique-paths", "interleaving-strings", "max-area-of-islands", "house-robber", "no-of-islands",
             "combination-sum", "subsets",
             "generate-parenthesis",
@@ -19,47 +20,47 @@ const menuStructure = [
     },
     {
         categoryTitle: "BFS",
-        categoryId: "core-concepts",
+        categoryId: "bfs",
         pageIds: ["rotten-oranges"]
     },
     {
         categoryTitle: "Sliding Window",
-        categoryId: "core-concepts",
+        categoryId: "sliding-window",
         pageIds: ["max-consecutive-ones-iii"]
     },
     {
         categoryTitle: "Stacks",
-        categoryId: "stacks",
+        categoryId: "stacks-general",
         pageIds: ["longest-valid-parenthesis"]
     },
     {
         categoryTitle: "Monotonic Stacks",
-        categoryId: "monotonic-stacks",
+        categoryId: "monotonic-stacks-specific",
         pageIds: ["next-greater-element-i", "trapping-rain-water"]
     },
     {
         categoryTitle: "Graphs",
-        categoryId: "core-concepts",
+        categoryId: "graphs",
         pageIds: ["the-maze-ii", "course-schedule"]
     },
     {
         categoryTitle: "TreeMap (SortedMap)",
-        categoryId: "core-concepts",
+        categoryId: "treemap",
         pageIds: ["my-calendar-iii", "count-int-in-intervals"]
     },
     {
         categoryTitle: "Union Find",
-        categoryId: "core-concepts",
+        categoryId: "union-find",
         pageIds: ["union-find-basics", "water-distribution"]
     },
     {
         categoryTitle: "Priority Queue",
-        categoryId: "meeting-rooms-ii",
+        categoryId: "priority-queue",
         pageIds: ["priority-queue-basics", "max-events-attendable", "meeting-rooms-ii"]
     },
     {
         categoryTitle: "Algorithmic Problems",
-        categoryId: "meeting-rooms-ii",
+        categoryId: "algorithmic-problems",
         pageIds: ["longest-increasing-subsequence","max-subarray-sum","boyer-moore-voting","best-sightseeing-pair", "merge-intervals", "non-overlapping-intervals"]
     },
     {

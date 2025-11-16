@@ -303,15 +303,60 @@ function toggleSidebar(force) {
     }
 }
 
+/**
+ * Checks for duplicate categoryId values in the menuStructure and displays a
+ * visible warning if any are found. This is a development-time utility to
+ * prevent configuration errors.
+ */
+function checkForDuplicateCategoryIds() {
+    if (typeof menuStructure === 'undefined') {
+        console.error("`menuStructure` is not defined. Cannot check for duplicate category IDs.");
+        return;
+    }
+
+    const seenIds = new Set();
+    const duplicates = [];
+
+    menuStructure.forEach(category => {
+        if (seenIds.has(category.categoryId)) {
+            duplicates.push(category.categoryId);
+        } else {
+            seenIds.add(category.categoryId);
+        }
+    });
+
+    if (duplicates.length > 0) {
+        const uniqueDuplicates = [...new Set(duplicates)];
+        const warningBanner = document.createElement('div');
+        warningBanner.style.cssText = `
+            position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+            background-color: #ef4444; color: white; padding: 1rem; border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            z-index: 9999; font-family: monospace; font-size: 14px; max-width: 80%;
+            border: 2px solid #f87171;
+        `;
+        warningBanner.innerHTML = `
+            <strong style="font-weight: bold; font-size: 16px;">Configuration Warning!</strong>
+            <p style="margin-top: 0.5rem;">Duplicate \`categoryId\` values found in \`content.js\`.</p>
+            <p style="margin-top: 0.25rem;">Each category must have a unique ID.</p>
+            <p style="margin-top: 0.75rem; font-weight: bold;">Duplicates: <span style="background-color: #b91c1c; padding: 2px 6px; border-radius: 4px;">${uniqueDuplicates.join(', ')}</span></p>
+        `;
+        document.body.appendChild(warningBanner);
+    }
+}
+
 // --- 3. INITIALIZATION ---
 
 function initializeApp() {
     try {
-        // 1. Apply the correct theme state, including icons and Prism styles
+        // 1. Run development-time checks
+        checkForDuplicateCategoryIds();
+
+        // 2. Apply the correct theme state, including icons and Prism styles
         const savedTheme = localStorage.getItem('theme') || 'light';
         applyTheme(savedTheme);
 
-        // 2. Build the dynamic navigation menu
+        // 3. Build the dynamic navigation menu
         buildMenu();
 
         // --- NEW: Determine initial page from URL or default ---
@@ -331,7 +376,7 @@ function initializeApp() {
             renderContent(initialPageId, false);
         }
 
-        // 3. Set up event listeners
+        // 4. Set up event listeners
         document.getElementById('menu-button').addEventListener('click', () => toggleSidebar());
         document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
 
@@ -376,7 +421,7 @@ function initializeApp() {
             }
         });
 
-        // 4. Render Lucide icons now that the DOM is fully ready
+        // 5. Render Lucide icons now that the DOM is fully ready
         if (window.lucide) {
             lucide.createIcons();
         }

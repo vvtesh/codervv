@@ -1,0 +1,131 @@
+
+
+<h3>Last Stone Weight</h3>
+
+<p>A simpler problem that is not a knapsack problem.</p>
+<a href="https://leetcode.com/problems/last-stone-weight/description/">Last Stone Weight</a>
+<p>You are given an array of integers stones where stones[i] is the weight of the ith stone.
+
+    We are playing a game with the stones. On each turn, we choose the heaviest two stones and smash them together. Suppose the heaviest two stones have weights x and y with x <= y. The result of this smash is:
+
+    If x == y, both stones are destroyed, and
+    If x != y, the stone of weight x is destroyed, and the stone of weight y has new weight y - x.
+    At the end of the game, there is at most one stone left.
+
+    Return the weight of the last remaining stone. If there are no stones left, return 0.
+</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+    public int lastStoneWeight(int[] stones) {
+
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(Collections.reverseOrder());
+
+        for(int stone: stones) {
+            priorityQueue.add(stone);
+        }
+
+        while(priorityQueue.size()>=2) {
+
+            int largest = priorityQueue.poll();
+            int secondLargest = priorityQueue.poll();
+
+            if (largest > secondLargest) {
+                priorityQueue.add(largest-secondLargest);
+            }
+        }
+
+        if (priorityQueue.isEmpty()) return 0;
+        return priorityQueue.peek();
+    }
+}
+</textarea>
+</code></pre>
+
+<hr>
+
+<p>The knapsack problem</p>
+
+<p> On each turn, we choose <b>any two</b> stones and smash them together. Return the <b>smallest possible</b> weight of the left stone. If there are no stones left, return 0.</p>
+<pre>
+    Solution:
+    Lets suppose we have [a,b,c,d,e]
+    Suppose we smash a&b, our new array is [a-b,c,d,e]
+    Suppose we smash c&d, our new array is [a-b,c-d,e]
+    Suppose we smash (a-b)&e, our new array is [a-b-e,c-d]
+    Now we smash remaining two, our answer is ( (a-b-e) - (c-d) ) == (a-b-e-c+d) = (a+d) - (b+c+e)
+    Since we subtract lighter stone from heavier one we can't get negative answer,
+    so goal is to partition the array in two sets whose absolute difference is minimum.
+    (It's the question TARGET SUM which is variation of SUBSET SUM which is variation of KNAPSACK)
+</pre>
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+    public int lastStoneWeightII(int[] stones) {
+        int sumStWt = 0;
+        for(int stone : stones){
+            sumStWt += stone;
+        }
+        Integer[][] dp = new Integer[stones.length][sumStWt];
+        return helper(stones, 0, 0, 0, dp);
+    }
+
+    private int helper(int[] stones, int index, int sumL, int sumR, Integer[][] dp) {
+        if(index == stones.length){
+            return Math.abs(sumL - sumR);
+        }
+        if(dp[index][sumL] != null) {
+            return dp[index][sumL];
+        }
+        //For each stone, we take min of "taken" case and "not taken" case.
+        dp[index][sumL] = Math.min(helper(stones, index+1, sumL + stones[index], sumR, dp),
+                                   helper(stones, index+1, sumL, sumR + stones[index], dp));
+        return dp[index][sumL];
+    }
+}
+</textarea>
+</code></pre>
+
+<hr>
+
+<p>Target Sum</p>
+
+<a href="https://leetcode.com/problems/target-sum/description/">Target Sum</a>
+
+<p>
+You are given an integer array nums and an integer target. You want to build an expression out of nums by adding one of the symbols '+' and '-' before each integer in nums and then concatenate all the integers.
+</p>
+<p>
+For example, if nums = [2, 1], you can add a '+' before 2 and a '-' before 1 and concatenate them to build the expression "+2-1".
+Return the number of different expressions that you can build, which evaluates to target.
+</p>
+
+<pre><code class="language-java">
+    <textarea hidden>
+        class Solution {
+            public int findTargetSumWays(int[] nums, int n, int target, Map<Integer, Integer>[] memo) {
+                if (n == 0) {
+                    return (target == 0) ? 1 : 0;
+                }
+                if (memo[n].containsKey(target)) {
+                    return memo[n].get(target);
+                }
+
+                int assignPlus = findTargetSumWays(nums, n - 1, target - nums[n - 1], memo);
+                int assignSub = findTargetSumWays(nums, n - 1, target + nums[n - 1], memo);
+                memo[n].put(target, assignPlus + assignSub);
+
+                return memo[n].get(target);
+            }
+
+            public int findTargetSumWays(int[] nums, int target) {
+                Map<Integer, Integer>[] memo = new Map[nums.length + 1];
+                for (int i = 0; i <= nums.length; i++) {
+                    memo[i] = new HashMap<>();
+                }
+                return findTargetSumWays(nums, nums.length, target, memo);
+            }
+        }
+    </textarea>
+</code></pre>

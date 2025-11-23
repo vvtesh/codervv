@@ -14,7 +14,7 @@ const menuStructure = [
         categoryTitle: "Recursion, DFS, DP",
         categoryId: "recursion-dfs-dp",
         pageIds: ["simple-recursion", "unique-paths", "interleaving-strings", "max-area-of-islands", "house-robber", "no-of-islands",
-            "combination-sum", "subsets",
+            "combination-sum", "subsets", "knapsack",
             "generate-parenthesis",
             "regex-matching"]
     },
@@ -89,6 +89,9 @@ const pageContent = {
     },
     "simple-recursion": {
         title: "Simple Recursion"
+    },
+    "knapsack": {
+        title: "Knapsack"
     },
     "unique-paths": {
         title: "Unique Paths"

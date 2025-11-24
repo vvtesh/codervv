@@ -171,6 +171,8 @@ class Solution {
         for (int i = index; i < candidates.length; i++ ) {
 
             if (remain < candidates[i]) break;
+
+            //Without this line, we output [[1,1,6],[1,2,5],[1,7],[1,2,5],[1,7],[2,6]] which is wrong.
             if (i > index && candidates[i] == candidates[i - 1]) continue;
 
             tempList.add(candidates[i]);

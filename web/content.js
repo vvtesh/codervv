@@ -16,7 +16,7 @@ const menuStructure = [
         pageIds: ["simple-recursion", "unique-paths", "interleaving-strings", "max-area-of-islands", "house-robber", "no-of-islands",
             "combination-sum", "subsets", "knapsack",
             "generate-parenthesis",
-            "regex-matching"]
+            "regex-matching", "tree-rightside", "edit-distance", "word-break-ii"]
     },
     {
         categoryTitle: "BFS",
@@ -104,6 +104,15 @@ const pageContent = {
     },
     "no-of-islands": {
         title: "Number of Islands"
+    },
+    "edit-distance": {
+        title: "Edit Distance"
+    },
+    "tree-rightside": {
+        title: "Binary Tree Rightside View"
+    },
+    "word-break-ii": {
+        title: "Word-Break II"
     },
     "max-area-of-islands": {
         title: "Max Area of Islands"

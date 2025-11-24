@@ -62,8 +62,9 @@
 <pre><code class="language-java">
 <textarea hidden>
     String s = "hello";
-    int n = s.length(); //with brackets.
-    //For int[] nums, the length would be nums.length without brackets.
+    int n = s.length(); //with brackets ().
+    int[] nums = { 1,2,3 };
+    int n = nums.length; //without brackets.
     String commaSeparated = String.join(", ", find(s));
 </textarea>
 </code></pre>

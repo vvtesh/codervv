@@ -84,3 +84,26 @@ Polled: 15 | Queue state: []
 -----------------------------------
 </pre>
 <hr>
+
+<pre><code class="language-java">
+<textarea hidden>
+// K largest - use min heap of size k. Example: [5,6] from [1,2,3,4,5,6]
+PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+for (int num : nums) {
+    minHeap.add(num);
+    if (minHeap.size() > k) {
+        minHeap.poll();  // Remove smallest
+    }
+}
+
+// K smallest - use max heap of size k. Example: [2,1] from [1,2,3,4,5,6]
+PriorityQueue<Integer> maxHeap =
+       new PriorityQueue<>(Collections.reverseOrder());
+for (int num : nums) {
+    maxHeap.add(num);
+    if (maxHeap.size() > k) {
+        maxHeap.poll();  // Remove largest
+    }
+}
+</textarea>
+</code></pre>

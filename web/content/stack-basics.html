@@ -1,0 +1,127 @@
+
+
+<a href="https://leetcode.com/problems/valid-parentheses/">Valid Parentheses</a>
+<pre>
+    Input: s = "()[]{}"
+    Output: true
+</pre>
+<pre><code class="language-java">
+<textarea hidden>
+    public boolean isValid(String s) {
+
+        Map<Character, Character> map = Map.of('(', ')', '[',']','{','}');
+
+        Stack stack = new Stack();
+        for (int i = 0; i < s.length(); i++) {
+
+            char c = s.charAt(i);
+
+            if (map.containsKey(c)) {
+                stack.push(c);
+            } else {
+                if (stack.isEmpty()) {
+                    return false;
+                }
+                char top = (char) stack.peek();
+                if (c == map.get(top)) {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            }
+
+        }
+        if (stack.isEmpty()) {
+            return true;
+        }
+        return false;
+
+    }
+</textarea>
+</code></pre>
+<br>
+<hr>
+<br>
+<a href="https://leetcode.com/problems/buildings-with-an-ocean-view/description/">Buildings With Ocean View</a>
+<pre>
+    Input: heights = [4,2,3,1]
+    Output: [0,2,3]
+    Explanation: Building 1 (0-indexed) does not have an ocean view because building 2 is taller.
+</pre>
+
+<pre><code class="language-java">
+<textarea hidden>
+    public int[] findBuildings(int[] heights) {
+        int n = heights.length;
+        List<Integer> list = new ArrayList<>();
+
+        // Monotonically decreasing stack.
+        Stack<Integer> stack = new Stack<>();
+        for (int current = n - 1; current >= 0; --current) {
+
+            if (stack.isEmpty())
+                stack.add(current);
+            else
+                if (heights[stack.peek()] < heights[current]) {
+                    stack.add(current);
+                }
+        }
+
+        // Push elements from list to answer array in reverse order.
+        int[] answer = new int[stack.size()];
+        int count = stack.size();
+        for (int i = 0; i < count; i++) {
+            answer[i] = stack.pop();
+        }
+
+        return answer;
+    }
+</textarea>
+</code></pre>
+<br>
+<hr>
+<br>
+<a href="https://leetcode.com/problems/asteroid-collision/">Asteroid Collision</a>
+<p>Find out the state of the asteroids after all collisions. If two asteroids meet, the smaller one will explode. If both are the same size, both will explode. Two asteroids moving in the same direction will never meet.</p>
+<pre>
+    Input: asteroids = [5,10,-5]
+    Output: [5,10]
+    Explanation: The 10 and -5 collide resulting in 10. The 5 and 10 never collide.
+</pre>
+<pre><code class="language-java">
+    <textarea hidden>
+        public int[] asteroidCollision(int[] asteroids) {
+            Stack<Integer> st = new Stack<Integer>();
+
+            for (int asteroid : asteroids) {
+                boolean flag = true;
+                while (!st.isEmpty() && (st.peek() > 0 && asteroid < 0)) {
+
+                    if (Math.abs(st.peek()) < Math.abs(asteroid)) {
+                        st.pop();
+                        continue;
+                    } else if (Math.abs(st.peek()) == Math.abs(asteroid)) {
+                        st.pop();
+                    }
+
+                    flag = false;
+                    break;
+                }
+
+                if (flag) {
+                    st.push(asteroid);
+                }
+            }
+
+            int[] remainingAsteroids = new int[st.size()];
+            for (int i = remainingAsteroids.length - 1; i >= 0; i--) {
+                remainingAsteroids[i] = st.peek();
+                st.pop();
+            }
+
+            return remainingAsteroids;
+        }
+    </textarea>
+</code></pre>
+<br>
+<hr>

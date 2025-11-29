@@ -31,12 +31,7 @@ const menuStructure = [
     {
         categoryTitle: "Stacks",
         categoryId: "stacks-general",
-        pageIds: ["longest-valid-parenthesis"]
-    },
-    {
-        categoryTitle: "Monotonic Stacks",
-        categoryId: "monotonic-stacks-specific",
-        pageIds: ["next-greater-element-i", "trapping-rain-water"]
+        pageIds: ["stack-basics", "longest-valid-parenthesis", "next-greater-element-i", "trapping-rain-water"]
     },
     {
         categoryTitle: "Graphs",
@@ -143,6 +138,9 @@ const pageContent = {
     },
     "longest-increasing-subsequence": {
         title: "Longest Increasing Subsequence"
+    },
+    "stack-basics": {
+        title: "Stack Basics"
     },
     "next-greater-element-i": {
         title: "Next Greater Element I"

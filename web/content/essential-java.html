@@ -66,6 +66,10 @@
     int[] nums = { 1,2,3 };
     int n = nums.length; //without brackets.
     String commaSeparated = String.join(", ", find(s));
+
+    StringBuilder sb = new StringBuilder();
+    sb.append("1").repeat(4);
+    sb.toString();
 </textarea>
 </code></pre>
 
@@ -140,6 +144,30 @@
     PriorityQueue < int[] > queue = new PriorityQueue < > ((a, b) -> a[2] - b[2])
     PriorityQueue<Integer> allocator = new PriorityQueue<Integer>(n)
     allocator.add(intervals[0][1])
+
+</textarea>
+</code></pre>
+
+<hr>
+
+<p>
+    Essential stack operations
+</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+    //Common represenations
+    Stack<Integer> stack = new Stack<>();
+    stack.isEmpty()
+    stack.poll()
+    stack.push(4)
+
+    //returns stack contents from beginning to end. stack.peek() will return the ending element.
+    //so, if you pop and append, you will need to reverse to get the same output.
+    for(char c: stack) {
+        sb.append(c);
+    }
+    sb.toString();
 
 </textarea>
 </code></pre>

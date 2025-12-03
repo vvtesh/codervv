@@ -1,0 +1,36 @@
+
+
+<h3>Basics of Graphs</h3>
+<p>Build a graph</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+    //Common represenations
+    List<List> //adjacency list [[1,2],[2,3],[4,5]]
+    List<int[]> //edges in list [{1,2},{2,3},{4,5}]
+    Int[][] //edges array {{1,2},{2,3},{4,5}}
+
+    //synonyms = [["happy","joy"],["happy","awesome"],["sad","sorrow"],["joy","cheerful"]]
+    //graph = {"happy", ["joy","awesome"], "sad", ["sorrow"], "joy", ["cheerful"]}
+    Map<String, List<String>> graph = new HashMap<>();
+    private void buildGraph(List<List<String>> synonyms) {
+        for(List<String> list : synonyms) {
+            graph.putIfAbsent(list.get(0), new ArrayList<>());
+            graph.putIfAbsent(list.get(1), new ArrayList<>());
+            graph.get(list.get(0)).add(list.get(1));
+            graph.get(list.get(1)).add(list.get(0));
+        }
+    }
+
+</textarea>
+</code></pre>
+
+<hr>
+
+<p> </p>
+
+<pre><code class="language-java">
+<textarea hidden>
+
+</textarea>
+</code></pre>

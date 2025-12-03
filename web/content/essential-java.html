@@ -11,30 +11,32 @@
     //Arrays
     A 2D array: [[1,2,1],[2,3,1]]
     int[][] pipes = new int[2][3];
-
+    int m = pipes.length;
+    int n = pipes[0].length;
 
     //sort an array
     Arrays.sort(numbers);
     Arrays.sort(numbers, Collections.reverseOrder());
-    //sort in asc/descending order with collections
-    Collections.sort(numbers); // Sorts in ascending order
+
+    //sort a list
+    Collections.sort(numbers);
     Collections.sort(names, Collections.reverseOrder());
 
+    //use lambda
     ArrayList<int[]> edges = new ArrayList<>();
-    //Sort an arraylist or a collection by some attribute
-    //lambda
     Collections.sort(edges, (a,b) -> a[2] - b[2]);
     Collections.sort(people, (p1, p2) -> Integer.compare(p1.age, p2.age));
-    //comparator
+
+    //use comparator
     Collections.sort(people, Comparator.comparing(p -> p.name));
-    //custom comparator
+
+    //complex comparator
     Collections.sort(people, new LexicographicComparator());
     class LexicographicComparator implements Comparator<Person> {
     @Override
     public int compare(Person a, Person b) {
         return a.name.compareToIgnoreCase(b.name);
     }
-
 </textarea>
 </code></pre>
 
@@ -173,28 +175,3 @@
 </code></pre>
 
 <hr>
-
-<p>
-    Essential graph operations
-</p>
-
-<pre><code class="language-java">
-<textarea hidden>
-    //Common represenations
-    List<List> //adjacency list [[1,2],[2,3],[4,5]]
-    List<int[]> //edges in list [{1,2},{2,3},{4,5}]
-    Int[][] //edges array {{1,2},{2,3},{4,5}}
-
-    Map<String, List<String>> graph = new HashMap<>();
-    //synonyms = [["happy","joy"],["sad","sorrow"],["joy","cheerful"]]
-    private void buildGraph(List<List<String>> synonyms) {
-        for(List<String> list : synonyms) {
-            graph.putIfAbsent(list.get(0), new ArrayList<>());
-            graph.putIfAbsent(list.get(1), new ArrayList<>());
-            graph.get(list.get(0)).add(list.get(1));
-            graph.get(list.get(1)).add(list.get(0));
-        }
-    }
-
-</textarea>
-</code></pre>

@@ -36,7 +36,7 @@ const menuStructure = [
     {
         categoryTitle: "Graphs",
         categoryId: "graphs",
-        pageIds: ["the-maze-ii", "course-schedule"]
+        pageIds: ["graph-basics", "the-maze-ii", "course-schedule"]
     },
     {
         categoryTitle: "TreeMap (SortedMap)",
@@ -180,6 +180,9 @@ const pageContent = {
     },
     "best-sightseeing-pair": {
         title: "Best Sightseeing Pair"
+    },
+    "graph-basics": {
+        title: "Basics"
     },
     "the-maze-ii": {
         title: "The Maze II"

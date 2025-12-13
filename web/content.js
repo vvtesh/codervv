@@ -8,7 +8,7 @@ const menuStructure = [
     {
         categoryTitle: "Getting Started",
         categoryId: "getting-started",
-        pageIds: ["intro", "essential-java", "substrings", "two-sum", "longest-consecutive-subsequence"]
+        pageIds: ["intro", "essential-java", "substrings", "two-sum", "longest-consecutive-subsequence", "binary-search"]
     },
     {
         categoryTitle: "Recursion, DFS, DP",
@@ -46,7 +46,7 @@ const menuStructure = [
     {
         categoryTitle: "Union Find",
         categoryId: "union-find",
-        pageIds: ["union-find-basics", "water-distribution"]
+        pageIds: ["union-find-basics", "redundant-connections", "water-distribution"]
     },
     {
         categoryTitle: "Priority Queue",
@@ -81,6 +81,9 @@ const pageContent = {
     },
     "two-sum": {
         title: "Two Sum"
+    },
+    "binary-search": {
+        title: "binary-search"
     },
     "simple-recursion": {
         title: "Simple Recursion"
@@ -162,6 +165,9 @@ const pageContent = {
     },
     "union-find-basics": {
         title: "Basics"
+    },
+    "redundant-connections": {
+        title: "Redundant Connections"
     },
     "max-subarray-sum": {
         title: "Maximum Subarray Sum (Kadane's algorithm)"

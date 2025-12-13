@@ -1,0 +1,24 @@
+
+<hr>
+
+<h3>Redundant Connection: An Example for Cycle Detection</h3>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+    public int[] findRedundantConnection(int[][] edges) {
+        UnionFind uf = new UnionFind(edges.length + 1);
+
+        for(int i = 0; i < edges.length; i++){
+            int u = edges[i][0];
+            int v = edges[i][1];
+
+            if(!uf.union(u, v)) return new int[]{u, v};
+        }
+        return new int[]{-1, -1};
+    }
+}
+</textarea>
+</code></pre>
+
+<hr>

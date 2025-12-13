@@ -1,6 +1,66 @@
+
 <hr>
 
-<h3>Example: Disjoint Set Union (DSU) Data Structure Implementation</h3>
+<h3>Common Problems</h3>
+<ul>
+    <li><b>Cycle Detection: </b><a href="https://leetcode.com/problems/redundant-connection/description/?envType=problem-list-v2&envId=union-find">Redundant Connection</a></li>
+    <li><b>Kruskal’s Algorithm for building Minimum Spanning Trees (MST): </b><a href="https://leetcode.com/problems/optimize-water-distribution-in-a-village/description/?envType=problem-list-v2&envId=union-find">Water distribution problem</a></li>
+    <li>Connected Components</li>
+</ul>
+
+<hr>
+
+<h3>Clean Union Find Implementation</h3>
+
+<pre><code class="language-java">
+<textarea hidden>
+class UnionFind{
+    private int[] rank;
+    private int[] parent;
+
+    UnionFind(int size){
+        rank = new int[size];
+        parent = new int[size];
+        for(int i = 0; i < size ; i++){
+            parent[i] = i;
+            rank[i] = 0;
+        }
+    }
+
+    public int find(int x){
+        if(parent[x] != x){
+            parent[x] = find(parent[x]);
+        }
+        return parent[x];
+    }
+
+    public boolean union(int x, int y){
+        int rootX = find(x);
+        int rootY = find(y);
+
+        if(rootX == rootY) return false;
+
+        if(rank[rootX] > rank[rootY]){
+            parent[rootY] = rootX;
+        }else if(rank[rootY] > rank[rootX]){
+            parent[rootX] = rootY;
+        }else{
+            parent[rootY] = rootX;
+            rank[rootX]++;
+        }
+        return true;
+    }
+
+    public boolean isConnected(int x, int y){
+        return find(x) == find(y);
+    }
+}
+    </textarea>
+</code></pre>
+
+<hr>
+
+<h3>HashMap based implementation</h3>
 <p>This Java code implements the Disjoint Set Union (DSU) or Union-Find data structure, which efficiently manages a collection of disjoint sets. The approach uses a HashMap to store parent pointers (id) and the size of each set's tree, enabling path compression in the find operation for optimization. The union by size heuristic is applied in the union operation to maintain a flat tree structure, ensuring near-constant time complexity for both operations.</p>
 
 <pre><code class="language-java">
@@ -8,7 +68,7 @@
     class DisjointSet { HashMap<Integer, Integer> id, size;
 
         public DisjointSet() {
-            this.id = new HashMap&lt;&gt;();
+            this.id = new HashMap<>();
             this.size = new HashMap&lt;&gt;();
         }
 
@@ -30,6 +90,53 @@
             } else {
                 id.put(idV, idU);
                 size.put(idU, size.get(idU) + size.get(idV));
+            }
+        }
+    }
+</textarea>
+</code></pre>
+
+<hr>
+
+<h3>ArrayList based implementation</h3>
+
+<pre><code class="language-java">
+<textarea hidden>
+    class DSU{
+        ArrayList<Integer> parent = new ArrayList<>();
+        ArrayList<Integer> rank = new ArrayList<>();
+        public DSU(int n){
+            for(int i = 0;i<n;i++){
+                parent.add(i);
+                rank.add(0);
+            }
+        }
+        public int getParent(int node)
+        {
+            if(node == parent.get(node))
+                return node;
+            int gParent = getParent(parent.get(node));
+            parent.set(node, gParent);
+            return parent.get(node);
+        }
+        public void union(int nodeU, int nodeV)
+        {
+            int parentU = getParent(nodeU);
+            int parentV = getParent(nodeV);
+            if(parentU == parentV)
+                return;
+            if(rank.get(parentU)> rank.get(parentV))
+            {
+                parent.set(parentU, parentV);
+            }
+            else if(rank.get(parentU) ==  rank.get(parentV))
+            {
+                parent.set(parentU, parentV);
+                rank.set(parentU, rank.get(parentU)+1);
+            }
+            else{
+                parent.set(parentV, parentU);
+
             }
         }
     }

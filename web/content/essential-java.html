@@ -59,6 +59,26 @@
 </textarea>
 </code></pre>
 
+
+<hr>
+
+<p>
+    Comparing Integers and Comparators
+</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+    //map1.get(c) == map2.get(c) will return false for same Integer values. Use intValue().
+    map1.get(c).intValue() == map2.get(c).intValue()
+
+    //Comparator takes array index to compare array values.
+    //see https://leetcode.com/submissions/detail/1854173185/
+    Comparator<Integer> c1 = (x,y) -> businessLine[x].compareTo(businessLine[y]);
+    Comparator<Integer> c2 = (x,y) -> code[x].compareTo(code[y]);
+    validCodes.sort(c1.thenComparing(c2));
+</textarea>
+</code></pre>
+
 <hr>
 <p>Essential String operations</p>
 <pre><code class="language-java">

@@ -43,7 +43,7 @@
 <hr>
 
 <p>
-    Essential operations on Arrays
+    Essential operations on Collections and Arrays
 </p>
 
 <pre><code class="language-java">
@@ -56,6 +56,18 @@
     //Insert position after binary search
     int idx = Collections.binarySearch(nums, num);
     int j = (idx >= 0 ? idx : ~idx);
+
+    //Find max
+    Collections.max(count.values())
+
+    //convert ArrayList to int[]
+    int[] ans = output.stream().mapToInt(i -> i).toArray();
+
+    //Built-in set intersection.
+    set1.retainAll(set2);
+
+    //A strategy to avoid using arraylist if the size of array is unknown. Start with a larger size. Then use:
+    Arrays.copyOfRange(result, 0 , idx);
 </textarea>
 </code></pre>
 
@@ -111,6 +123,34 @@
     queue.offer(new int[]{start[0],start[1],0});
     int[] s = queue.poll();
 
+</textarea>
+</code></pre>
+
+<hr>
+
+<p>
+    Essential operations on Enums
+</p>
+
+<p>Define an enum and define a next() method.</p>
+<pre><code class="language-java">
+<textarea hidden>
+//Use as follows.
+    DIR dir = DIR.RIGHT;
+    dir = dir.next();
+
+enum DIR {
+    RIGHT,
+    DOWN,
+    LEFT,
+    UP;
+
+    public DIR next() {
+        DIR[] values = DIR.values();
+        int nextOrdinal = (this.ordinal() + 1) % values.length;
+        return values[nextOrdinal];
+    }
+}
 </textarea>
 </code></pre>
 

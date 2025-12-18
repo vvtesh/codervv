@@ -44,6 +44,30 @@
         <td><a href="https://leetcode.com/problems/permutation-in-string/">Permutation in String</a></td>
         <td>How to compare two permuations? Use freq map. Use array instead of hashmap. Saves time in hash calculation, unboxing objects. If using map, use intValue() as in map.get(c).intValue()</td>
     </tr>
+    <tr>
+        <td><a href="https://leetcode.com/problems/contains-duplicate-ii/description/">k-Nearest Duplicates</a></td>
+        <td>Find duplicates within a distance of k in an array. Use set to keep only the k nearest elements. Look it up.</td>
+    </tr>
+    <tr>
+        <td><a href="https://leetcode.com/problems/count-binary-substrings/">Count Binary Substrings</a></td>
+        <td>001110000 -> 0011, 01, 111000, 1100, 10. Answer = 5. Count zeros, ones and call it a group array. group = {2,3,4}. Sum of Math.min(i-1, i) combinations can be made.</td>
+    </tr>
+    <tr>
+        <td><a href="https://leetcode.com/problems/third-maximum-number">Third maximum number</a></td>
+        <td>Use Long.MIN_VALUE instead of Integer.MIN_VALUE if that is a valid input.</td>
+    </tr>
+    <tr>
+        <td><a href="https://leetcode.com/problems/arranging-coins">Arranging Coins</a></td>
+        <td>For large numbers, beware of doing n * (n + 1). Don't have few ints and few doubles. Have all variables as double.</td>
+    </tr>
+    <tr>
+        <td><a href="https://leetcode.com/problems/reverse-integer">Reverse an Integer</a></td>
+        <td>Why reversing an int need not be an int? The Integer.MAX_VALUE and Integer.MIN_VALUE are 2147483647 and -2147483648 respectively. Consider 1534236469. Reversing it goes off bounds of Integer.</td>
+    </tr>
+    <tr>
+        <td><a href="https://leetcode.com/problems/intersection-of-two-arrays">Intersection of Two Arrays</a></td>
+        <td>One nice intersection strategy. Iterate through array. if array element ispresent in set, we found an intersecting element. remove that element from set to avoid future re-addition.</td>
+    </tr>
 </table>
 <!-- template
     <tr>

@@ -42,6 +42,33 @@
 
 <hr>
 
+<p>Elegant way to check if the map has a list before adding value to it.</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+    //group_map is of type Map<String, List<String>>. How to add a value to it?
+
+    //Primitive way
+    String k = key.toString();
+    if(!group_map.containsKey(k)){
+        List<String> value = new ArrayList<>();
+        group_map.put(k,value);
+    }
+    group_map.get(k).add(s);
+
+    //Better way
+    group_map.computeIfAbsent(key.toString(), k -> new ArrayList<>())
+     .add(s);
+
+    //Alternate way
+    String k = key.toString();
+    group_map.putIfAbsent(k, new ArrayList<>());
+    group_map.get(k).add(s);
+</textarea>
+</code></pre>
+
+<hr>
+
 <p>
     Essential operations on Collections and Arrays
 </p>

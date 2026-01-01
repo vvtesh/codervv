@@ -56,7 +56,7 @@ const menuStructure = [
     {
         categoryTitle: "Algorithmic Problems",
         categoryId: "algorithmic-problems",
-        pageIds: ["longest-increasing-subsequence","max-subarray-sum","boyer-moore-voting","best-sightseeing-pair", "merge-intervals", "non-overlapping-intervals"]
+        pageIds: ["longest-increasing-subsequence","max-subarray-sum","boyer-moore-voting","best-sightseeing-pair", "merge-intervals", "non-overlapping-intervals", "counting-bits"]
     },
     {
         categoryTitle: "Miscellaneous",
@@ -180,6 +180,9 @@ const pageContent = {
     },
     "boyer-moore-voting": {
     title: "Find Majority Item (Voting Algorithm)"
+    },
+    "counting-bits": {
+        title: "Counting Bits"
     },
     "trapping-rain-water": {
         title: "Trapping Rain Water"

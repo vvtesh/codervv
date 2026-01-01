@@ -68,6 +68,28 @@
         <td><a href="https://leetcode.com/problems/intersection-of-two-arrays">Intersection of Two Arrays</a></td>
         <td>One nice intersection strategy. Iterate through array. if array element ispresent in set, we found an intersecting element. remove that element from set to avoid future re-addition.</td>
     </tr>
+    <tr>
+        <td><a href="https://leetcode.com/problems/n-queens-ii/submissions/1866273874/?envType=problem-list-v2&envId=vj5odyfd">N-Queens</a></td>
+        <td>Keep a set of diagonals, antidiagonals and cols. Go row by row. Base condition: If row==n, return 1. Recurrence Relation: f(row) = f(row+1,d,ad,cols);</td>
+    </tr>
+    <tr>
+        <td><a href="https://leetcode.com/problems/permutations-ii/description/?envType=problem-list-v2&envId=v1tzm965">Permutations II</a></td>
+        <td>How to deal with duplicates? Consider the input [1,1,2]. For first position, let us use only the first "1".
+            <code class="language-java">if (i>0 && nums[i]==nums[i-1] && !list.contains(i-1)) continue;</code>
+        </td>
+    </tr>
+    <tr>
+        <td><a href="https://leetcode.com/problems/h-index/editorial/?envType=problem-list-v2&envId=v1tzm965">h-Index</a></td>
+        <td>You might be tempted to try <code>Arrays.asList(numbers)</code>. However, if numbers is an int[], this will create a `List<int[]>` containing exactly one element (the array itself), rather than a list of integers. Always use the Stream API for primitive arrays.
+        <br><code class="language-java">List<Integer> list = new ArrayList(Arrays.stream(citations).boxed().toList());</code><br>
+            Comparison sorting algorithms such as heapsort, mergesort and quicksort have a lower bound of O(nlogn). The most commonly used non-comparison sorting is counting sort.
+        </td>
+        x
+    </tr>
+    <tr>
+        <td><a href="https://leetcode.com/problems/group-shifted-strings/description/?envType=problem-list-v2&envId=v1tzm965">Group Shifted Strings</a></td>
+        <td>Across all the values in the same group (i.e., ab, bc, cd, ..) the distance of each character to the first character at each position respectively is a constant i.e., for ab,bc,cd the distances of each char to the first char looks like 01,01,01. So, we can use 01 as the key.</td>
+    </tr>
 </table>
 <!-- template
     <tr>

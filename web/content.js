@@ -13,7 +13,7 @@ const menuStructure = [
     {
         categoryTitle: "Recursion, DFS, DP",
         categoryId: "recursion-dfs-dp",
-        pageIds: ["simple-recursion", "unique-paths", "interleaving-strings", "max-area-of-islands", "house-robber", "no-of-islands",
+        pageIds: ["root-to-leaf-paths", "permutation", "unique-paths", "interleaving-strings", "max-area-of-islands", "house-robber", "no-of-islands",
             "combination-sum", "subsets", "knapsack",
             "generate-parenthesis",
             "regex-matching", "tree-rightside", "edit-distance", "word-break-ii"]
@@ -85,8 +85,11 @@ const pageContent = {
     "binary-search": {
         title: "binary-search"
     },
-    "simple-recursion": {
-        title: "Simple Recursion"
+    "root-to-leaf-paths": {
+        title: "Paths from Root to Leaf"
+    },
+    "permutation": {
+        title: "Permutation"
     },
     "knapsack": {
         title: "Knapsack"

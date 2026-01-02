@@ -1,0 +1,55 @@
+
+
+<p>Given the root of a binary tree, return all root-to-leaf paths in any order.</p>
+<p>Key Points:</p>
+<ul>
+    <li>What will be the base condition?</li>
+    <li>What will you do when you backtrack?</li>
+    <li>What will you keep as parameters?</li>
+</ul>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> result = new ArrayList<>();
+        List<Integer> curr = new ArrayList<>();
+        solve(root, curr, result);
+        return result;
+    }
+
+    void solve(TreeNode root, List<Integer> curr, List<String> result) {
+        if (root.left==null && root.right==null) {
+            curr.add(root.val);
+            result.add(process(curr, root.val));
+            return;
+        }
+
+        curr.add(root.val);
+        if (root.left != null) {
+            solve(root.left, curr, result);
+            curr.removeLast();
+        }
+        if (root.right != null) {
+            solve(root.right, curr, result);
+            curr.removeLast();
+        }
+    }
+
+    String process(List<Integer> curr, int val) {
+        StringBuilder sb = new StringBuilder();
+        int n = curr.size();
+        int nminus1 = n - 1;
+        for(int i=0; i<n; i++) {
+            sb.append(curr.get(i));
+            if (i != nminus1) sb.append("->");
+        }
+        return sb.toString();
+    }
+}
+</textarea>
+</code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/binary-tree-paths/"><img width="25px" src="content/images/leetcode.png"</a></td></tr></table>
+
+<hr>

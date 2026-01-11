@@ -1,12 +1,8 @@
 
 
 <h3>Combination Sum I</h3>
-<p>Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
-
-    The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different.
-
-    The test cases are generated such that the number of unique combinations that sum up to target is less than 150 combinations for the given input.</p>
-
+<p>Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.</p>
+<p>The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different.</p>
 <pre>
 Input: candidates = [2,3,5], target = 8
 Output: [[2,2,2,2],[2,3,3],[3,5]]
@@ -127,16 +123,18 @@ class Solution {
     [5, 5]
 </pre>
 
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/combination-sum/description/"><img width="25px" src="content/images/leetcode.png"</a></td></tr></table>
+
 <hr>
+
 <h3>Combination Sum II</h3>
-<p>Given a collection of candidate numbers (candidates) and a target number (target), find all unique combinations in candidates where the candidate numbers sum to target.
 
-    Each number in candidates may only be used once in the combination.
-
-    Note: The solution set must not contain duplicate combinations.</p>
+<p>Given a collection of candidate numbers (candidates) and a target number (target), find all unique combinations in candidates where the candidate numbers sum to target.</p>
+<p>Each number in candidates may only be used once in the combination.</p>
+<p>Note: The solution set must not contain duplicate combinations.</p>
 
 <pre>
-    Input: candidates = [10,1,2,7,6,1,5], target = 8
+Input: candidates = [10,1,2,7,6,1,5], target = 8
 Output:
 [
 [1,1,6],
@@ -145,7 +143,6 @@ Output:
 [2,6]
 ]
 </pre>
-
 
 <pre><code class="language-java">
 <textarea hidden>
@@ -172,7 +169,7 @@ class Solution {
 
             if (remain < candidates[i]) break;
 
-            //Without this line, we output [[1,1,6],[1,2,5],[1,7],[1,2,5],[1,7],[2,6]] which is wrong.
+            //Without this line, we give wrong output [[1,1,6],[1,2,5],[1,7],[1,2,5],[1,7],[2,6]].
             if (i > index && candidates[i] == candidates[i - 1]) continue;
 
             tempList.add(candidates[i]);
@@ -188,7 +185,10 @@ class Solution {
     Note: Goal is not to select the num[i] twice as xth element of the combination, although it can be selected again as (x+1)th or element in other position.
 </p>
 
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/combination-sum-ii/description/"><img width="25px" src="content/images/leetcode.png"</a></td></tr></table>
+
 <hr>
+
 <h3>Combination Sum III</h3>
 <p>Find all valid combinations of k numbers that sum up to n such that the following conditions are true:</p>
 <ul>
@@ -197,8 +197,8 @@ class Solution {
 </ul>
     <p>Return a list of all possible valid combinations. The list must not contain the same combination twice, and the combinations may be returned in any order. </p>
 <pre>
-    Input: k = 3, n = 9
-    Output: [[1,2,6],[1,3,5],[2,3,4]]
+Input: k = 3, n = 9
+Output: [[1,2,6],[1,3,5],[2,3,4]]
 </pre>
 <pre><code class="language-java">
 <textarea hidden>
@@ -231,5 +231,7 @@ class Solution {
 }
 </textarea>
 </code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/combination-sum-iii/description/"><img width="25px" src="content/images/leetcode.png"</a></td></tr></table>
 
 <hr>

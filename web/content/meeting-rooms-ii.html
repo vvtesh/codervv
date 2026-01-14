@@ -1,22 +1,25 @@
 <h3>Example: Minimum Meeting Rooms Solution</h3>
-<p>This code solves the problem of finding the <b>minimum number of conference rooms</b> required to accommodate a given set of meeting time intervals. The approach first sorts the meetings by their start times to process them chronologically. It then uses a <b>Min-Heap (PriorityQueue)</b> to keep track of the earliest ending time among all currently occupied rooms. If a new meeting's start time is greater than or equal to the earliest room end time (`allocator.peek()`), that room is freed up (`allocator.poll()`) and reused for the new meeting; otherwise, a new room is needed. The final size of the Min-Heap is the minimum number of rooms needed.</p>
+<p>This code solves the problem of finding the <b>minimum number of conference rooms</b> required to accommodate a given set of meeting time intervals. The approach first sorts the meetings by their start times to process them chronologically. It then uses a <b>Min-Heap (PriorityQueue)</b> to keep track the time that each room gets free. If a new meeting's start time is greater than or equal to the earliest room end time (`allocator.peek()`), that room is freed up (`allocator.poll()`) and reused for the new meeting; otherwise, a new room is needed. The final size of the Min-Heap is the minimum number of rooms needed.</p>
 
 <pre><code class="language-java">
 <textarea hidden>
 class Solution {
     public int minMeetingRooms(int[][] intervals) {
+
         int n = intervals.length;
-        if (n == 0) return 0;
-        PriorityQueue<Integer> allocator = new PriorityQueue<Integer>();
-        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
-        allocator.add(intervals[0][1]);
-        for (int i = 1; i < intervals.length; i++) {
-            if (intervals[i][0] >= allocator.peek()) {
-                allocator.poll();
+        if (n==0) return 0;
+
+        Arrays.sort(intervals, (a,b) -> Integer.compare(a[0],b[0]));
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+
+        priorityQueue.add(intervals[0][1]);
+        for(int i=1; i<n; i++) {
+            if (intervals[i][0] >= priorityQueue.peek()) {
+                priorityQueue.poll();
             }
-            allocator.add(intervals[i][1]);
+            priorityQueue.add(intervals[i][1]);
         }
-        return allocator.size();
+        return priorityQueue.size();
     }
 }
 </textarea>
@@ -26,9 +29,30 @@ class Solution {
 <pre>
     1. Sort the intervals by start time.
     2. Process intervals one by one.
-        2.a) When processing each, for all the intervals so far added, get the earliest end time.
+        2.a) When processing each, allocate a new room or if an allocated room is free, reuse it.
+             This is done by remembering the meeting end time when allocating a room.
             (priority queue helps here.)
-        2.b) If the interval to be added starts after the prev smallest end time,
-            remove the prev smallest end time from queue.
+        2.b) If the interval to be added starts after the smallest of the meeting end times,
+            remove that smallest end time from queue, and add this one.
     3. Return the priority queue size.
 </pre>
+
+<p>A easy way to understand the solution is as follows.
+How many meeting rooms were allocated so far? When does the meeting end in each of them? Remember this information.
+    One way to code it is with an array where index is the meeting room id and value is the end time.
+</p>
+
+<p>For example, consider the sorted intervals [[0, 30], [5, 10], [15, 20]]. Meeting room 0 will be free at 30. We need a meeting room 1 to accomodate [5, 10]. This meeting room will be free at 10. For [15,20] meeting, we see that we can use room 1. Basically, we look for the meeting room whose meeting ended at the earliest.</p>
+
+<p>So, the meeting room array will look like [30, 10] after processing first two intervals. After processing the third interval, it becomes [30, 20]. The size of this array gives us the number of meeting rooms required.</p>
+
+<p>Since we need to find min at each iteration, it is simpler to use a priorityqueue (minheap). </p>
+
+<pre>
+    Iteration     Interval     Meeting Room State
+    1             [0, 30]      [30] //room 0 gets free at 30.
+    2             [5, 10]      [30, 10] //need another room. room 1 gets free at 10.
+    3             [15, 20]     [30, 20] //room 1 was free. We use it. Now, room 1 gets free at 15.
+</pre>
+
+<p>This problem highlights the need for frequently finding min. It can be done with a priority queue.</p>

@@ -13,24 +13,22 @@
 <textarea hidden>
 class Solution {
 
-    List<List<Integer>> results = new ArrayList<>();
-    int[] nums;
-
     public List<List<Integer>> subsets(int[] nums) {
-        this.nums = nums;
-        solve(0, new ArrayList<>());
-        return results;
+
+     List<List<Integer>> results = new ArrayList<>();
+     solve(0, new ArrayList<Integer>(), results, nums);
+     return results;
     }
 
-    public void solve(int idx, List<Integer> curr) {
+    public void solve(int idx, List<Integer> curr, List<List<Integer>> results, int[] nums) {
 
-        System.out.println(curr);
         results.add(new ArrayList<>(curr));
+        System.out.println(curr);
 
         for(int i=idx; i<nums.length; i++) {
             curr.add(nums[i]);
-            solve(i+1, curr);
-            curr.remove(curr.size()-1);
+            solve(i+1, curr, results, nums);
+            curr.removeLast();
         }
     }
 }
@@ -56,6 +54,8 @@ Output:
     Iter1
       Iter2
         Iter3
+
+    Output of print statement. Adding indentation for easier understanding.
     []
     [1]
       [1, 2]

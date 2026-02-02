@@ -1,27 +1,20 @@
-
-
 <h3>Basics of Priority Queue</h3>
-<p>Notes: Minheap by default. [30,5,10] -> [5,10,30] where 5 is the first element to pop. </p>
+<p>Notes: Minheap by default. [30,5,10,20] -> [5,10,20,30] where 5 is the first element to pop. </p>
 
 <pre><code class="language-java">
 <textarea hidden>
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.PriorityQueue;
-
 public class PriorityQueueExample {
 
     public static void main(String[] args) {
 
         PriorityQueue<Integer> minHeap = new PriorityQueue<>();
-        //same as
-        //PriorityQueue<Integer> minHeap = new PriorityQueue<>((a,b)->a-b);
+        //same as PriorityQueue<Integer> minHeap = new PriorityQueue<>((a,b)->a-b);
 
         // Adding elements
         minHeap.offer(30);
+        minHeap.offer(5);
         minHeap.offer(10);
         minHeap.offer(20);
-        minHeap.offer(5);
 
         // Note: Output is not guaranteed to be sorted
         System.out.println("Initial Min-Heap: " + minHeap);
@@ -32,14 +25,11 @@ public class PriorityQueueExample {
             System.out.println("Polled: " + minHeap.poll() + " | Queue state: " + minHeap);
         }
 
-        System.out.println("\n-----------------------------------\n");
-
-        System.out.println("--- 2. Max-Heap (Custom Ordering) ---");
+        System.out.println("--- 2. Max-Heap (Reverse Ordering) ---");
 
         // Option A: Using Collections.reverseOrder()
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
-        //same as
-        //PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a,b)->b-a);
+        //same as PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a,b)->b-a);
 
         // Adding elements
         maxHeap.offer(15);
@@ -54,8 +44,6 @@ public class PriorityQueueExample {
         while (!maxHeap.isEmpty()) {
             System.out.println("Polled: " + maxHeap.poll() + " | Queue state: " + maxHeap);
         }
-
-        System.out.println("\n-----------------------------------\n");
     }
 }
 </textarea>
@@ -71,9 +59,7 @@ Polled: 10 | Queue state: [20, 30]
 Polled: 20 | Queue state: [30]
 Polled: 30 | Queue state: []
 
------------------------------------
-
---- 2. Max-Heap (Custom Ordering) ---
+--- 2. Max-Heap (Reverse Ordering) ---
 Initial Max-Heap: [55, 45, 25, 15]
 Polling elements from Max-Heap:
 Polled: 55 | Queue state: [45, 15, 25]
@@ -81,7 +67,6 @@ Polled: 45 | Queue state: [25, 15]
 Polled: 25 | Queue state: [15]
 Polled: 15 | Queue state: []
 
------------------------------------
 </pre>
 <hr>
 
@@ -107,3 +92,5 @@ for (int num : nums) {
 }
 </textarea>
 </code></pre>
+
+<hr>

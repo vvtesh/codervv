@@ -1,4 +1,4 @@
-<h3>Example: Counting Total Covered Length of Intervals</h3>
+<h3>Counting Total Covered Length of Intervals</h3>
 <p>This Java class addresses the problem of efficiently calculating the total length covered by a stream of added intervals, ensuring that overlaps are only counted once. The approach uses a <b>TreeMap</b> to store non-overlapping intervals, mapping the start (left) of an interval to its end (right). When a new interval `[l, r]` is added, the code iteratively checks for and merges all existing intervals that overlap with it using a <b>greedy merge strategy</b>. The total count is updated by subtracting the length of the removed intervals and adding the length of the newly merged, extended interval.</p>
 
 <pre><code class="language-java">
@@ -64,3 +64,7 @@ class CountIntervals {
         its structure (through recoloring and rotations) after every insertion and deletion to ensure the tree remains
         approximately balanced. For all major operations like get(), put(), remove(), and navigation methods (floorKey(), ceilingKey(), etc.), the worst-case time complexity is guaranteed to be $O(\log n)$. This consistent, logarithmic performance is what makes TreeMap reliable, even with millions of entries.</li>
 </ol>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/count-integers-in-intervals/"><img width="25px" src="content/images/leetcode.png"</a></td></tr></table>
+
+<hr>

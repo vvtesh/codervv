@@ -1,7 +1,8 @@
 <hr>
 
-<h3>Example: My Calendar Three Solution (Difference Array/TreeMap)</h3>
-<p>This Java code solves the "My Calendar III" problem, which asks for the maximum number of concurrent events, also known as the <b>k-booking</b>. The approach uses a <b>Difference Array</b>, implemented with a <b>TreeMap</b> to maintain sorted intervals. The core logic involves recording a +1 increment at each `start` time and a -1 decrement at each `end` time. By iterating through the sorted keys and accumulating the changes (`cur`), we track the current number of active bookings, and the maximum value reached (`res`) is the final answer.</p>
+<h3>Find max meeting rooms required (k-booking).</h3>
+<p>Why Treemap? When a booking happens, we want to sort the intervals seen so far by start time. This allows us to go from first to last and apply the sweeing line algorithm.
+Instead of sorting again and again, we prefer to maintain a sorted data structure i.e., a treemap.</p>
 
 <pre><code class="language-java">
 <textarea hidden>
@@ -25,3 +26,7 @@ class MyCalendarThree {
 }
 </textarea>
 </code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/my-calendar-iii/"><img width="25px" src="content/images/leetcode.png"</a></td></tr></table>
+
+<hr>

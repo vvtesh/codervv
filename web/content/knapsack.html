@@ -1,19 +1,18 @@
-
-
 <h3>Last Stone Weight</h3>
 
 <p>A simpler problem that is not a knapsack problem.</p>
-<a href="https://leetcode.com/problems/last-stone-weight/description/">Last Stone Weight</a>
-<p>You are given an array of integers stones where stones[i] is the weight of the ith stone.
 
-    We are playing a game with the stones. On each turn, we choose the heaviest two stones and smash them together. Suppose the heaviest two stones have weights x and y with x <= y. The result of this smash is:
+<p>You are given an array of integers stones where stones[i] is the weight of the ith stone.</p>
 
-    If x == y, both stones are destroyed, and
-    If x != y, the stone of weight x is destroyed, and the stone of weight y has new weight y - x.
-    At the end of the game, there is at most one stone left.
+<p>We are playing a game with the stones. On each turn, we choose the heaviest two stones and smash them together. Suppose the heaviest two stones have weights x and y with x <= y. The result of this smash is:</p>
 
-    Return the weight of the last remaining stone. If there are no stones left, return 0.
-</p>
+<ol>
+    <li>If x == y, both stones are destroyed</li>
+    <li>If x != y, the stone of weight x is destroyed, and the stone of weight y has new weight y - x.</li>
+    <li>At the end of the game, there is at most one stone left.</li>
+</ol>
+
+<p>Return the weight of the last remaining stone. If there are no stones left, return 0.</p>
 
 <pre><code class="language-java">
 <textarea hidden>
@@ -42,6 +41,8 @@ class Solution {
 }
 </textarea>
 </code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/last-stone-weight"><img width="25px" src="content/images/leetcode.png"></a></td></tr></table>
 
 <hr>
 
@@ -87,11 +88,11 @@ class Solution {
 </textarea>
 </code></pre>
 
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/last-stone-weight-ii/"><img width="25px" src="content/images/leetcode.png"></a></td></tr></table>
+
 <hr>
 
 <p>Target Sum</p>
-
-<a href="https://leetcode.com/problems/target-sum/description/">Target Sum</a>
 
 <p>
 You are given an integer array nums and an integer target. You want to build an expression out of nums by adding one of the symbols '+' and '-' before each integer in nums and then concatenate all the integers.
@@ -104,7 +105,8 @@ Return the number of different expressions that you can build, which evaluates t
 <pre><code class="language-java">
     <textarea hidden>
         class Solution {
-            public int findTargetSumWays(int[] nums, int n, int target, Map<Integer, Integer>[] memo) {
+            public int findTargetSumWays(int[] nums, int n, int target,
+                                            Map<Integer, Integer>[] memo) {
                 if (n == 0) {
                     return (target == 0) ? 1 : 0;
                 }
@@ -129,3 +131,7 @@ Return the number of different expressions that you can build, which evaluates t
         }
     </textarea>
 </code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/target-sum/description/"><img width="25px" src="content/images/leetcode.png"></a></td></tr></table>
+
+<hr>

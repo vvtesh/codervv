@@ -1,7 +1,4 @@
-
-
-<h3>Subsets</h3>
-<a href="https://leetcode.com/problems/subsets/description/">Leetcode: Subsets</a>
+<h3>Approach 1: Backtracking</h3>
 <p>Given an integer array nums of unique elements, return all possible subsets (the power set).</p>
 <pre>
     Example Input/Output
@@ -15,9 +12,9 @@ class Solution {
 
     public List<List<Integer>> subsets(int[] nums) {
 
-     List<List<Integer>> results = new ArrayList<>();
-     solve(0, new ArrayList<Integer>(), results, nums);
-     return results;
+        List<List<Integer>> results = new ArrayList<>();
+        solve(0, new ArrayList<Integer>(), results, nums);
+        return results;
     }
 
     public void solve(int idx, List<Integer> curr, List<List<Integer>> results, int[] nums) {
@@ -35,6 +32,7 @@ class Solution {
 </textarea>
 </code></pre>
 <img width=400px src="content/images/subsets.png" />
+
 <pre>
 Think about it. We add to results a copy as we process.
 
@@ -66,9 +64,11 @@ Output:
     [3]
 </pre>
 
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/subsets/description/"><img width="25px" src="content/images/leetcode.png"></a></td></tr></table>
+
 <hr>
 
-<p>Bit mask trick.</p>
+<h3>Approach 2: Bit mask trick</h3>
 
 <pre><code class="language-java">
 <textarea hidden>
@@ -123,3 +123,5 @@ Output:
     }
 </textarea>
 </code></pre>
+
+<hr>

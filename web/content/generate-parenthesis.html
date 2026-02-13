@@ -1,11 +1,17 @@
+<pre>
+Problem: Generate valid parantheses.
+    Input: n = 3
+    Output: ["((()))","(()())","(())()","()(())","()()()"]
+</pre>
+
 <hr>
-
-<h3>Three approaches: Brute Force, Backtracking and Catalan Number Strategy</h3>
-<p>Brute force</p>
-
+<h3>Approach 1: Brute Force</h3>
+<p>Generate all possible permutations of "(" and ")". Keep the valid ones.</p>
+<img src="content/images/permutation-gp.png" width="300px"/>
 <pre><code class="language-java">
 <textarea hidden>
-private boolean isValid(String pString) {
+class Solution {
+    private boolean isValid(String pString) {
         int leftCount = 0;
         for (char p : pString.toCharArray()) {
             if (p == '(') {
@@ -19,16 +25,16 @@ private boolean isValid(String pString) {
             }
         }
         return leftCount == 0;
+    }
 
     public List<String> generateParenthesis(int n) {
         List<String> answer = new ArrayList<>();
-        Queue<String> queue = new LinkedList<>(Arrays.asList(""));
+        Queue<String> queue = new LinkedList<>();
+        queue.offer("");;
 
         while (!queue.isEmpty()) {
             String curString = queue.poll();
 
-            // If the length of curString is 2 * n, add it to `answer` if
-            // it is valid.
             if (curString.length() == 2 * n) {
                 if (isValid(curString)) {
                     answer.add(curString);
@@ -41,13 +47,13 @@ private boolean isValid(String pString) {
 
         return answer;
     }
-
+}
 </textarea>
 </code></pre>
 
 <hr>
 
-<p>Approach: Backtracking </p>
+<p>Approach 2: Backtracking</p>
 <p>Following image illustrates how the queue is used to arrive at different interleavings.</p>
 <img src="content/images/queue-interleaving.png" width="300px"/>
 <pre><code class="language-java">
@@ -59,13 +65,9 @@ private boolean isValid(String pString) {
         return answer;
     }
 
-    private void backtracking(
-        List<String> answer,
-        StringBuilder curString,
-        int leftCount,
-        int rightCount,
-        int n
-    ) {
+    private void backtracking(List<String> answer, StringBuilder curString,
+        int leftCount, int rightCount, int n) {
+
         if (curString.length() == 2 * n) {
             answer.add(curString.toString());
             return;
@@ -80,19 +82,15 @@ private boolean isValid(String pString) {
             backtracking(answer, curString, leftCount, rightCount + 1, n);
             curString.deleteCharAt(curString.length() - 1);
         }
-    }
-
-</textarea>
-</code>
-</pre>
+    }</textarea></code></pre>
 
 <hr>
 
-<p>Approach: Catalan Number Strategy </p>
-
+<p>Approach 3: Catalan Number Strategy</p>
+<img src="content/images/catalan.png" width="500px"/>
 <pre><code class="language-java">
     <textarea hidden>
-    class Solution {
+class Solution {
     public List<String> generateParenthesis(int n) {
         if (n == 0) {
             return new ArrayList(Arrays.asList(""));
@@ -107,9 +105,9 @@ private boolean isValid(String pString) {
         return answer;
     }
 }
+</textarea></code></pre>
 
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/generate-parentheses/description/"><img width="25px" src="content/images/leetcode.png"</a></td></tr></table>
 
-</textarea>
-</code>
-</pre>
+<hr>
 

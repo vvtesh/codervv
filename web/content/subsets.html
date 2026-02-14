@@ -1,10 +1,45 @@
-<h3>Approach 1: Backtracking</h3>
+
 <p>Given an integer array nums of unique elements, return all possible subsets (the power set).</p>
 <pre>
     Example Input/Output
     Input: nums = [1,2,3]
     Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
 </pre>
+
+<hr>
+
+<h3>Approach 1: Simple Backtracking</h3>
+<p>Uses a binary decision tree. At each step, we pick or don't pick a number.</p>
+
+<pre><code class="language-java"><textarea hidden>
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> results = new ArrayList<>();
+        List<Integer> curr = new ArrayList<>();
+        backtrack(0, curr, results, nums);
+        return results;
+    }
+
+    public void backtrack(int i, List<Integer> curr, List<List<Integer>> results, int[] nums) {
+        if (i == nums.length) {
+            results.add(new ArrayList<>(curr));
+            return;
+        }
+
+        //backtrack without adding
+        backtrack(i + 1, curr, results, nums);
+
+        //add and backtrack. remember to remove it after backtracking.
+        curr.add(nums[i]);
+        backtrack(i + 1, curr, results, nums);
+        curr.remove(curr.size() - 1);
+    }
+}
+</textarea></code></pre>
+<hr>
+
+<h3>Approach 2: Looped Backtracking</h3>
+<p>We use a n-ary decision tree where n = len(nums).</p>
 
 <pre><code class="language-java">
 <textarea hidden>
@@ -68,7 +103,7 @@ Output:
 
 <hr>
 
-<h3>Approach 2: Bit mask trick</h3>
+<h3>Approach 3: Bit mask trick</h3>
 
 <pre><code class="language-java">
 <textarea hidden>
@@ -123,5 +158,7 @@ Output:
     }
 </textarea>
 </code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/subsets/description/"><img width="25px" src="content/images/leetcode.png"></a></td></tr></table>
 
 <hr>

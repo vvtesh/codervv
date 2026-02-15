@@ -11,17 +11,33 @@ const menuStructure = [
         pageIds: ["intro", "essential-java", "substrings", "two-sum", "longest-consecutive-subsequence", "binary-search"]
     },
     {
-        categoryTitle: "Recursion, DFS, DP",
-        categoryId: "recursion-dfs-dp",
-        pageIds: ["root-to-leaf-paths", "permutation", "unique-paths", "interleaving-strings", "max-area-of-islands", "house-robber", "no-of-islands",
-            "combination-sum", "subsets", "knapsack",
-            "generate-parenthesis",
-            "regex-matching", "tree-rightside", "edit-distance", "word-break-ii"]
+        categoryTitle: "Backtracking",
+        categoryId: "backtracking",
+        pageIds: ["permutation", "subsets", "generate-parenthesis", "combination-sum"]
+    },
+    {
+        categoryTitle: "Recursion, DFS",
+        categoryId: "recursion-dfs",
+        pageIds: [
+            "interleaving-strings", "knapsack",
+            "no-of-islands", "max-area-of-islands",
+            "root-to-leaf-paths",
+            "regex-matching"]
+    },
+    {
+        categoryTitle: "DP",
+        categoryId: "dp",
+        pageIds: ["dp-basics", "edit-distance", "word-break-ii"]
+    },
+    {
+        categoryTitle: "Recurrence Relation",
+        categoryId: "recurrence",
+        pageIds: ["house-robber", "unique-paths"]
     },
     {
         categoryTitle: "BFS",
         categoryId: "bfs",
-        pageIds: ["rotten-oranges"]
+        pageIds: ["rotten-oranges", "tree-rightside"]
     },
     {
         categoryTitle: "Sliding Window",
@@ -102,6 +118,9 @@ const pageContent = {
     },
     "house-robber": {
         title: "House Robber"
+    },
+    "dp-basics": {
+        title: "DP - Basics"
     },
     "no-of-islands": {
         title: "Number of Islands"

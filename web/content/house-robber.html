@@ -1,5 +1,38 @@
-<h3>Example: House Robber Problem Solution</h3>
-<p>This Java code implements a solution to the classic "House Robber" problem using <b>Dynamic Programming</b> with <b>Memoization</b> (top-down approach). The <code>rob(int[] nums)</code> method initializes a memoization array and calls the recursive helper method <code>robFrom</code>. The <code>robFrom</code> method calculates the maximum money that can be robbed from house index $i$ onwards by choosing the maximum of two options: skipping the current house or robbing the current house and moving two houses down. Memoization ensures that subproblems are solved only once, significantly improving performance.</p>
+<p>Approach 1: Simple recurrence</p>
+
+<p>Implements $f[i] = \max(f[i+1], f[i+2] + nums[i])$ for i < nums.length, else zero.</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+
+    public int rob(int[] nums) {
+
+        return this.robFrom(0, nums);
+    }
+
+    private int robFrom(int i, int[] nums) {
+
+        if (i >= nums.length) {
+            return 0;
+        }
+
+        int ans = Math.max(
+            this.robFrom(i + 1, nums),
+            this.robFrom(i + 2, nums) + nums[i]
+        );
+
+        return ans;
+    }
+}
+</textarea>
+</code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/house-robber/description/"><img width="25px" src="content/images/leetcode.png"></a></td></tr></table>
+
+<hr>
+
+<p>Approach 2: Same with <b>Memoization</b> [0 ms]</p>
 
 <pre><code class="language-java">
 <textarea hidden>
@@ -36,8 +69,7 @@ class Solution {
 
 <hr>
 
-<h3>Example: House Robber Problem Solution (Iterative DP)</h3>
-<p>This second Java solution for the "House Robber" problem uses an <b>Iterative Dynamic Programming</b> (bottom-up) approach. Instead of recursion, it uses an array, <code>maxRobbedAmount</code>, to store the optimal solution for subproblems starting from the end of the street. The array is filled backwards from $N-2$ to $0$. The value at index $i$ is calculated using the recurrence relation: $DP[i] = \max(DP[i+1], DP[i+2] + nums[i])$. The final answer is stored in <code>maxRobbedAmount[0]</code>.</p>
+<h3>Approach 3: Iterative DP</h3>
 
 <pre><code class="language-java">
 <textarea hidden>
@@ -69,8 +101,9 @@ class Solution {
 
 <hr>
 
-<h3>Example: House Robber Problem Solution (Optimized Iterative DP)</h3>
-<p>This third Java solution is an optimization of the previous <b>Iterative Dynamic Programming</b> approach. It achieves $O(1)$ space complexity by observing that the current solution only depends on the results of the two immediately following houses ($i+1$ and $i+2$). This eliminates the need for the full $DP$ array. Two variables, <code>robNext</code> and <code>robNextPlusOne</code>, track the maximum amounts for $i+1$ and $i+2$, respectively. In each loop, a new optimal <code>current</code> value is computed, and the two variables are shifted to prepare for the next iteration.</p>
+<h3>Approach 4: Optimized Iterative DP</h3>
+
+<p>Replace array with two variables.</p>
 
 <pre><code class="language-java">
 <textarea hidden>
@@ -135,3 +168,7 @@ class Solution {
 }
 </textarea>
 </code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/house-robber-ii/description/"><img width="25px" src="content/images/leetcode.png"></a></td></tr></table>
+
+<hr>

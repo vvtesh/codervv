@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursion vs. Dynamic Programming</title>
+
+</head>
+<body>
+
+<h1>Can All Recursive Problems be Solved as DP?</h1>
+
+<p>The short answer is <strong>no</strong>. Not every recursive problem can be effectively solved using Dynamic Programming (DP).</p>
+
+<p>While both techniques involve breaking a problem into subproblems, DP is a specific optimization that only applies when a problem meets two critical criteria: <strong>Overlapping Subproblems</strong> and <strong>Optimal Substructure</strong>.</p>
+
+<hr>
+
+<h2>1. The Two Pillars of DP</h2>
+<p>To transition from simple recursion to DP, the problem must exhibit:</p>
+<ul>
+    <li><strong>Overlapping Subproblems:</strong> The recursive tree must visit the <em>same</em> subproblems multiple times. If every recursive call is unique, storing results (memoization) is useless.</li>
+    <li><strong>Optimal Substructure:</strong> The optimal solution to the main problem can be constructed from the optimal solutions of its subproblems.</li>
+</ul>
+
+<h3>Example: Fibonacci vs. Merge Sort</h3>
+<p></p>
+<ul>
+    <li><strong>Fibonacci (DP-friendly):</strong> To find $F(5)$, you need $F(4)$ and $F(3)$. To find $F(4)$, you again need $F(3)$. Here, $F(3)$ is an overlapping subproblem.</li>
+    <li><strong>Merge Sort (Not DP):</strong> You divide an array into halves. You never sort the <em>exact same</em> subarray twice. This is <strong>Divide and Conquer</strong>.</li>
+</ul>
+
+<hr>
+
+<h2>2. When Recursion Cannot Be DP</h2>
+
+<h3>A. Problems without Overlapping Subproblems</h3>
+<p>In a <strong>File System Traversal</strong> or a <strong>Tree Sum</strong>, you visit each node exactly once. Since there is no "re-calculation," DP offers no benefit over simple recursion.</p>
+
+<h3>B. Problems without Optimal Substructure</h3>
+<p>Some problems cannot be solved by combining the "best" sub-results. For example, finding the <strong>Longest Simple Path</strong> in a graph doesn't follow optimal substructure because a simple path cannot visit the same node twice, making subproblems interdependent.</p>
+
+<h3>C. Exhaustive Search (Backtracking)</h3>
+<p>Problems like the <strong>N-Queens Puzzle</strong> or generating all <strong>Permutations</strong> require exploring every unique path. Since you need to list every configuration rather than finding a single "best" value, memoization doesn't apply.</p>
+
+<hr>
+
+<div class="note">
+    <strong>The "DP-able" Test:</strong> Ask yourself: "In my recursion tree, am I calling the same function with the <strong>exact same parameters</strong> more than once?" If yes, you have a DP candidate.
+</div>
+
+</body>
+</html>

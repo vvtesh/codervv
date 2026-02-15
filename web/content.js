@@ -27,7 +27,7 @@ const menuStructure = [
     {
         categoryTitle: "DP",
         categoryId: "dp",
-        pageIds: ["dp-basics", "edit-distance", "word-break-ii"]
+        pageIds: ["dp-basics", "edit-distance", "word-break-ii", "coin-change"]
     },
     {
         categoryTitle: "Recurrence Relation",
@@ -118,6 +118,9 @@ const pageContent = {
     },
     "house-robber": {
         title: "House Robber"
+    },
+    "coin-change": {
+        title: "Coin Change"
     },
     "dp-basics": {
         title: "DP - Basics"

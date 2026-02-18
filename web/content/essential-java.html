@@ -19,7 +19,15 @@
 
     //sort an array
     Arrays.sort(numbers);
-    Arrays.sort(numbers, Collections.reverseOrder());
+    Arrays.sort(numbers, Collections.reverseOrder()); //does not work for primitive int
+
+    //sort an int[] in reverse order
+    //see https://leetcode.com/problems/matchsticks-to-square/
+     matchsticks = IntStream.of(matchsticks)
+                                .boxed() // Convert int to Integer (boxing)
+                                .sorted(Comparator.reverseOrder()) // Sort the Integer stream
+                                .mapToInt(i -> i) // Convert Integer back to int (unboxing)
+                                .toArray(); // Convert stream to array
 
     //sort a list
     Collections.sort(numbers);

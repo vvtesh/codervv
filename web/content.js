@@ -13,7 +13,7 @@ const menuStructure = [
     {
         categoryTitle: "Backtracking",
         categoryId: "backtracking",
-        pageIds: ["permutation", "subsets", "generate-parenthesis", "combination-sum"]
+        pageIds: ["permutation", "subsets", "generate-parenthesis", "combination-sum", "factors"]
     },
     {
         categoryTitle: "Recursion, DFS",
@@ -106,6 +106,9 @@ const pageContent = {
     },
     "permutation": {
         title: "Permutation"
+    },
+    "factors": {
+        title: "Factors"
     },
     "knapsack": {
         title: "Knapsack"

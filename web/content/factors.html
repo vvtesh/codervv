@@ -1,0 +1,93 @@
+<p>Given an integer n, return all possible combinations of its factors. You may return the answer in any order.</p>
+
+<pre>
+    Input: n = 12
+    Output: [[2,6],[3,4],[2,2,3]]
+
+    Input: n = 1
+    Output: []
+</pre>
+
+<p><b>Reduce the number of recursive calls if possible. This example demonstrates this idea.</b></p>
+
+<hr>
+
+<p>Approach 1: Iterates from 2 to n. Issue: Time limit exceeded.</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+    public List<List<Integer>> getFactors(int n) {
+
+        List<List<Integer>> results = new ArrayList<>();
+        if (n==1) return new ArrayList<>();
+        solve(n,2,new ArrayList<>(),1,results);
+        return results;
+    }
+
+    void solve(int n, int idx, List<Integer> curr, int product, List<List<Integer>> results) {
+
+        if (product==n) {
+            results.add(new ArrayList(curr));
+            return;
+        }
+
+        if (product>n) return;
+
+        for(int i=idx; i<n; i++) {
+
+            if (product*i > n) break;
+            if (n%2==1 && i%2==0) continue;
+            curr.add(i);
+            solve(n, i, curr, product*i, results);
+            curr.removeLast();
+        }
+    }
+}
+</textarea>
+</code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/factor-combinations/"><img width="25px" src="content/images/leetcode.png"></a></td></tr></table>
+
+<hr>
+
+<p>Approach 2: Fewer recursive calls</p>
+
+<img src="content/images/factors.png" width="500px"/>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+    private void backtracking(final LinkedList<Integer> factors, final List<List<Integer>> ans) {
+
+        if (factors.size() > 1) {
+            ans.add(new ArrayList(factors));
+        }
+
+        final int lastFactor = factors.removeLast();
+        for (int i = factors.isEmpty() ? 2 : factors.peekLast(); i <=  lastFactor / i; ++i) {
+            if (lastFactor % i == 0) {
+
+                factors.add(i);
+                factors.add(lastFactor / i);
+                backtracking(factors, ans);
+                factors.removeLast();
+                factors.removeLast();
+            }
+        }
+
+        factors.add(lastFactor);
+    }
+
+    public List<List<Integer>> getFactors(int n) {
+        final List<List<Integer>> ans = new LinkedList<>();
+        backtracking(new LinkedList<>(Arrays.asList(n)), ans);
+        return ans;
+    }
+}
+</textarea>
+</code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/factor-combinations/"><img width="25px" src="content/images/leetcode.png"></a></td></tr></table>
+
+<hr>

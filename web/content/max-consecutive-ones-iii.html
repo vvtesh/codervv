@@ -1,7 +1,5 @@
-
-
-<h3>Maximum Consecutive Ones III</h3>
-<p>BruteForce: The answer has to start somewhere and end somewhere. If we assume, each position could be the answer’s starting point, we could go as long as possible covering only k zeros. Do this for every position. Return max valid length.
+<p>Approach: Sliding window</p>
+<p>The answer has to start somewhere and end somewhere. If we assume, each position could be the answer’s starting point, we could go as long as possible covering only k zeros. Do this for every position. Return max valid length.
     SlidingWindow: Expand and Shrink based on zeroCount.
 </p>
 <p>Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.</p>
@@ -24,9 +22,9 @@ class Solution {
 
         while(r<n) {
 
-            if (nums[r] == 1) r++;
-
-            if (nums[l] == 0) {
+            if (nums[r] == 1) {
+                r++;
+            } else {
                 if (zeroCount<k) {
                     r++;
                     zeroCount++;
@@ -43,8 +41,9 @@ class Solution {
 
     /**
     * Moving the left pointer till we find the first zero, shrinks the window.
+    * We are trying to include the last zero and see if a new seq can be made.
     */
-    public int shrinkWindow(int[] nums, int , int r) {
+    public int shrinkWindow(int[] nums, int l, int r) {
         while(l<=r && nums[l]==1) {
             l++;
         }
@@ -52,6 +51,9 @@ class Solution {
         return l;
     }
 }
-
 </textarea>
 </code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/max-consecutive-ones-iii/"><img width="25px" src="content/images/leetcode.png"></a></td></tr></table>
+
+<hr>

@@ -8,7 +8,12 @@ const menuStructure = [
     {
         categoryTitle: "Getting Started",
         categoryId: "getting-started",
-        pageIds: ["intro", "essential-java", "substrings", "two-sum", "longest-consecutive-subsequence", "binary-search"]
+        pageIds: ["intro", "essential-java", "substrings", "two-sum", "longest-consecutive-subsequence"]
+    },
+    {
+        categoryTitle: "Binary Search",
+        categoryId: "binary-search",
+        pageIds: ["binary-search", "complete-binary-tree-nodes"]
     },
     {
         categoryTitle: "Backtracking",
@@ -99,7 +104,10 @@ const pageContent = {
         title: "Two Sum"
     },
     "binary-search": {
-        title: "binary-search"
+        title: "First Bad Version"
+    },
+    "complete-binary-tree-nodes": {
+        title: "Count Nodes"
     },
     "root-to-leaf-paths": {
         title: "Paths from Root to Leaf"

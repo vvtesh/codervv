@@ -16,6 +16,11 @@ const menuStructure = [
         pageIds: ["binary-search", "complete-binary-tree-nodes"]
     },
     {
+        categoryTitle: "Linked List",
+        categoryId: "linked-list",
+        pageIds: ["palindrome-ll"]
+    },
+    {
         categoryTitle: "Backtracking",
         categoryId: "backtracking",
         pageIds: ["permutation", "subsets", "generate-parenthesis", "combination-sum", "factors"]
@@ -105,6 +110,9 @@ const pageContent = {
     },
     "binary-search": {
         title: "First Bad Version"
+    },
+    "palindrome-ll": {
+        title: "Palindrome"
     },
     "complete-binary-tree-nodes": {
         title: "Count Nodes"

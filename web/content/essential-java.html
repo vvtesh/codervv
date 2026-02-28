@@ -21,6 +21,9 @@
     Arrays.sort(numbers);
     Arrays.sort(numbers, Collections.reverseOrder()); //does not work for primitive int
 
+    //Assume that we have int[][] events
+    Arrays.sort(events, (a, b) -> a[0] - b[0]);
+
     //sort an int[] in reverse order
     //see https://leetcode.com/problems/matchsticks-to-square/
      matchsticks = IntStream.of(matchsticks)

@@ -1,6 +1,4 @@
-<h3>MST with Kruskal's Algorithm</h3>
-<p><a href="https://leetcode.com/problems/optimize-water-distribution-in-a-village/description/">https://leetcode.com/problems/optimize-water-distribution-in-a-village/description/</a></p>
-<p>This code solves the <b>Minimum Cost to Supply Water</b> problem, which is modeled as a <b>Minimum Spanning Tree (MST)</b> problem. The approach uses <b>Kruskal's Algorithm</b> combined with a <b>Union-Find</b> data structure. Virtual edges are created from a source node (0) to each house (1 to $N$), representing the cost of building a well, and these are combined with the existing pipe edges. The edges are then sorted by cost, and the Union-Find structure is used to greedily select the lowest-cost edges that do not form a cycle, cumulatively calculating the minimum total cost.</p>
+<p>Minimum Spanning Tree: Kruskal's algorithm</p>
 
 <p>How does union operation work?</p>
 <img src="content/images/unionfind.png" width="300px" />
@@ -76,3 +74,7 @@ class UnionFind {
 }
 </textarea>
 </code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/optimize-water-distribution-in-a-village/description/"><img width="25px" src="content/images/leetcode.png"></a></td></tr></table>
+
+<hr>

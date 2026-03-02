@@ -82,7 +82,7 @@ const menuStructure = [
     {
         categoryTitle: "Algorithmic Problems",
         categoryId: "algorithmic-problems",
-        pageIds: ["longest-increasing-subsequence","max-subarray-sum","boyer-moore-voting","best-sightseeing-pair", "merge-intervals", "non-overlapping-intervals", "counting-bits"]
+        pageIds: ["longest-increasing-subsequence","max-subarray-sum","boyer-moore-voting","best-sightseeing-pair", "merge-intervals", "non-overlapping-intervals", "counting-bits", "nth-permutation"]
     },
     {
         categoryTitle: "Miscellaneous",
@@ -227,6 +227,9 @@ const pageContent = {
     },
     "counting-bits": {
         title: "Counting Bits"
+    },
+    "nth-permutation": {
+        title: "Nth Permuation"
     },
     "trapping-rain-water": {
         title: "Trapping Rain Water"

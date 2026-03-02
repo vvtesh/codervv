@@ -1,0 +1,37 @@
+<p>Knuth's Algorithm</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+    public String getPermutation(int n, int k) {
+
+        int[] factorials = new int[n];
+        List<Integer> nums = new ArrayList<>();
+
+        factorials[0] = 1;
+        nums.add(1);
+
+        for (int i = 1; i < n; ++i) {
+            factorials[i] = factorials[i - 1] * i;
+            nums.add(i + 1);
+        }
+
+        // fit k in the interval 0 ... (n! - 1)
+        k--;
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = n - 1; i > -1; i--) {
+            int idx = k / factorials[i];
+            k -= idx * factorials[i];
+            sb.append(nums.get(idx));
+            nums.remove(idx);
+        }
+        return sb.toString();
+    }
+}
+</textarea>
+</code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/permutation-sequence/description/"><img width="25px" src="content/images/leetcode.png"></a></td></tr></table>
+
+<hr>

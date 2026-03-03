@@ -18,7 +18,7 @@ const menuStructure = [
     {
         categoryTitle: "Linked List",
         categoryId: "linked-list",
-        pageIds: ["palindrome-ll"]
+        pageIds: ["palindrome-ll","reorder-list"]
     },
     {
         categoryTitle: "Backtracking",
@@ -31,7 +31,7 @@ const menuStructure = [
         pageIds: [
             "interleaving-strings", "knapsack",
             "no-of-islands", "max-area-of-islands",
-            "root-to-leaf-paths",
+            "root-to-leaf-paths", "balanced-binary-tree",
             "regex-matching"]
     },
     {
@@ -114,11 +114,17 @@ const pageContent = {
     "palindrome-ll": {
         title: "Palindrome"
     },
+    "reorder-list": {
+        title: "Reorder List"
+    },
     "complete-binary-tree-nodes": {
         title: "Count Nodes"
     },
     "root-to-leaf-paths": {
         title: "Paths from Root to Leaf"
+    },
+    "balanced-binary-tree": {
+        title: "balanced-binary-tree"
     },
     "permutation": {
         title: "Permutation"

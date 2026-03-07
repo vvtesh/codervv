@@ -1,0 +1,32 @@
+
+
+<p>Given an integer array nums where the elements are sorted in ascending order, convert it to a height-balanced binary search tree.</p>
+<p>Note: Resulting tree need not be unique. Also, inorder traversal of a BST tree always results in a sorted array.</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+    int[] nums;
+
+    public TreeNode helper(int left, int right) {
+        if (left > right) return null;
+
+        int p = (left + right) / 2;
+
+        TreeNode root = new TreeNode(nums[p]);
+        root.left = helper(left, p - 1);
+        root.right = helper(p + 1, right);
+        return root;
+    }
+
+    public TreeNode sortedArrayToBST(int[] nums) {
+        this.nums = nums;
+        return helper(0, nums.length - 1);
+    }
+}
+</textarea>
+</code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/"><img width="25px" src="content/images/leetcode.png"></a></td></tr></table>
+
+<hr>

@@ -1,5 +1,9 @@
-<h3>Example: Next Greater Element I Solution (Monotonic Stack)</h3>
-<p>This code solves the "Next Greater Element I" problem by efficiently finding the first element greater than a given element in another array. It utilizes a **Monotonic Stack** to process the larger array, <code>nums2</code>, in a single pass ($O(N)$ time complexity) while maintaining a decreasing order of elements. A **HashMap** stores the mappings from an element to its next greater element, allowing the final array, <code>res</code>, to be constructed quickly by iterating through <code>nums1</code> and retrieving the pre-computed results.</p>
+<p>Utilizes a Monotonic Stack in a single pass ($O(N)$ time complexity) while maintaining a decreasing order of elements.</p>
+
+<pre>
+    Input: nums1 = [4,1,2], nums2 = [1,3,4,2]
+    Output: [-1,3,-1]
+</pre>
 
 <pre><code class="language-java">
 <textarea hidden>
@@ -28,3 +32,7 @@ class Solution {
 }
 </textarea>
 </code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/next-greater-element-i/description/"><img width="25px" src="content/images/leetcode.png"></a></td></tr></table>
+
+<hr>

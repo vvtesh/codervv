@@ -8,7 +8,7 @@ const menuStructure = [
     {
         categoryTitle: "Getting Started",
         categoryId: "getting-started",
-        pageIds: ["intro", "essential-java", "substrings", "two-sum", "longest-consecutive-subsequence"]
+        pageIds: ["intro", "essential-java", "substrings", "two-sum", "longest-consecutive-subsequence", "bst-successor"]
     },
     {
         categoryTitle: "Binary Search",
@@ -32,7 +32,7 @@ const menuStructure = [
             "interleaving-strings", "knapsack",
             "no-of-islands", "max-area-of-islands",
             "root-to-leaf-paths", "balanced-binary-tree",
-            "regex-matching"]
+            "regex-matching", "binary-tree-from-sorted-array"]
     },
     {
         categoryTitle: "DP",
@@ -110,6 +110,12 @@ const pageContent = {
     },
     "binary-search": {
         title: "First Bad Version"
+    },
+    "bst-successor": {
+        title: "Inorder Successor in BST"
+    },
+    "binary-tree-from-sorted-array": {
+        title: "Binary Tree From Sorted Array"
     },
     "palindrome-ll": {
         title: "Palindrome"

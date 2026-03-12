@@ -1,4 +1,9 @@
-<p>This code solves the problem of finding the <b>minimum number of conference rooms</b> required to accommodate a given set of meeting time intervals. The approach first sorts the meetings by their start times to process them chronologically. It then uses a <b>Min-Heap (PriorityQueue)</b> to keep track the time that each room gets free. If a new meeting's start time is greater than or equal to the earliest room end time (`allocator.peek()`), that room is freed up (`allocator.poll()`) and reused for the new meeting; otherwise, a new room is needed. The final size of the Min-Heap is the minimum number of rooms needed.</p>
+<p>Given an array of meeting time intervals intervals where intervals[i] = [starti, endi], return the minimum number of conference rooms required.</p>
+
+<pre>
+    Input: intervals = [[0,30],[5,10],[15,20]]
+    Output: 2
+</pre>
 
 <pre><code class="language-java">
 <textarea hidden>
@@ -56,6 +61,6 @@ How many meeting rooms were allocated so far? When does the meeting end in each 
 
 <p>This problem highlights the need for frequently finding min. It can be done with a priority queue.</p>
 
-<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/meeting-rooms-ii/description/"><img width="25px" src="content/images/leetcode.png"</a></td></tr></table>
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/meeting-rooms-ii/description/" target="_blank" rel="noopener noreferrer"><img width="25px" src="content/images/leetcode.png"</a></td></tr></table>
 
 <hr>

@@ -17,69 +17,69 @@
         <td>Approach</td>
     </tr>
     <tr>
-        <td><a href="https://leetcode.com/problems/set-matrix-zeroes/description/">Set Matrix Zeroes</a></td>
+        <td><a href="https://leetcode.com/problems/set-matrix-zeroes/description/" target="_blank" rel="noopener noreferrer">Set Matrix Zeroes</a></td>
         <td>Use a matrix cell instead of a new variable to save space.</td>
     </tr>
     <tr>
-        <td><a href="https://leetcode.com/problems/implement-queue-using-stacks/description/">Implement Queue using Stacks</a></td>
+        <td><a href="https://leetcode.com/problems/implement-queue-using-stacks/description/" target="_blank" rel="noopener noreferrer">Implement Queue using Stacks</a></td>
         <td>Use two stacks.</td>
     </tr>
     <tr>
-        <td><a href="https://leetcode.com/problems/daily-temperatures/description/">Daily Temperatures</a></td>
+        <td><a href="https://leetcode.com/problems/daily-temperatures/description/" target="_blank" rel="noopener noreferrer">Daily Temperatures</a></td>
         <td>Same as next greater element. Use stack.</td>
     </tr>
     <tr>
-        <td><a href="https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/editorial/">Remove k adjacent duplicates</a></td>
+        <td><a href="https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/editorial/" target="_blank" rel="noopener noreferrer">Remove k adjacent duplicates</a></td>
         <td>Use stack. Keep a pair of char and count in the stack. See <a href="https://www.designgurus.io/course-play/grokking-the-coding-interview/doc/solution-remove-all-adjacent-duplicates-in-string-ii">design gurus</a>.</td>
     </tr>
     <tr>
-        <td><a href="https://leetcode.com/problems/remove-k-digits/">Remove k digits</a></td>
+        <td><a href="https://leetcode.com/problems/remove-k-digits/" target="_blank" rel="noopener noreferrer">Remove k digits</a></td>
         <td>Use stack. Many edge cases: Leading zeros, replaced < k, empty result to "0". See <a href="https://www.designgurus.io/course-play/grokking-the-coding-interview/doc/remove-k-digits-hard">design gurus</a>.</td>
     </tr>
     <tr>
-        <td><a href="https://leetcode.com/problems/longest-palindrome/">Longest Palindrome</a></td>
+        <td><a href="https://leetcode.com/problems/longest-palindrome/" target="_blank" rel="noopener noreferrer">Longest Palindrome</a></td>
         <td>Create a frequency map. No need to sort. s.length() - oddFreqCharsCount + 1 will also work.</td>
     </tr>
     <tr>
-        <td><a href="https://leetcode.com/problems/permutation-in-string/">Permutation in String</a></td>
+        <td><a href="https://leetcode.com/problems/permutation-in-string/" target="_blank" rel="noopener noreferrer">Permutation in String</a></td>
         <td>How to compare two permuations? Use freq map. Use array instead of hashmap. Saves time in hash calculation, unboxing objects. If using map, use intValue() as in map.get(c).intValue()</td>
     </tr>
     <tr>
-        <td><a href="https://leetcode.com/problems/contains-duplicate-ii/description/">k-Nearest Duplicates</a></td>
+        <td><a href="https://leetcode.com/problems/contains-duplicate-ii/description/" target="_blank" rel="noopener noreferrer">k-Nearest Duplicates</a></td>
         <td>Find duplicates within a distance of k in an array. Use set to keep only the k nearest elements. Look it up.</td>
     </tr>
     <tr>
-        <td><a href="https://leetcode.com/problems/count-binary-substrings/">Count Binary Substrings</a></td>
+        <td><a href="https://leetcode.com/problems/count-binary-substrings/" target="_blank" rel="noopener noreferrer">Count Binary Substrings</a></td>
         <td>001110000 -> 0011, 01, 111000, 1100, 10. Answer = 5. Count zeros, ones and call it a group array. group = {2,3,4}. Sum of Math.min(i-1, i) combinations can be made.</td>
     </tr>
     <tr>
-        <td><a href="https://leetcode.com/problems/third-maximum-number">Third maximum number</a></td>
+        <td><a href="https://leetcode.com/problems/third-maximum-number" target="_blank" rel="noopener noreferrer">Third maximum number</a></td>
         <td>Use Long.MIN_VALUE instead of Integer.MIN_VALUE if that is a valid input.</td>
     </tr>
     <tr>
-        <td><a href="https://leetcode.com/problems/arranging-coins">Arranging Coins</a></td>
+        <td><a href="https://leetcode.com/problems/arranging-coins" target="_blank" rel="noopener noreferrer">Arranging Coins</a></td>
         <td>For large numbers, beware of doing n * (n + 1). Don't have few ints and few doubles. Have all variables as double.</td>
     </tr>
     <tr>
-        <td><a href="https://leetcode.com/problems/reverse-integer">Reverse an Integer</a></td>
+        <td><a href="https://leetcode.com/problems/reverse-integer" target="_blank" rel="noopener noreferrer">Reverse an Integer</a></td>
         <td>Why reversing an int need not be an int? The Integer.MAX_VALUE and Integer.MIN_VALUE are 2147483647 and -2147483648 respectively. Consider 1534236469. Reversing it goes off bounds of Integer.</td>
     </tr>
     <tr>
-        <td><a href="https://leetcode.com/problems/intersection-of-two-arrays">Intersection of Two Arrays</a></td>
+        <td><a href="https://leetcode.com/problems/intersection-of-two-arrays" target="_blank" rel="noopener noreferrer">Intersection of Two Arrays</a></td>
         <td>One nice intersection strategy. Iterate through array. if array element ispresent in set, we found an intersecting element. remove that element from set to avoid future re-addition.</td>
     </tr>
     <tr>
-        <td><a href="https://leetcode.com/problems/n-queens-ii/submissions/1866273874/?envType=problem-list-v2&envId=vj5odyfd">N-Queens</a></td>
+        <td><a href="https://leetcode.com/problems/n-queens-ii/submissions/1866273874/?envType=problem-list-v2&envId=vj5odyfd" target="_blank" rel="noopener noreferrer">N-Queens</a></td>
         <td>Keep a set of diagonals, antidiagonals and cols. Go row by row. Base condition: If row==n, return 1. Recurrence Relation: f(row) = f(row+1,d,ad,cols);</td>
     </tr>
     <tr>
-        <td><a href="https://leetcode.com/problems/permutations-ii/description/?envType=problem-list-v2&envId=v1tzm965">Permutations II</a></td>
+        <td><a href="https://leetcode.com/problems/permutations-ii/description/?envType=problem-list-v2&envId=v1tzm965" target="_blank" rel="noopener noreferrer">Permutations II</a></td>
         <td>How to deal with duplicates? Consider the input [1,1,2]. For first position, let us use only the first "1".
             <code class="language-java">if (i>0 && nums[i]==nums[i-1] && !list.contains(i-1)) continue;</code>
         </td>
     </tr>
     <tr>
-        <td><a href="https://leetcode.com/problems/h-index/editorial/?envType=problem-list-v2&envId=v1tzm965">h-Index</a></td>
+        <td><a href="https://leetcode.com/problems/h-index/editorial/?envType=problem-list-v2&envId=v1tzm965" target="_blank" rel="noopener noreferrer">h-Index</a></td>
         <td>You might be tempted to try <code>Arrays.asList(numbers)</code>. However, if numbers is an int[], this will create a `List<int[]>` containing exactly one element (the array itself), rather than a list of integers. Always use the Stream API for primitive arrays.
         <br><code class="language-java">List<Integer> list = new ArrayList(Arrays.stream(citations).boxed().toList());</code><br>
             Comparison sorting algorithms such as heapsort, mergesort and quicksort have a lower bound of O(nlogn). The most commonly used non-comparison sorting is counting sort.
@@ -87,7 +87,7 @@
         x
     </tr>
     <tr>
-        <td><a href="https://leetcode.com/problems/group-shifted-strings/description/?envType=problem-list-v2&envId=v1tzm965">Group Shifted Strings</a></td>
+        <td><a href="https://leetcode.com/problems/group-shifted-strings/description/?envType=problem-list-v2&envId=v1tzm965" target="_blank" rel="noopener noreferrer">Group Shifted Strings</a></td>
         <td>Across all the values in the same group (i.e., ab, bc, cd, ..) the distance of each character to the first character at each position respectively is a constant i.e., for ab,bc,cd the distances of each char to the first char looks like 01,01,01. So, we can use 01 as the key.</td>
     </tr>
 </table>

@@ -1,0 +1,89 @@
+<p>Given the root of a binary tree, return the bottom-up level order traversal of its nodes' values. (i.e., from left to right, level by level from leaf to root).</p>
+
+<img src="content/images/level-order.png" width="300px"/>
+
+<pre>
+Input: root = [3,9,20,null,null,15,7]
+Output: [[15,7],[9,20],[3]]
+
+Given: -1000 <= Node.val <= 1000
+</pre>
+
+<h3>Approach 1: Without using SENTINAL</h3>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> levels = new ArrayList<List<Integer>>();
+        if (root == null) return levels;
+
+        ArrayDeque<TreeNode> nextLevel = new ArrayDeque();
+        nextLevel.add(root);
+
+        ArrayDeque<TreeNode> currLevel = new ArrayDeque();
+
+        while (!nextLevel.isEmpty()) {
+            currLevel = nextLevel.clone();
+            nextLevel.clear();
+            levels.add(new ArrayList<Integer>());
+
+            for (TreeNode node : currLevel) {
+                // append the current node value
+                levels.get(levels.size() - 1).add(node.val);
+
+                // process child nodes for the next level
+                if (node.left != null) nextLevel.offer(node.left);
+                if (node.right != null) nextLevel.offer(node.right);
+            }
+        }
+
+        Collections.reverse(levels);
+        return levels;
+    }
+}
+</textarea>
+</code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/binary-tree-level-order-traversal-ii/description/" target="_blank" rel="noopener noreferrer"><img width="25px" src="content/images/leetcode.png"</a></td></tr></table>
+
+<hr>
+
+<h3>Approach 2: With SENTINAL</h3>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+
+    public static final int SENTINAL=-1001;
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) return result;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        queue.add(new TreeNode(SENTINAL));
+        List<Integer> resultItem = new ArrayList<>();
+        while(!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (node.val == SENTINAL) {
+                if (!queue.isEmpty()) queue.add(new TreeNode(SENTINAL));
+                result.add(new ArrayList<>(resultItem));
+                resultItem.clear();
+            } else {
+                resultItem.add(node.val);
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+            }
+        }
+        result = result.reversed();
+        return result;
+    }
+}
+</textarea>
+</code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/binary-tree-level-order-traversal-ii/description/" target="_blank" rel="noopener noreferrer"><img width="25px" src="content/images/leetcode.png"</a></td></tr></table>
+
+<hr>

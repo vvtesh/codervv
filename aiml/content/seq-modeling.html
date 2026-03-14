@@ -1,0 +1,15 @@
+<ul>
+    <li>Motivation for Sequence Modeling: Sequential data is everywhere—audio, text, medical signals (ECG), stock prices, and DNA sequences. Unlike static data, the meaning in sequences often depends on the order and history of previous inputs [01:53].</li>
+    <li><img src="content/images/rnn-diagram.png" width="400px"/>Recurrent Neural Networks (RNNs): To handle sequences, RNNs introduce a "hidden state" ($h_t$) that acts as internal memory. This state is updated at each time step based on the current input ($x_t$) and the previous state ($h_{t-1}$), allowing information to persist over time [13:40].</li>
+    <li>Training with Backpropagation Through Time (BPTT): RNNs are trained by summing losses at each time step. Gradients are "unrolled" across the entire sequence to update weights. However, this often leads to vanishing or exploding gradients, making it hard for standard RNNs to learn long-term dependencies [35:19].</li>
+    <li>LSTMs and GRUs: To solve gradient issues, more complex architectures like Long Short-Term Memory (LSTM) networks were developed. They use "gates" to selectively add, remove, or retain information in the hidden state, significantly improving memory capacity [37:38].</li>
+    <li>The Embedding Layer: Before a model can process words, they must be converted into numbers. Embedding maps words to high-dimensional vectors where semantically similar words are positioned closer together in space [29:10].</li>
+    <li>Limitations of RNNs: Despite their power, RNNs have three main drawbacks: they process data sequentially (slow to parallelize), they have a fixed-size memory bottleneck, and they still struggle with very long-range dependencies [41:43].</li>
+    <li>The Attention Mechanism: Introduced to overcome RNN limitations, Attention allows a model to "zoom in" on the most relevant parts of a sequence regardless of their distance. It works like a search engine using Queries (Q), Keys (K), and Values (V) to compute a similarity score and weigh the importance of different inputs [48:44].</li>
+    <li><img src="content/images/transformer.png" width="400px"/>The Transformer Architecture: Transformers eliminate recurrence entirely, instead using Self-Attention to process entire sequences in parallel. This makes them much more efficient to train on massive datasets and is the "T" in models like ChatGPT [46:08].</li>
+    <li>Positional Encoding: Since Transformers process everything at once, they lose the inherent sense of order found in RNNs. Positional Encodings are added to the input embeddings to provide the model with information about the relative position of each word in the sequence [51:34].</li>
+</ul>
+
+<table width="100%"><tr><td align="right"><a href="https://www.youtube.com/watch?v=GvezxUdLrEk&list=PLjctrnwG0NeT9dd2mvP3W40TdX58rZc1P&index=2" target="_blank" rel="noopener noreferrer"><img width="25px" src="content/images/leetcode.png"</a></td></tr></table>
+
+<hr>

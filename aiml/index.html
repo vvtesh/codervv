@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loopbender's Journal</title>
+
+    <!-- Script to apply theme early to prevent FOUC (MOVED UP FOR SPEED) -->
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || 'light';
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configure Tailwind to use the 'dark' class for dark mode
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- === SYNTAX HIGHLIGHTING: PRISM.JS === -->
+    <!-- Prism.js Light Theme (Default) - Initially active -->
+    <link id="prism-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <!-- Prism.js Dark Theme (Okaidia) - Initially inactive -->
+    <link id="prism-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" disabled />
+
+    <!-- Prism.js Core Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <!-- Include languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup-templating.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Added Java support explicitly -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <!-- End Prism.js -->
+
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- === MATHJAX CONFIGURATION === -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']] // Recognize $...$ for inline math
+            }
+        };
+    </script>
+    <!-- === END MATHJAX CONFIGURATION === -->
+
+    <!-- MathJax for LaTeX rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/polyfill-io-feature-packs@1.0.1/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* Custom styles for the scrollbar and transitions */
+        :root {
+            --primary-color: #0d9488; /* Teal 600 */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Slate 50 - Light Mode Default */
+        }
+        /* Dark mode background for the main body */
+        .dark body {
+            background-color: #111827; /* Gray 900 */
+        }
+
+        /* FIX: Explicit CSS rules to prevent white flash on fixed elements in dark theme */
+        /* By targeting the default light-mode classes, we create a more specific selector that wins over Tailwind's base styles without needing !important. */
+        .dark header.bg-white {
+            background-color: #000000; /* Matches dark:bg-black */
+        }
+        .dark #sidebar.bg-white {
+            background-color: #1f2937; /* Matches dark:bg-gray-800 */
+            border-right-color: #374151; /* Matches dark:border-gray-700 */
+        }
+        /* END FIX */
+
+        /* Sidebar Item Colors (Theme-Aware) */
+        .sidebar-item-active {
+            color: #ffffff; /* White text for high contrast */
+            background-color: var(--primary-color); /* Use the main accent color for the background */
+            font-weight: 600;
+            border-left: 4px solid var(--primary-color);
+        }
+        .dark .sidebar-item-active {
+            /* changes the background of the active menu item from ugly white in dark mode to black. */
+            background-color: #000000; /* Black background */
+            color: #ffffff; /* White text for contrast */
+            border-left: 4px solid var(--primary-color); /* Retain Teal accent border */
+        }
+
+        /* General Layout */
+        #sidebar {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(0);
+        }
+        .content-scrollable {
+             /* Adjust height calculation for top/bottom fixed bars */
+            height: calc(100vh - 6rem);
+            overflow-y: auto;
+        }
+        /* Mobile specific adjustments (hidden by default, shown by JS) */
+        @media (max-width: 1024px) {
+            #sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar-open #sidebar {
+                transform: translateX(0);
+                z-index: 40;
+            }
+            .sidebar-open #main-content-wrapper {
+                opacity: 0.5;
+                pointer-events: none;
+            }
+        }
+        /* Override Tailwind prose styles for code blocks to ensure Prism.js works */
+        .prose pre {
+            padding: 0;
+            background-color: transparent;
+            margin: 1.5em 0;
+            border-radius: 0.5rem;
+            overflow: auto;
+        }
+        /* Add default list styling back to prose content */
+        .prose ul {
+            list-style-type: disc;
+            padding-left: 2rem; /* Adjust padding to make bullets visible */
+            margin-top: 1.25em; /* Mimic prose vertical spacing */
+        }
+        /* Ensure code block elements match prose styling in both themes */
+        .prose h1, .prose h2, .prose h3 { color: #1f2937; } /* Light mode headings */
+        .dark .prose h1, .dark .prose h2, .dark .prose h3 { color: #f3f4f6; } /* Dark mode headings */
+        .dark .prose p, .dark .prose code, .dark .prose li { color: #d1d5db; } /* Dark mode text */
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 dark:bg-gray-900">
+
+    <!-- 1. TOP BAR (Fixed Header) -->
+    <header class="fixed top-0 left-0 right-0 h-16 bg-white dark:bg-black shadow-md dark:shadow-xl z-30 flex items-center justify-between px-4 lg:px-6">
+        <div class="flex items-center space-x-3">
+            <!-- Logo (Inline SVG for simplicity) -->
+            <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+            <span class="text-xl font-bold text-gray-800 dark:text-gray-100">Loopbender's Journal</span>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <!-- Theme Toggle Button -->
+            <button id="theme-toggle" class="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                aria-label="Toggle theme">
+                <!-- Icon will be set by JS -->
+            </button>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-button" class="lg:hidden p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+
+            <!-- About Me Menu -->
+            <a href="https://vvtesh.github.io" target="_blank" rel="noopener noreferrer"
+               class="hidden lg:inline-block text-gray-600 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 px-3 py-2 rounded-lg transition duration-150">
+                About Me
+            </a>
+        </div>
+    </header>
+
+    <!-- 2. MAIN LAYOUT (Sidebar and Content) -->
+    <main class="flex pt-16 pb-20"> <!-- Padding for fixed header/footer -->
+
+        <!-- Mobile Overlay -->
+        <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden" onclick="toggleSidebar()"></div>
+
+        <!-- 2a. LEFT SIDEBAR (Navigation Menu) -->
+        <aside id="sidebar" class="fixed top-16 bottom-20 w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 lg:block z-30 p-4 content-scrollable">
+
+            <!-- NEW SEARCH BAR -->
+            <div class="mb-4">
+                <input type="text" id="menu-search" oninput="filterMenu()"
+                       placeholder="Search titles..."
+                       class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-gray-200 transition">
+            </div>
+            <!-- END NEW SEARCH BAR -->
+
+            <!-- EXPAND/COLLAPSE TOGGLE -->
+            <div class="mb-4">
+                <button id="menu-toggle-all" class="w-full flex items-center justify-center px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition">
+                    <i data-lucide="chevrons-down-up" class="w-4 h-4 mr-2"></i>
+                    <span id="menu-toggle-all-text">Collapse All</span>
+                </button>
+            </div>
+            <!-- END EXPAND/COLLAPSE TOGGLE -->
+
+            <nav id="nav-menu" class="space-y-2">
+                <!-- Navigation links will be injected here by JavaScript -->
+            </nav>
+        </aside>
+
+        <!-- 2b. MAIN CONTENT AREA -->
+        <div id="main-content-wrapper" class="w-full lg:ml-64 p-6 transition-all duration-300">
+            <section id="content-container" class="max-w-4xl mx-auto py-4">
+                <!-- Content will be injected here by JavaScript -->
+                <h1 id="content-title" class="text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-gray-100 mb-6">Welcome to Loopbender's Journal!</h1>
+                <div id="content-body" class="prose prose-teal max-w-none text-gray-700 dark:text-gray-300 space-y-4">
+                    <p>This is your starting page. Use the expandable and collapsible menu on the left to navigate between documentation sections.</p>
+                    <p>The content and the navigation structure are defined in the JavaScript data object, making it easy to manage all your documentation pages in one place without needing external file imports.</p>
+                    <p>To get started, please click on any section in the sidebar, like "Introduction" under the "Getting Started" category.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 3. BOTTOM BAR (Fixed Footer) -->
+    <footer class="fixed bottom-0 left-0 right-0 h-16 bg-gray-800 dark:bg-black text-white flex items-center justify-center z-20 shadow-lg">
+        <p class="text-sm italic text-gray-300 dark:text-gray-400 px-4 text-center">
+            "The computer was born to solve problems that did not exist before."
+        </p>
+    </footer>
+
+    <!-- Load content data from external file -->
+    <script src="content.js"></script>
+
+    <!-- Load application logic from external file -->
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<p>The purpose of activation functions is to introduce non-linearities in the network.</p>
+<img src="content/images/activation-fn.png" width="400px"/>
+
+<h3>Summary Table</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th>Sigmoid</th>
+            <th>Tanh</th>
+            <th>ReLU</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Output Range</strong></td>
+            <td>(0, 1)</td>
+            <td>(-1, 1)</td>
+            <td>[0, $\infty$)</td>
+        </tr>
+        <tr>
+            <td><strong>Best Layer</strong></td>
+            <td>Output (Binary)</td>
+            <td>Hidden / RNNs</td>
+            <td>Hidden (Default)</td>
+        </tr>
+        <tr>
+            <td><strong>Zero-Centered</strong></td>
+            <td>No</td>
+            <td>Yes</td>
+            <td>No</td>
+        </tr>
+        <tr>
+            <td><strong>Gradient Risk</strong></td>
+            <td>High (Vanishing)</td>
+            <td>High (Vanishing)</td>
+            <td>Low (except "Dying ReLU")</td>
+        </tr>
+        <tr>
+            <td><strong>Computation</strong></td>
+            <td>Expensive (exp)</td>
+            <td>Expensive (exp)</td>
+            <td>Very Cheap</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul>
+    <li><strong>1. Sigmoid:</strong> The Sigmoid function squashes any real-valued number into a range between 0 and 1.
+        <ul>
+            <li><strong>When to use it:</strong>
+                <ul>
+                    <li><em>Output Layer of Binary Classifiers:</em> It is the standard choice for the final layer when you need to predict a probability (e.g., "Is this email spam or not?").</li>
+                </ul>
+            </li>
+            <li><strong>Why it fell out of favor for hidden layers:</strong>
+                <ul>
+                    <li><em>Vanishing Gradient Problem:</em> For very high or very low input values, the gradient becomes almost zero. This "kills" learning in deep networks.</li>
+                    <li><em>Not Zero-Centered:</em> The outputs are always positive, which can make the optimization (gradient descent) zig-zag and slow down convergence.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li><strong>2. Tanh (Hyperbolic Tangent):</strong> Tanh is similar to Sigmoid but squashes values into a range between -1 and 1.
+        <ul>
+            <li><strong>When to use it:</strong>
+                <ul>
+                    <li><em>Hidden Layers (if data is centered):</em> It is generally preferred over Sigmoid for hidden layers because it is zero-centered. This means the average of the outputs is closer to zero, which helps the next layer learn more efficiently.</li>
+                    <li><em>Recurrent Neural Networks (RNNs):</em> It is frequently used in RNNs and LSTMs to regulate the flow of information.</li>
+                </ul>
+            </li>
+            <li><strong>The Catch:</strong> Like Sigmoid, it still suffers from the vanishing gradient problem when the inputs are very large or small.</li>
+        </ul>
+    </li>
+    <li><strong>3. ReLU (Rectified Linear Unit):</strong> ReLU is the most widely used activation function in deep learning today. It outputs the input directly if it is positive; otherwise, it outputs zero ($f(x) = \max(0, x)$).
+        <ul>
+            <li><strong>When to use it:</strong>
+                <ul>
+                    <li><em>Hidden Layers (Default Choice):</em> You should almost always start with ReLU for your hidden layers. It is the standard for Convolutional Neural Networks (CNNs) and deep feedforward networks.</li>
+                </ul>
+            </li>
+            <li><strong>Strengths:</strong>
+                <ul>
+                    <li><em>Computationally Efficient:</em> It only requires a simple thresholding at zero (no expensive exponents).</li>
+                    <li><em>Reduces Vanishing Gradients:</em> It does not saturate in the positive direction, allowing deep models to converge much faster than Sigmoid or Tanh.</li>
+                </ul>
+            </li>
+            <li><strong>The Weakness:</strong>
+                <ul>
+                    <li><em>"Dying ReLU" Problem:</em> If a neuron's input is always negative, it will always output zero and its gradient will be zero. That neuron becomes "dead" and never updates again. (This is often solved using Leaky ReLU).</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>

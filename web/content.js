@@ -47,7 +47,7 @@ const menuStructure = [
     {
         categoryTitle: "BFS",
         categoryId: "bfs",
-        pageIds: ["rotten-oranges", "tree-rightside"]
+        pageIds: ["rotten-oranges", "tree-rightside", "level-order"]
     },
     {
         categoryTitle: "Sliding Window",
@@ -110,6 +110,9 @@ const pageContent = {
     },
     "binary-search": {
         title: "First Bad Version"
+    },
+    "level-order": {
+        title: "Level Order (from leaf)"
     },
     "bst-successor": {
         title: "Inorder Successor in BST"

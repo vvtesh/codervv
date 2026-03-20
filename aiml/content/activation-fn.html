@@ -93,3 +93,6 @@
         </ul>
     </li>
 </ul>
+
+<h3>Dead and Leaky ReLU</h3>
+<p>The intuition of "turning off" neurons can backfire. If a neuron's weights are updated in a way that it always receives negative inputs, it will always output 0. Because the gradient of 0 is 0, the neuron will never learn again. It becomes a "Dead ReLU."To fix this, researchers created Leaky ReLU, which allows a tiny bit of the negative signal to pass through ($0.01x$) instead of a hard zero.</p>

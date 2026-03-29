@@ -1,0 +1,95 @@
+<p>Approach 1: Simple recurrence</p>
+
+<p>Given two strings s and t, return the number of distinct subsequences of s which equals t.</p>
+<pre>
+    Input: s = "rabbbit", t = "rabbit"
+    Output: 3
+</pre>
+
+<p>Note: Use two pointers i, j to compare characters in s with characters in t. If they match, we have two cases: consider the match, or drop the match in the hope that there will be a match in future. If they don't match, just increment i.</p>
+
+<p>if $s[i] == t[j]$</p>
+<p> $f(i, j) = f(i + 1, j) + f(i + 1, j + 1)$</p>
+<p>else</p>
+<p> $f(i, j) = f(i + 1, j)$</p>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+
+    private HashMap<Pair<Integer, Integer>, Integer> memo;
+
+    private int recurse(String s, String t, int i, int j) {
+        int M = s.length();
+        int N = t.length();
+
+        if (i == M || j == N || M - i < N - j) {
+            return j == t.length() ? 1 : 0;
+        }
+
+        Pair<Integer, Integer> key = new Pair<Integer, Integer>(i, j);
+
+        if (this.memo.containsKey(key)) {
+            return this.memo.get(key);
+        }
+
+        int ans = this.recurse(s, t, i + 1, j);
+
+        if (s.charAt(i) == t.charAt(j)) {
+            ans += this.recurse(s, t, i + 1, j + 1);
+        }
+
+        this.memo.put(key, ans);
+        return ans;
+    }
+
+    public int numDistinct(String s, String t) {
+        this.memo = new HashMap<Pair<Integer, Integer>, Integer>();
+        return this.recurse(s, t, 0, 0);
+    }
+}
+</textarea>
+</code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/distinct-subsequences/" target="_blank" rel="noopener noreferrer"><img width="25px" src="content/images/leetcode.png"></a></td></tr></table>
+
+<hr>
+
+<h3>Approach 2: Optimized Iterative DP</h3>
+
+<pre><code class="language-java">
+<textarea hidden>
+class Solution {
+    public int numDistinct(String s, String t) {
+        int M = s.length();
+        int N = t.length();
+
+        int[] dp = new int[N];
+
+        int prev = 1;
+
+        for (int i = M - 1; i >= 0; i--) {
+
+            prev = 1;
+
+            for (int j = N - 1; j >= 0; j--) {
+
+                int old_dpj = dp[j];
+
+                if (s.charAt(i) == t.charAt(j)) {
+                    dp[j] += prev;
+                }
+
+                prev = old_dpj;
+            }
+        }
+
+        return dp[0];
+    }
+}
+</textarea>
+</code></pre>
+
+<table width="100%"><tr><td align="right"><a href="https://leetcode.com/problems/distinct-subsequences/" target="_blank" rel="noopener noreferrer"><img width="25px" src="content/images/leetcode.png"></a></td></tr></table>
+
+<hr>

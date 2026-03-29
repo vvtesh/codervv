@@ -42,7 +42,7 @@ const menuStructure = [
     {
         categoryTitle: "Recurrence Relation",
         categoryId: "recurrence",
-        pageIds: ["house-robber", "unique-paths"]
+        pageIds: ["house-robber", "unique-paths", "distinct-subsequences"]
     },
     {
         categoryTitle: "BFS",
@@ -107,6 +107,9 @@ const pageContent = {
     },
     "two-sum": {
         title: "Two Sum"
+    },
+    "distinct-subsequences": {
+        title: "Number of Distinct Subsequences"
     },
     "binary-search": {
         title: "First Bad Version"
